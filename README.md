@@ -17,6 +17,11 @@ functions for this package.
 
 > 🏁 An R client for accessing [Kaggle](https://www.kaggle.com)’s API
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/KoderKow/kaggler/workflows/R-CMD-check/badge.svg)](https://github.com/KoderKow/kaggler/actions)
+<!-- badges: end -->
+
 ## Installation
 
 You can install the dev version of **{kaggler}** from
