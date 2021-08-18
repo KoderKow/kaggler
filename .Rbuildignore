@@ -1,0 +1,10 @@
+^logo\.R$
+^make\.R$
+^\.DS_Store$
+^LICENSE\.md$
+^README\.Rmd$
+^kaggler\.Rproj$
+^\.Rproj\.user$
+^\.github$
+^tools
+^README_cache
