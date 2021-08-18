@@ -8,3 +8,6 @@
 ^\.github$
 ^tools
 ^README_cache
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
