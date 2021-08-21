@@ -1,5 +1,4 @@
-
-#' CompetitionsDataListFiles
+#' Competitions Data List Files
 #'
 #' List competition data files
 #'
@@ -10,8 +9,10 @@
 #'   - Checks to see if string starts with `kaggle competitions `
 #' - Direct Competition ID/Name
 #'   - If the two checks above fail, the function will interpret the string as is
+#' @param clean_response Logical. Clean the response from the Kaggle API.
+#'
 #' @export
-kgl_competitions_data_list <- function(id) {
+kgl_competitions_data_list <- function(id, clean_response = TRUE) {
   if(!assertthat::is.string(id)) {
     usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
     usethis::ui_stop("'id' is not a string.")
@@ -23,22 +24,22 @@ kgl_competitions_data_list <- function(id) {
 
   get_request <- kgl_api_get(get_url)
 
-  d_return <-
-    get_request %>%
-    httr::content() %>%
-    dplyr::bind_rows() %>%
-    janitor::clean_names() %>%
-    dplyr::mutate(id = competition_id) %>%
-    dplyr::relocate(id)
+  if (clean_response == TRUE) {
+    get_request <-
+      get_request %>%
+      kgl_as_tbl() %>%
+      dplyr::mutate(id = competition_id) %>%
+      dplyr::relocate(id)
+  }
 
-  return(d_return)
+  return(get_request)
 }
 
 #' CompetitionsDataDownloadFile
 #'
 #' Download competition data file
 #'
-#' @param id Character. Competition name. Required: TRUE.
+#' @inheritParams kgl_competitions_data_list
 #' @param file_name Character. Competition name. Required: TRUE.
 #' @param return_data Logical. Read in the data with `readr::read_csv()` and have it returned. If `FALSE` this will return `NULL`.
 #' @param save_data Logical. Save the data in `dir_name`. If `FALSE` this will remove the `dir_name` directory.
@@ -69,19 +70,20 @@ kgl_competitions_data_download <- function(
   }
 
   ## create temp dir
+  dir_kaggle <- usethis::proj_path(dir_name)
+  dir_value <- usethis::ui_value(paste0(dir_kaggle, "/"))
+
   if (!fs::dir_exists(usethis::proj_path(dir_name))) {
     usethis::ui_info("Data directory {dir_value} has been created!")
-    dir_temp <- fs::dir_create(usethis::proj_path(dir_name))
+    fs::dir_create(dir_kaggle)
   }
-
-  dir_value <- usethis::ui_value(paste0(usethis::proj_path(dir_name), "/"))
 
   get_url <- get_request$url
 
   get_ext <- fs::path_ext(get_url)
 
   path_temp <- fs::path(
-    dir_temp,
+    dir_kaggle,
     file_name,
     ext = ifelse(get_ext == "zip", "zip", "")
   )
@@ -103,14 +105,14 @@ kgl_competitions_data_download <- function(
 
     unzip_result <- suppressWarnings(unzip(
       path_temp,
-      exdir = dir_temp,
+      exdir = dir_kaggle,
       overwrite = TRUE
     ))
 
     usethis::ui_done("Unzipping complete!")
   }
 
-  path_d <- fs::path(dir_temp, file_name)
+  path_d <- fs::path(dir_kaggle, file_name)
 
   if (!fs::file_exists(path_d)) {
     usethis::ui_oops("File does not exist! Something went wrong :(")
@@ -156,9 +158,11 @@ kgl_competitions_data_download_all <- function(id) {
   current_id <- unique(data_list$id)
 
   usethis::ui_todo("Iterating over all files names to download...")
+
   l_return <-
     data_list %>%
-    dplyr::pull(name, ref) %>%
+    dplyr::mutate(name = fs::path_ext_remove(name)) %>%
+    dplyr::pull(ref, name) %>%
     purrr::map(~ {
 
       d <- kgl_competitions_data_download(
@@ -170,7 +174,6 @@ kgl_competitions_data_download_all <- function(id) {
     })
 
   dir_value <- usethis::ui_value("_kaggle_data")
-
   usethis::ui_done("Iteration complete! Returning all data in a list and data is available in {dir_value}!")
 
   return(l_return)

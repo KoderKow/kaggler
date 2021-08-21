@@ -2,12 +2,12 @@
 % Please edit documentation in R/competitions-leaderboard.R
 \name{kgl_competitions_leaderboard_download}
 \alias{kgl_competitions_leaderboard_download}
-\title{CompetitionDownloadLeaderboard}
+\title{Competition Download Leaderboard}
 \usage{
 kgl_competitions_leaderboard_download(id)
 }
 \arguments{
-\item{id}{string, Competition name. Required: TRUE.}
+\item{id}{Character. Competition name. Required: TRUE.}
 }
 \description{
 Download competition leaderboard

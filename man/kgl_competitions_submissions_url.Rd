@@ -4,10 +4,10 @@
 \alias{kgl_competitions_submissions_url}
 \title{CompetitionsSubmissionsUrl}
 \usage{
-kgl_competitions_submissions_url(file_name = NULL)
+kgl_competitions_submissions_url(file = NULL)
 }
 \arguments{
-\item{file_name}{string, Competition submission file name. Required: FALSE.
+\item{file}{Character. Competition submission file name. Required: FALSE.
 since epoch in UTC. Required: TRUE.}
 }
 \description{

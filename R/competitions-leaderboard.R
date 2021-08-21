@@ -1,9 +1,9 @@
 
-#' CompetitionDownloadLeaderboard
+#' Competition Download Leaderboard
 #'
 #' Download competition leaderboard
 #'
-#' @param id string, Competition name. Required: TRUE.
+#' @param id Character. Competition name. Required: TRUE.
 #' @export
 kgl_competitions_leaderboard_download <- function(id) {
   if(!assertthat::is.string(id)) {
@@ -20,11 +20,11 @@ kgl_competitions_leaderboard_download <- function(id) {
   return(get_request)
 }
 
-#' CompetitionViewLeaderboard
+#' Competition View Leaderboard
 #'
 #' VIew competition leaderboard
 #'
-#' @param id string, Competition name. Required: TRUE.
+#' @param id Character. Competition name. Required: TRUE.
 #' @export
 kgl_competitions_leaderboard_view <- function(id) {
   if(!assertthat::is.string(id)) {
@@ -39,13 +39,8 @@ kgl_competitions_leaderboard_view <- function(id) {
   d_final <-
     get_url %>%
     kgl_api_get() %>%
-    httr::content() %>%
-    purrr::set_names(NULL) %>%
-    dplyr::bind_rows() %>%
-    janitor::clean_names() %>%
-    dplyr::mutate(
-      submission_date = lubridate::ymd_hms(submission_date)
-    )
+    kgl_as_tbl() %>%
+    dplyr::mutate(score = as.numeric(score))
 
   return(d_final)
 }

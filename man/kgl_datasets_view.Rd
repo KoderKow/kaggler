@@ -2,13 +2,12 @@
 % Please edit documentation in R/datasets.R
 \name{kgl_datasets_view}
 \alias{kgl_datasets_view}
-\title{DatasetsView}
+\title{Datasets View}
 \usage{
 kgl_datasets_view(owner_dataset)
 }
 \arguments{
-\item{owner_dataset}{The owner and data set slug as it appears in the URL,
-i.e., \code{"mathan/fifa-2018-match-statistics"}.}
+\item{owner_dataset}{Character. The owner and data set slug as it appears in the URL, i.e., \code{"mathan/fifa-2018-match-statistics"}.}
 }
 \description{
 Show details about a dataset

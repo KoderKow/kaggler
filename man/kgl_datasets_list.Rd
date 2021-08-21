@@ -4,18 +4,14 @@
 \alias{kgl_datasets_list}
 \title{DatasetsList}
 \usage{
-kgl_datasets_list(page = 1, search = "", owner_dataset = NULL)
+kgl_datasets_list(page = 1, search = NULL, owner_dataset = NULL)
 }
 \arguments{
-\item{page}{integer, Page number. Defaults to 1. Retrieve datasets via
-page, search, or (ownerSlug and datasetSlug)}
+\item{page}{Numeric. Page number. Defaults to 1. Retrieve datasets via page, search, or (ownerSlug and datasetSlug)}
 
-\item{search}{string, Search terms. Defaults to . Retrieve datasets via
-page, search, or (ownerSlug and datasetSlug)}
+\item{search}{Character. Search terms. Defaults to . Retrieve datasets via page, search, or (ownerSlug and datasetSlug)}
 
-\item{owner_dataset}{Alternative to page/search.  The owner and dataset
-slug as it appears in the URL, i.e.,
-\code{"mathan/fifa-2018-match-statistics"}.}
+\item{owner_dataset}{Character. Alternative to page/search.  The owner and dataset slug as it appears in the URL, i.e., \code{"mathan/fifa-2018-match-statistics"}.}
 }
 \description{
 List datasets

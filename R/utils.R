@@ -17,8 +17,24 @@ kgl_as_tbl <- function(x) {
   if (length(x) == 1 && is.list(x) && is.data.frame(x[[1]])) {
     x <- x[[1]]
   }
-  x <- tibble::as_tibble(x[!is_recursive(x)], validate = FALSE)
-  parse_datetimes(x)
+
+  x <-
+    x %>%
+    purrr::map(~ .x %||% NA) %>%
+    .[!is_recursive(.)] %>%
+    tibble::as_tibble(validate = FALSE) %>%
+    parse_datetimes() %>%
+    janitor::clean_names()
+
+  return(x)
+}
+
+"%||%" <- function(x, y) {
+  if (is.null(x)) {
+    y
+  } else {
+    x
+  }
 }
 
 parse_datetimes <- function(x) {
@@ -29,9 +45,9 @@ parse_datetimes <- function(x) {
 }
 
 parse_datetime <- function(x) {
-  as.POSIXct(strptime(x, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"), tz = "UTC")
+  # as.POSIXct(strptime(x, "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"), tz = "UTC")
+  lubridate::ymd_hms(x, tz = "UTC")
 }
-
 
 as_parsed <- function(x) httr::content(x)
 

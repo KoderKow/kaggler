@@ -1,5 +1,4 @@
 ## globals
-
 #' @export
 .kaggle_host_url <- "https://www.kaggle.com"
 
@@ -49,8 +48,7 @@ kgl_api_get <- function(path, ..., auth = kgl_auth()) {
   ## build and make request
   r <- httr::GET(
     url = get_url,
-    auth,
-    httr::accept_json()
+    auth
   )
 
   ## check status
@@ -66,9 +64,9 @@ kgl_api_get <- function(path, ..., auth = kgl_auth()) {
 }
 
 
-`%||%` <- function(a, b) {
-  if (length(a) > 0) a else b
-}
+# `%||%` <- function(a, b) {
+#   if (length(a) > 0) a else b
+# }
 
 ## for POST requests
 kgl_api_post <- function(path, ..., body = NULL) {

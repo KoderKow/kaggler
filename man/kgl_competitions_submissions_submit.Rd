@@ -2,7 +2,7 @@
 % Please edit documentation in R/competition-submissions.R
 \name{kgl_competitions_submissions_submit}
 \alias{kgl_competitions_submissions_submit}
-\title{CompetitionsSubmissionsSubmit}
+\title{Competition Submission Submit}
 \usage{
 kgl_competitions_submissions_submit(
   blob_file_tokens,
@@ -11,13 +11,11 @@ kgl_competitions_submissions_submit(
 )
 }
 \arguments{
-\item{blob_file_tokens}{string, Token identifying location of uploaded submission
-file. Required: TRUE.}
+\item{blob_file_tokens}{Character. Token identifying location of uploaded submission file. Required: TRUE.}
 
-\item{submission_description}{string, Description of competition submission.
-Required: TRUE.}
+\item{submission_description}{Character. Description of competition submission. Required: TRUE.}
 
-\item{id}{string, Competition name. Required: TRUE.}
+\item{id}{Character. Competition name. Required: TRUE.}
 }
 \description{
 Submit to competition

@@ -3,15 +3,15 @@
 
 # ATTENTION
 
-The base of this package was cloned/forked from the original at
-[{kaggler}](https://github.com/mkearney/kaggler). From my observations
-the package is not being maintained and the issues have no response. I
-have decided to take the developers work and fix the errors that have
-seemed to pop up over time. Major props and recognition goes out to the
-original developer(s) of this package.
+The base of this package was cloned from the original at
+[{kaggler}](https://github.com/mkearney/kaggler). I have decided to take
+the developers work and continue their amazing development\! Major props
+and recognition goes out to the original developer(s) of this package.
 
 I will be updating all documentation and examples for the README and
 functions for this package.
+
+-----
 
 # kaggler <img src="man/figures/logo.png" width="160px" align="right" />
 
@@ -59,7 +59,7 @@ your username and API key)
 <!-- end list -->
 
 ``` r
-kgl_auth(username = "koderkow", key = "9as87f6faf9a8sfd76a9fsd89asdf6dsa9f8")
+kgl_auth(username = "koderkow", key = "example")
 #> Your Kaggle key has been recorded for this session and saved as `KAGGLE_PAT` environment variable for future sessions.
 ```
 
@@ -122,9 +122,8 @@ imagecomps
 
 ## `kgl_competitions_data_.*()`
 
-Look up the datalist for a given Kaggle competition. **IF you’ve already
-accepted the competition rules, then you should be able to download the
-dataset too (I haven’t gotten there yet to test it)**
+You can look up the datalist for a given Kaggle competition using the
+API.
 
 ``` r
 ## data list for a given competition
@@ -133,10 +132,13 @@ c1_datalist
 #> # A tibble: 3 x 6
 #>   id                 ref            name           total_bytes url             creation_date        
 #>   <chr>              <chr>          <chr>                <int> <chr>           <chr>                
-#> 1 contradictory-my-… train.csv      train.csv          2771659 https://www.ka… 2020-07-27T19:45:43.…
+#> 1 contradictory-my-… sample_submis… sample_submis…       67549 https://www.ka… 2020-07-27T19:45:43.…
 #> 2 contradictory-my-… test.csv       test.csv           1180141 https://www.ka… 2020-07-27T19:45:43.…
-#> 3 contradictory-my-… sample_submis… sample_submis…       67549 https://www.ka… 2020-07-27T19:45:43.…
+#> 3 contradictory-my-… train.csv      train.csv          2771659 https://www.ka… 2020-07-27T19:45:43.…
 ```
+
+Downloading single files is possible by supplying the competition ID and
+the wanted file.
 
 ``` r
 ## download set sets (IF YOU HAVE ACCEPTED COMPETITION RULES)
@@ -146,6 +148,97 @@ c1_data <- kgl_competitions_data_download(
   )
 #> x You must accept this competition's rules before you'll be able to download files.
 ```
+
+### Downloading all data for a competition
+
+#### ID input
+
+Methods have been built out to accept multiple forms of `id`.
+
+1.  The competition URL
+      - `https://www.kaggle.com/c/titanic` and
+        `https://www.kaggle.com/c/titanic/code` will recognize `titanic`
+        as the ID
+2.  Kaggle’s API command
+      - Kaggles official API is built in python and they supply a
+        command to download the data on the data tab of a competition.
+        The download functions will take `kaggle competitions download
+        -c titanic`and recognize the ID as `titanic`
+3.  Explicit ID
+      - If the above two cases don’t match in the logic then everything
+        else will be considered an ID
+      - Example; entering `titanic` directly
+
+#### `kgl_competitions_data_download_all()`
+
+This function will download all the competitions data files into a dir
+called `_kaggle_data` into the main working directory.
+
+``` r
+kgl_data <- kgl_competitions_data_download_all(
+  id = "https://www.kaggle.com/c/titanic/"
+  )
+#> ● Iterating over all files names to download...
+#> ✓ Setting active project to '/Users/Kow/projects/kaggler'
+#> ● Downloading 'gender_submission.csv'...
+#> ✓ Data has been saved in '/Users/Kow/projects/kaggler/_kaggle_data/'.
+#> ● Downloading 'train.csv'...
+#> ✓ Data has been saved in '/Users/Kow/projects/kaggler/_kaggle_data/'.
+#> ● Downloading 'test.csv'...
+#> ✓ Data has been saved in '/Users/Kow/projects/kaggler/_kaggle_data/'.
+#> ✓ Iteration complete! Returning all data in a list and data is available in '_kaggle_data'!
+```
+
+The data is available in the `_kaggle_data` directory.
+
+``` r
+list.files("_kaggle_data")
+#> [1] "gender_submission.csv" "test.csv"              "train.csv"
+```
+
+The data is also returned in a list and available in the variable you
+assigned it to, in this example its `kgl_data`.
+
+``` r
+kgl_data$train
+#> # A tibble: 891 x 12
+#>   PassengerId Survived Pclass Name             Sex     Age SibSp Parch Ticket    Fare Cabin Embarked
+#>         <dbl>    <dbl>  <dbl> <chr>            <chr> <dbl> <dbl> <dbl> <chr>    <dbl> <chr> <chr>   
+#> 1           1        0      3 Braund, Mr. Owe… male     22     1     0 A/5 211…  7.25 <NA>  S       
+#> 2           2        1      1 Cumings, Mrs. J… fema…    38     1     0 PC 17599 71.3  C85   C       
+#> 3           3        1      3 Heikkinen, Miss… fema…    26     0     0 STON/O2…  7.92 <NA>  S       
+#> 4           4        1      1 Futrelle, Mrs. … fema…    35     1     0 113803   53.1  C123  S       
+#> 5           5        0      3 Allen, Mr. Will… male     35     0     0 373450    8.05 <NA>  S       
+#> # … with 886 more rows
+kgl_data$test
+#> # A tibble: 418 x 11
+#>   PassengerId Pclass Name                       Sex      Age SibSp Parch Ticket  Fare Cabin Embarked
+#>         <dbl>  <dbl> <chr>                      <chr>  <dbl> <dbl> <dbl> <chr>  <dbl> <chr> <chr>   
+#> 1         892      3 Kelly, Mr. James           male    34.5     0     0 330911  7.83 <NA>  Q       
+#> 2         893      3 Wilkes, Mrs. James (Ellen… female  47       1     0 363272  7    <NA>  S       
+#> 3         894      2 Myles, Mr. Thomas Francis  male    62       0     0 240276  9.69 <NA>  Q       
+#> 4         895      3 Wirz, Mr. Albert           male    27       0     0 315154  8.66 <NA>  S       
+#> 5         896      3 Hirvonen, Mrs. Alexander … female  22       1     1 31012… 12.3  <NA>  S       
+#> # … with 413 more rows
+kgl_data$gender_submission
+#> # A tibble: 418 x 2
+#>   PassengerId Survived
+#>         <dbl>    <dbl>
+#> 1         892        0
+#> 2         893        1
+#> 3         894        0
+#> 4         895        0
+#> 5         896        1
+#> # … with 413 more rows
+```
+
+### Future goals for downloads
+
+  - Check the download folder to see if any of the files exists. If yes,
+    prompt the user to redownload the ones that exist. If they dont
+    exist, download them
+  - Easily load/attach all kaggle data with a function, similar to
+    `{targets}`’s `tar_load()`
 
 ## `kgl_datasets_.*()`
 
@@ -158,11 +251,11 @@ datasets
 #> # A tibble: 20 x 23
 #>        id ref   subtitle  creatorName creatorUrl totalBytes url    lastUpdated         downloadCount
 #>     <int> <chr> <chr>     <chr>       <chr>           <dbl> <chr>  <dttm>                      <int>
-#> 1 1187302 gpre… r/Vaccin… Gabriel Pr… gpreda        2.39e 5 https… NA                          10818
-#> 2 1165452 crow… A Large-… Oğuzhan Ul… crowww        3.48e 9 https… NA                           6614
-#> 3 1167622 imsp… A curate… Sparsh Gup… imsparsh      2.31e10 https… NA                           2499
-#> 4 1167113 dhru… Complete… Dhruvil Da… dhruvilda…    1.94e 9 https… NA                           2669
-#> 5 1193668 prom… A full s… PromptCloud promptclo…    4.39e 7 https… NA                           1631
+#> 1 1187302 gpre… r/Vaccin… Gabriel Pr… gpreda        2.39e 5 https… NA                          10860
+#> 2 1165452 crow… A Large-… Oğuzhan Ul… crowww        3.48e 9 https… NA                           6641
+#> 3 1167622 imsp… A curate… Sparsh Gup… imsparsh      2.31e10 https… NA                           2512
+#> 4 1167113 dhru… Complete… Dhruvil Da… dhruvilda…    1.94e 9 https… NA                           2674
+#> 5 1193668 prom… A full s… PromptCloud promptclo…    4.39e 7 https… NA                           1637
 #> # … with 15 more rows, and 14 more variables: isPrivate <lgl>, isReviewed <lgl>, isFeatured <lgl>,
 #> #   licenseName <chr>, description <lgl>, ownerName <chr>, ownerRef <chr>, kernelCount <int>,
 #> #   title <chr>, topicCount <int>, viewCount <int>, voteCount <int>, currentVersionNumber <int>,
@@ -190,9 +283,9 @@ c1_leaderboard
 
 ## Note(s)
 
-  - The original author, Michael Wayne Kearney, is in no way affiliated
-    with Kaggle.com, and, as such, makes no assurances that there won’t
-    be breaking changes to the API at any time.
-  - Although I (Michael Wayne Kearney) am not affiliated, it’s good
-    practice to be informed, so here is the link to Kaggle’s terms of
-    service: <https://www.kaggle.com/terms>
+  - The the developers are in no way affiliated with Kaggle.com, and, as
+    such, makes no assurances that there won’t be breaking changes to
+    the API at any time
+  - Although the developers are not affiliated, it’s good practice to be
+    informed, so here is the link to Kaggle’s terms of service:
+    <https://www.kaggle.com/terms>

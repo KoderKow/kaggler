@@ -2,12 +2,12 @@
 % Please edit documentation in R/competitions-leaderboard.R
 \name{kgl_competitions_leaderboard_view}
 \alias{kgl_competitions_leaderboard_view}
-\title{CompetitionViewLeaderboard}
+\title{Competition View Leaderboard}
 \usage{
 kgl_competitions_leaderboard_view(id)
 }
 \arguments{
-\item{id}{string, Competition name. Required: TRUE.}
+\item{id}{Character. Competition name. Required: TRUE.}
 }
 \description{
 VIew competition leaderboard

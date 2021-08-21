@@ -7,9 +7,9 @@
 kgl_competitions_list(page = 1, search = NULL)
 }
 \arguments{
-\item{page}{integer, Page number. Defaults to 1. Required: FALSE.}
+\item{page}{Numeric. Page number. Defaults to 1. Required: FALSE.}
 
-\item{search}{string, Search terms. Required: FALSE.}
+\item{search}{Character. Search terms. Required: FALSE.}
 }
 \description{
 List competitions

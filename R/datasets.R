@@ -1,43 +1,66 @@
-
-
 #' DatasetsList
 #'
 #' List datasets
 #'
-#' @param page integer, Page number. Defaults to 1. Retrieve datasets via
-#'   page, search, or (ownerSlug and datasetSlug)
-#' @param search string, Search terms. Defaults to . Retrieve datasets via
-#'   page, search, or (ownerSlug and datasetSlug)
-#' @param owner_dataset Alternative to page/search.  The owner and dataset
-#'   slug as it appears in the URL, i.e.,
-#'   \code{"mathan/fifa-2018-match-statistics"}.
+#' @param page Numeric. Page number. Defaults to 1. Retrieve datasets via page, search, or (ownerSlug and datasetSlug)
+#' @param search Character. Search terms. Defaults to . Retrieve datasets via page, search, or (ownerSlug and datasetSlug)
+#' @param owner_dataset Character. Alternative to page/search.  The owner and dataset slug as it appears in the URL, i.e., \code{"mathan/fifa-2018-match-statistics"}.
+#'
 #' @export
-kgl_datasets_list <- function(page = 1, search = "",
-                              owner_dataset = NULL) {
+kgl_datasets_list <- function(
+  page = 1,
+  search = NULL,
+  owner_dataset = NULL
+) {
   if (!is.null(owner_dataset)) {
-    owner_dataset <- strsplit(owner_dataset, "/")[[1]]
-    ownerSlug <- owner_dataset[1]
-    datasetSlug <- owner_dataset[2]
-    get_request <- kgl_api_get(glue::glue("datasets/list/{ownerSlug}/{datasetSlug}"))
+    owner_dataset_clean <- owner_dataset_parser(owner_dataset)
+    owner_slug <- owner_dataset_clean[1]
+    dataset_slug <- owner_dataset_clean[2]
+
+    get_url <- glue::glue("datasets/list/{owner_slug}/{dataset_slug}")
+
+    get_request <- kgl_api_get(get_url)
+
   } else {
-    get_request <- kgl_api_get("datasets/list", page = page, search = search)
+    get_request <- kgl_api_get(
+      path = "datasets/list",
+      page = page,
+      search = search
+    )
   }
 
   kgl_as_tbl(get_request)
 }
 
-#' DatasetsView
+owner_dataset_parser <- function(owner_dataset) {
+  kaggle_pattern <- paste0("^", .kaggle_host_url, "/")
+  if (stringr::str_detect(owner_dataset, kaggle_pattern)) {
+    owner_dataset <-
+      owner_dataset %>%
+      stringr::str_remove(kaggle_pattern)
+  }
+
+  owner_dataset <- strsplit(owner_dataset, "/")[[1]]
+
+  return(owner_dataset)
+}
+
+#' Datasets View
 #'
 #' Show details about a dataset
 #'
-#' @param owner_dataset The owner and data set slug as it appears in the URL,
-#'   i.e., \code{"mathan/fifa-2018-match-statistics"}.
+#' @param owner_dataset Character. The owner and data set slug as it appears in the URL, i.e., \code{"mathan/fifa-2018-match-statistics"}.
+#'
 #' @export
 kgl_datasets_view <- function(owner_dataset) {
-  owner_dataset <- strsplit(owner_dataset, "/")[[1]]
-  ownerSlug <- owner_dataset[1]
-  datasetSlug <- owner_dataset[2]
-  kgl_api_get(glue::glue("datasets/view/{ownerSlug}/{datasetSlug}"))
+  owner_dataset_clean <- owner_dataset_parser(owner_dataset)
+  owner_slug <- owner_dataset_clean[1]
+  dataset_slug <- owner_dataset_clean[2]
+
+  get_url <- glue::glue("datasets/view/{owner_slug}/{dataset_slug}")
+  get_request <- kgl_api_get(get_url)
+
+  kgl_as_tbl(get_request)
 }
 
 #' DatasetsDownloadFile
@@ -51,9 +74,10 @@ kgl_datasets_view <- function(owner_dataset) {
 #' @export
 kgl_datasets_download <- function(owner_dataset, fileName,
                                   datasetVersionNumber = NULL) {
-  owner_dataset <- strsplit(owner_dataset, "/")[[1]]
-  ownerSlug <- owner_dataset[1]
-  datasetSlug <- owner_dataset[2]
+  owner_dataset_clean <- owner_dataset_parser(owner_dataset)
+  owner_slug <- owner_dataset_clean[1]
+  dataset_slug <- owner_dataset_clean[2]
+
   kgl_api_get(glue::glue(
     "datasets/download/{ownerSlug}/{datasetSlug}/{fileName}"),
     datasetVersionNumber = datasetVersionNumber)
@@ -72,7 +96,7 @@ kgl_datasets_upload_file <- function(fileName, contentLength,
                                      lastModifiedDateUtc) {
   contentLength <- file.size(fileName)
   lastModifiedDateUtc <- format(file.info(fileName)$mtime,
-    format = "%Y-%m-%d %H-%M-%S", tz = "UTC")
+                                format = "%Y-%m-%d %H-%M-%S", tz = "UTC")
   kgl_api_post(glue::glue(
     "datasets/upload/file/{contentLength}/{lastModifiedDateUtc}"),
     fileName = fileName)
@@ -89,9 +113,10 @@ kgl_datasets_upload_file <- function(fileName, contentLength,
 #' @export
 kgl_datasets_create_version <- function(owner_dataset,
                                         datasetNewVersionRequest) {
-  owner_dataset <- strsplit(owner_dataset, "/")[[1]]
-  ownerSlug <- owner_dataset[1]
-  datasetSlug <- owner_dataset[2]
+  owner_dataset_clean <- owner_dataset_parser(owner_dataset)
+  owner_slug <- owner_dataset_clean[1]
+  dataset_slug <- owner_dataset_clean[2]
+
   kgl_api_post(glue::glue(
     "datasets/create/version/{ownerSlug}/{datasetSlug}"),
     datasetNewVersionRequest = datasetNewVersionRequest)

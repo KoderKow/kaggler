@@ -2,9 +2,9 @@
 % Please edit documentation in R/competitions-data.R
 \name{kgl_competitions_data_list}
 \alias{kgl_competitions_data_list}
-\title{CompetitionsDataListFiles}
+\title{Competitions Data List Files}
 \usage{
-kgl_competitions_data_list(id)
+kgl_competitions_data_list(id, clean_response = TRUE)
 }
 \arguments{
 \item{id}{Character. Competition name. This accepts 3 formats. Based on the input, the function will try to obtain the correct compeition ID.
@@ -22,6 +22,8 @@ kgl_competitions_data_list(id)
 \item If the two checks above fail, the function will interpret the string as is
 }
 }}
+
+\item{clean_response}{Logical. Clean the response from the Kaggle API.}
 }
 \description{
 List competition data files
