@@ -150,6 +150,8 @@ kgl_data$gender_submission
 
 - Check the download folder to see if any of the files exists. If yes, prompt the user to redownload the ones that exist. If they dont exist, download them
 - Easily load/attach all kaggle data with a function, similar to `{targets}`'s `tar_load()`
+- Create a "Kaggle Workflow" that will guide the user on setting up their project space
+    - Have a family of functions that will set the competitions ID, download the data, and have it ready for the user
 
 ## `kgl_datasets_.*()`
 
