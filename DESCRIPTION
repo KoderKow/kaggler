@@ -15,6 +15,9 @@ Description: An interface for interacting with the public API offered by
     \href{https://www.kaggle.com}{Kaggle}, a machine learning competition
     platform.
 License: MIT + file LICENSE
+URL: https://koderkow.github.io/kaggler,
+    https://github.com/KoderKow/kaggler
+BugReports: https://github.com/KoderKow/kaggler/issues
 Imports:
     assertthat,
     dplyr,
@@ -34,5 +37,3 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-URL: https://koderkow.github.io/kaggler, https://github.com/KoderKow/kaggler
-BugReports: https://github.com/KoderKow/kaggler/issues
