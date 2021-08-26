@@ -66,14 +66,15 @@ kgl_competitions_data_download <- function(
   get_request <- kgl_api_get(get_url)
 
   if (httr::status_code(get_request) != 200) {
-    return(invisible(NULL))
+    return(invisible(get_request))
   }
 
   ## create temp dir
-  dir_kaggle <- usethis::proj_path(dir_name)
+  # dir_kaggle <- usethis::proj_path(dir_name)
+  dir_kaggle <- dir_name
   dir_value <- usethis::ui_value(paste0(dir_kaggle, "/"))
 
-  if (!fs::dir_exists(usethis::proj_path(dir_name))) {
+  if (!fs::dir_exists(dir_name)) {
     usethis::ui_info("Data directory {dir_value} has been created!")
     fs::dir_create(dir_kaggle)
   }
@@ -84,7 +85,7 @@ kgl_competitions_data_download <- function(
 
   path_temp <- fs::path(
     dir_kaggle,
-    file_name,
+    file_name %>% fs::path_ext_remove(),
     ext = ifelse(get_ext == "zip", "zip", "")
   )
 
@@ -120,7 +121,7 @@ kgl_competitions_data_download <- function(
   }
 
   if (save_data == FALSE) {
-    fs::dir_delete(usethis::proj_path(dir_name))
+    fs::dir_delete(dir_name)
     # usethis::ui_done("Data directory {dir_value} has been removed.")
   } else {
     usethis::ui_done("Data has been saved in {dir_value}.")
@@ -149,6 +150,10 @@ kgl_competitions_data_download_all <- function(id) {
   }
 
   competition_id <- id_type_guesser(id)
+
+  # dir_path <- usethis::proj_path(.kgl_dir)
+  dir_path <- .kgl_dir
+  fs::dir_create(dir_path)
 
   data_list <- kgl_competitions_data_list(
     id = competition_id
