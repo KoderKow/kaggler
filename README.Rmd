@@ -6,12 +6,6 @@ editor_options:
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ATTENTION
-
-The base of this package was cloned from the original at [{kaggler}](https://github.com/mkearney/kaggler). I have decided to take the developers work and continue their amazing development! Major props and recognition goes out to the original developer(s) of this package.
-
-I will be updating all documentation and examples for the README and functions for this package.
-
 ---
 
 ```{r setup, include = FALSE}
@@ -52,7 +46,7 @@ devtools::install_packages("koderkow/kaggler")
 
 <span>3.</span> Scroll down to the `API` section and click `Create New API Token` (which should cause you to download a `kaggle.json` file with your username and API key)
 
-<p style='align:center'><img src='tools/readme/kag.png' /></p>
+<p style='align:center'><img src='man/figures/kag.png' /></p>
 
 <span>4.</span> There are a few different ways to store your credentials
 
@@ -61,9 +55,110 @@ devtools::install_packages("koderkow/kaggler")
   - Enter your `username` and `key` and use the `kgl_auth()` function like in the example below 
 
 ```{r, eval = FALSE}
+library(kaggler)
+
 kgl_auth(username = "koderkow", key = "example")
 #> Your Kaggle key has been recorded for this session and saved as `KAGGLE_PAT` environment variable for future sessions.
 ```
+
+# Kaggle Flow
+
+This is an **experimental** and **opinionated** reproducible workflow for working with Kaggle competitions. The Kaggle Flow will always check  if the competition rules are accepted and the data files for the competition are readily available. If they are not, they will be downloaded.
+
+## ID input
+
+Find the competition you want to work on. Methods have been built out to accept multiple forms of `id`.
+
+1. The competition URL
+    - `https://www.kaggle.com/c/titanic` and `https://www.kaggle.com/c/titanic/code` will recognize `titanic` as the ID
+2. Kaggle's API command
+    - Kaggles official API is built in python and they supply a command to download the data on the data tab of a competition. The download functions will take `kaggle competitions download -c titanic`and recognize the ID as `titanic`
+3. Explicit ID
+    - If the above two cases don't match in the logic then everything else will be considered an ID
+    - Example; entering `titanic` directly
+
+## Example Work Flow
+
+The flow will always check if the user have accepted the rules to the competition. If the rules have not been accepted, a prompt will be shown notifying the user of the error and an input to take the user to the competitions rules.
+
+```r
+kgl_flow(id = "tabular-playground-series-jun-2021")
+
+#> x You must accept this competition's rules before you'll be able to download files.
+#> Would you like to visit 'https://www.kaggle.com/c/tabular-playground-series-jun-2021/rules' to  accept the rules?
+#> 
+#> 1: Nope
+#> 2: Yup
+#> 3: No way
+```
+
+Now lets switch to a different project and a competition my account has accepted the rules for. Running `kgl_flow()` will download all the files I need and also store some metadata to keep track of the competition ID and information about the competitions data files.
+
+```{r}
+kgl_flow("titanic")
+```
+
+The files have been saved into a new directory; `_kaggle_data`.
+
+```{r}
+fs::dir_ls("_kaggle_data")
+```
+
+We can get some information about our competition data by looking at the metadata.
+
+```r
+kgl_flow_meta()
+
+#> ℹ Competition ID: 'titanic'
+#> # A tibble: 3 x 10
+#>   id     ref      name    description                total_bytes url      creation_date       download_time       nrows ncols
+#>   <chr>  <chr>    <chr>   <chr>                            <int> <chr>   <dttm>              <dttm>              <int> <int>
+#> 1 titan… gender_… gender… "An example of what a sub…        3258 https:… 2018-04-09 05:33:22 2021-08-26 16:19:50   418     2
+#> 2 titan… test.csv test.c… "test data to check the a…       28629 https:… 2018-04-09 05:33:22 2021-08-26 16:19:51   418    11
+#> 3 titan… train.c… train.… "contains data "                 61194 https:… 2018-04-09 05:33:22 2021-08-26 16:19:52   891    12
+```
+
+If the competitions data is all in csv format, then they can easily be loaded in.
+
+```r
+kgl_flow_load()
+
+#> ℹ Competition ID: 'titanic'
+#> ✓ The data has been loaded into the global environment!
+#>   - 'gender_submission'
+#>   - 'test'
+#>   - 'train'
+```
+
+In an unwanted situation where one of the files gets accidentily deleted, kgl_flow_load() will reference the metadata to make sure all files are available before loading them in.
+
+```r
+fs::file_delete("_kaggle_data/train.csv")
+
+kgl_flow_load()
+#> x There seem to be files missing! Run 'kgl_flow()' to make sure all files are present.
+```
+
+As prompted, we can run `kgl_flow()` again to get the files back.
+
+```r
+kgl_flow()
+
+#> ℹ These files are detected in '_kaggle_data/' and will not be downloaded:
+#>   - 'gender_submission'
+#>   - 'test'
+#> ● These files will be downloaded:
+#>   - 'train'.
+#> ● Downloading 'train.csv'...
+```
+
+We did not need to supply the `id` this time because the flow will check if an ID has been recorded in the metadata.
+
+This has been heavily influenced by the [{targets}](https://github.com/ropensci/targets) package. Any issues or ideas for improvements to this experimental flow is greatly appreciated!
+
+# Direct API Interaction
+
+These will be functions the user can call to have custom control over the returns and interactions with the API.
 
 ## `kgl_competitions_list_.*()`
 
@@ -105,18 +200,6 @@ c1_data <- kgl_competitions_data_download(
 ```
 
 ### Downloading all data for a competition
-
-#### ID input
-
-Methods have been built out to accept multiple forms of `id`.
-
-1. The competition URL
-    - `https://www.kaggle.com/c/titanic` and `https://www.kaggle.com/c/titanic/code` will recognize `titanic` as the ID
-2. Kaggle's API command
-    - Kaggles official API is built in python and they supply a command to download the data on the data tab of a competition. The download functions will take `kaggle competitions download -c titanic`and recognize the ID as `titanic`
-3. Explicit ID
-    - If the above two cases don't match in the logic then everything else will be considered an ID
-    - Example; entering `titanic` directly
   
 #### `kgl_competitions_data_download_all()`
 
@@ -146,13 +229,6 @@ kgl_data$test
 kgl_data$gender_submission
 ```
 
-### Future goals for downloads
-
-- Check the download folder to see if any of the files exists. If yes, prompt the user to redownload the ones that exist. If they dont exist, download them
-- Easily load/attach all kaggle data with a function, similar to `{targets}`'s `tar_load()`
-- Create a "Kaggle Workflow" that will guide the user on setting up their project space
-    - Have a family of functions that will set the competitions ID, download the data, and have it ready for the user
-
 ## `kgl_datasets_.*()`
 
 Get a list of all of the datasets.
@@ -176,6 +252,8 @@ c1_leaderboard
 
 ## Note(s)
 
+- The base of this package was cloned from the original at [{kaggler}](https://github.com/mkearney/kaggler). I have decided to take the developers work and continue their amazing development! Major props and recognition goes out to the original developer(s) of this package.
+  - I will be updating all documentation and examples for the README and functions for this package as time goes on
 - The the developers are in no way affiliated with Kaggle.com, and, as such, makes no assurances that there won't be breaking changes to the API at any time
 - Although the developers are not affiliated, it's good practice to be informed, so here is the link to Kaggle's terms of service: https://www.kaggle.com/terms
 
