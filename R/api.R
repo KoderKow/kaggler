@@ -3,7 +3,7 @@
 .kaggle_base_url <- "https://www.kaggle.com/api/v1"
 .kaggle_competition_url <- "https://www.kaggle.com/c/"
 .kgl_dir <- "_kaggle_data"
-.kgl_dir_ui <- usethis::ui_value(paste0(.kgl_dir, '/'))
+.kgl_dir_ui <- usethis::ui_value(paste0(.kgl_dir, "/"))
 
 ## URL builder
 kgl_api_call <- function(path, ...) {
