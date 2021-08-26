@@ -70,8 +70,7 @@ kgl_competitions_data_download <- function(
   }
 
   ## create temp dir
-  # dir_kaggle <- usethis::proj_path(dir_name)
-  dir_kaggle <- dir_name
+  dir_kaggle <- usethis::proj_path(dir_name)
   dir_value <- usethis::ui_value(paste0(dir_kaggle, "/"))
 
   if (!fs::dir_exists(dir_name)) {
@@ -151,8 +150,7 @@ kgl_competitions_data_download_all <- function(id) {
 
   competition_id <- id_type_guesser(id)
 
-  # dir_path <- usethis::proj_path(.kgl_dir)
-  dir_path <- .kgl_dir
+  dir_path <- usethis::proj_path(.kgl_dir)
   fs::dir_create(dir_path)
 
   data_list <- kgl_competitions_data_list(
