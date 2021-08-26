@@ -55,11 +55,13 @@ kgl_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
       key <- Sys.getenv("KAGGLE_KEY")
     }
     if (identical(username, "") || identical(key, "")) {
-      stop("Couldn't find environment variables. Please set\nKAGGLE_PAT=",
-        "{username}/{key}\n# or\nKAGGLE_USERNAME={username}\nKAGGLE_KEY={key}")
+      stop(
+        "Couldn't find environment variables. Please set\nKAGGLE_PAT=",
+        "{username}/{key}\n# or\nKAGGLE_USERNAME={username}\nKAGGLE_KEY={key}"
+      )
     }
 
-  ## alternatively, users can provide path to (or text of) creds_file
+    ## alternatively, users can provide path to (or text of) creds_file
   } else if (!is.null(creds_file)) {
 
     ## read and parse kaggle.json creds file if it exists
@@ -68,36 +70,59 @@ kgl_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
       creds_file <- readLines(con, warn = FALSE, encoding = "UTF-8")
       close(con)
 
-    ## if file doens't exist and if contents are NOT supplied as a string then STOP
+      ## if file doens't exist and if contents are NOT supplied as a string then STOP
     } else if (!grepl("username.*key", creds_file)) {
-      stop("Kaggle credentials .json file not found. Provide path to file OR ",
+      stop(
+        "Kaggle credentials .json file not found. Provide path to file OR ",
         "enter your Kaggle 'username' and 'key' (from kaggle.com/{username}/account.",
-        call. = FALSE)
+        call. = FALSE
+      )
     }
 
     ## parse the username and key
-    username <- regmatches(creds_file, regexpr("(?<=username\":\")[^\"]+",
-      creds_file, perl = TRUE))
-    key <- regmatches(creds_file, regexpr("(?<=key\":\")[^\"]+",
-      creds_file, perl = TRUE))
+    username <- regmatches(
+      creds_file,
+      regexpr(
+        "(?<=username\":\")[^\"]+",
+        creds_file,
+        perl = TRUE
+      )
+    )
+    key <- regmatches(
+      creds_file,
+      regexpr(
+        "(?<=key\":\")[^\"]+",
+        creds_file,
+        perl = TRUE
+      )
+    )
 
     ## validate username and key inputs
-    stopifnot(length(username) == 1, is.atomic(username),
-      length(key) == 1, is.character(key))
+    stopifnot(
+      length(username) == 1,
+      is.atomic(username),
+      length(key) == 1,
+      is.character(key)
+    )
 
     ## set as store as env variable
     set_renv(KAGGLE_PAT = paste0(username, "/", key))
-
   } else {
     ## validate username and key inputs
-    stopifnot(length(username) == 1, is.atomic(username),
-      length(key) == 1, is.character(key))
+    stopifnot(
+      length(username) == 1,
+      is.atomic(username),
+      length(key) == 1,
+      is.character(key)
+    )
 
     ## set as store as env variable
     set_renv(KAGGLE_PAT = paste0(username, "/", key))
 
-    message("Your Kaggle key has been recorded for this session and saved as `KAGGLE_PAT`\n",
-      "  environment variable for future sessions.")
+    message(
+      "Your Kaggle key has been recorded for this session and saved as `KAGGLE_PAT`\n",
+      "  environment variable for future sessions."
+    )
   }
 
   ## return basic http authorization method (with kaggle-generated key as password)

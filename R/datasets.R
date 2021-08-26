@@ -20,7 +20,6 @@ kgl_datasets_list <- function(
     get_url <- glue::glue("datasets/list/{owner_slug}/{dataset_slug}")
 
     get_request <- kgl_api_get(get_url)
-
   } else {
     get_request <- kgl_api_get(
       path = "datasets/list",
@@ -72,15 +71,21 @@ kgl_datasets_view <- function(owner_dataset) {
 #' @param fileName string, File name. Required: TRUE.
 #' @param datasetVersionNumber string, Dataset version number. Required: FALSE.
 #' @export
-kgl_datasets_download <- function(owner_dataset, fileName,
-                                  datasetVersionNumber = NULL) {
+kgl_datasets_download <- function(
+  owner_dataset,
+  fileName,
+  datasetVersionNumber = NULL
+) {
   owner_dataset_clean <- owner_dataset_parser(owner_dataset)
   owner_slug <- owner_dataset_clean[1]
   dataset_slug <- owner_dataset_clean[2]
 
-  kgl_api_get(glue::glue(
-    "datasets/download/{ownerSlug}/{datasetSlug}/{fileName}"),
-    datasetVersionNumber = datasetVersionNumber)
+  kgl_api_get(
+    glue::glue(
+      "datasets/download/{ownerSlug}/{datasetSlug}/{fileName}"
+    ),
+    datasetVersionNumber = datasetVersionNumber
+  )
 }
 
 #' DatasetsUploadFile
@@ -92,14 +97,23 @@ kgl_datasets_download <- function(owner_dataset, fileName,
 #' @param lastModifiedDateUtc integer, Last modified date of file in milliseconds
 #'   since epoch in UTC. Required: TRUE.
 #' @export
-kgl_datasets_upload_file <- function(fileName, contentLength,
-                                     lastModifiedDateUtc) {
+kgl_datasets_upload_file <- function(
+  fileName,
+  contentLength,
+  lastModifiedDateUtc
+) {
   contentLength <- file.size(fileName)
-  lastModifiedDateUtc <- format(file.info(fileName)$mtime,
-                                format = "%Y-%m-%d %H-%M-%S", tz = "UTC")
-  kgl_api_post(glue::glue(
-    "datasets/upload/file/{contentLength}/{lastModifiedDateUtc}"),
-    fileName = fileName)
+  lastModifiedDateUtc <- format(
+    file.info(fileName)$mtime,
+    format = "%Y-%m-%d %H-%M-%S",
+    tz = "UTC"
+  )
+  kgl_api_post(
+    glue::glue(
+      "datasets/upload/file/{contentLength}/{lastModifiedDateUtc}"
+    ),
+    fileName = fileName
+  )
 }
 
 #' DatasetsCreateVersion
@@ -111,15 +125,20 @@ kgl_datasets_upload_file <- function(fileName, contentLength,
 #' @param datasetNewVersionRequest Information for creating a new dataset version.
 #'   Required: TRUE.
 #' @export
-kgl_datasets_create_version <- function(owner_dataset,
-                                        datasetNewVersionRequest) {
+kgl_datasets_create_version <- function(
+  owner_dataset,
+  datasetNewVersionRequest
+) {
   owner_dataset_clean <- owner_dataset_parser(owner_dataset)
   owner_slug <- owner_dataset_clean[1]
   dataset_slug <- owner_dataset_clean[2]
 
-  kgl_api_post(glue::glue(
-    "datasets/create/version/{ownerSlug}/{datasetSlug}"),
-    datasetNewVersionRequest = datasetNewVersionRequest)
+  kgl_api_post(
+    glue::glue(
+      "datasets/create/version/{ownerSlug}/{datasetSlug}"
+    ),
+    datasetNewVersionRequest = datasetNewVersionRequest
+  )
 }
 
 #' DatasetsCreateNew

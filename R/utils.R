@@ -1,7 +1,7 @@
 
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 ##                                  WRANGLING                                 ##
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 
 #' Convert kaggle output to tibble
 #'
@@ -39,7 +39,8 @@ kgl_as_tbl <- function(x) {
 
 parse_datetimes <- function(x) {
   x[grep("deadline|date", names(x), ignore.case = TRUE)] <- lapply(
-    x[grep("deadline|date", names(x), ignore.case = TRUE)], parse_datetime
+    x[grep("deadline|date", names(x), ignore.case = TRUE)],
+    parse_datetime
   )
   x
 }
@@ -51,8 +52,13 @@ parse_datetime <- function(x) {
 
 as_parsed <- function(x) httr::content(x)
 
-as_json <- function(r) jsonlite::fromJSON(httr::content(r,
-  as = "text", encoding = "UTF-8"))
+as_json <- function(r) {
+  jsonlite::fromJSON(httr::content(
+    r,
+    as = "text",
+    encoding = "UTF-8"
+  ))
+}
 
 readlines <- function(x, ...) {
   con <- file(x)
@@ -61,16 +67,16 @@ readlines <- function(x, ...) {
   x
 }
 
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 ##                              OBJECT VALIDATION                             ##
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 
 is_recursive <- function(x) vapply(x, is.recursive, logical(1))
 
 
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 ##                                RENVIRON FUNS                               ##
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 
 
 set_renv <- function(...) {
@@ -87,7 +93,9 @@ set_renv <- function(...) {
 }
 
 check_renv <- function(var = NULL) {
-  if (!file.exists(.Renviron())) return(invisible())
+  if (!file.exists(.Renviron())) {
+    return(invisible())
+  }
   if (is_incomplete(.Renviron())) {
     append_lines("", file = .Renviron())
   }
@@ -107,7 +115,9 @@ check_renv <- function(var = NULL) {
 
 is_incomplete <- function(x) {
   con <- file(x)
-  x <- tryCatch(readLines(con, encoding = "UTF-8"), warning = function(w) return(TRUE))
+  x <- tryCatch(readLines(con, encoding = "UTF-8"), warning = function(w) {
+    return(TRUE)
+  })
   close(con)
   ifelse(isTRUE(x), TRUE, FALSE)
 }

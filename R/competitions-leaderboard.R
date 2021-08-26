@@ -6,7 +6,7 @@
 #' @param id Character. Competition name. Required: TRUE.
 #' @export
 kgl_competitions_leaderboard_download <- function(id) {
-  if(!assertthat::is.string(id)) {
+  if (!assertthat::is.string(id)) {
     usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
     usethis::ui_stop("'id' is not a string.")
   }
@@ -27,7 +27,7 @@ kgl_competitions_leaderboard_download <- function(id) {
 #' @param id Character. Competition name. Required: TRUE.
 #' @export
 kgl_competitions_leaderboard_view <- function(id) {
-  if(!assertthat::is.string(id)) {
+  if (!assertthat::is.string(id)) {
     usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
     usethis::ui_stop("'id' is not a string.")
   }

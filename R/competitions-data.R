@@ -13,7 +13,7 @@
 #'
 #' @export
 kgl_competitions_data_list <- function(id, clean_response = TRUE) {
-  if(!assertthat::is.string(id)) {
+  if (!assertthat::is.string(id)) {
     usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
     usethis::ui_stop("'id' is not a string.")
   }
@@ -54,7 +54,7 @@ kgl_competitions_data_download <- function(
   dir_name = "_kaggle_data",
   quiet = TRUE
 ) {
-  if(!assertthat::is.string(id)) {
+  if (!assertthat::is.string(id)) {
     usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
     usethis::ui_stop("'id' is not a string.")
   }
@@ -130,7 +130,6 @@ kgl_competitions_data_download <- function(
     d <- invisible(NULL)
     return_value <- usethis::ui_value("NULL")
     # usethis::ui_done("Returning {return_value}, invisibly.")
-
   } else {
     d <- readr::read_csv(path_d, col_types = readr::cols())
     # usethis::ui_done("Returning {file_name_value} data!")
@@ -144,7 +143,7 @@ kgl_competitions_data_download <- function(
 #' @inheritParams kgl_competitions_data_list
 #' @export
 kgl_competitions_data_download_all <- function(id) {
-  if(!assertthat::is.string(id)) {
+  if (!assertthat::is.string(id)) {
     usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
     usethis::ui_stop("'id' is not a string.")
   }
@@ -164,7 +163,6 @@ kgl_competitions_data_download_all <- function(id) {
     dplyr::mutate(name = fs::path_ext_remove(name)) %>%
     dplyr::pull(ref, name) %>%
     purrr::map(~ {
-
       d <- kgl_competitions_data_download(
         id = current_id,
         file_name = .x
@@ -192,10 +190,8 @@ id_type_guesser <- function(id) {
       stringr::str_split(" ") %>%
       unlist() %>%
       .[length(.)]
-
   } else if (id_type == "id") {
     competition_id <- id
-
   } else {
     competition_id <-
       id %>%
