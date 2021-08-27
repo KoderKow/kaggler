@@ -77,6 +77,49 @@ shh <- function(x) {
 
 is_recursive <- function(x) vapply(x, is.recursive, logical(1))
 
+validator_param_id <- function(id) {
+  if (!assertthat::is.string(id)) {
+    usethis::ui_oops("{usethis::ui_value('id')} must be a character that references the competition. Check the docs for {usethis::ui_value('kgl_flow()')} for an acceptable {usethis::ui_value('id')}.")
+
+    return(invisible())
+  }
+}
+
+validator_competition_id <- function(competition_id) {
+  get_url <- glue::glue("competitions/data/list/{competition_id}")
+
+  get_request <- suppressMessages(kgl_api_get(get_url))
+
+  if (get_request$status_code != 200) {
+    stop("Invalid competition ID input.")
+  }
+
+  return(invisible())
+}
+
+validator_rules <- function(competition_id, file_name) {
+  get_url <- glue::glue("competitions/data/download/{competition_id}/{file_name}")
+
+  get_request <- kgl_api_get(get_url)
+
+  if (get_request$status_code != 200) {
+    competition_url <- glue::glue("{.kaggle_competition_url}{competition_id}/rules")
+    competition_url_ui <- usethis::ui_value(competition_url)
+    user_check <- usethis::ui_yeah("Would you like to visit {competition_url_ui} to accept the rules?")
+
+    if (user_check) {
+      browseURL(competition_url)
+    }
+
+    usethis::ui_todo("Rerun {usethis::ui_value('kgl_flow()')} once the rules are accepted!")
+
+    v_result <- FALSE
+  } else {
+    v_result <- TRUE
+  }
+
+  return(v_result)
+}
 
 ## ----------------------------------------------------------------------------##
 ##                                RENVIRON FUNS                               ##
@@ -165,3 +208,12 @@ clean_renv <- function(var) {
 are_named <- function(x) is_named(x) && !"" %in% names(x)
 
 is_named <- function(x) !is.null(names(x))
+
+## Console display
+ui_ul <- function(x) {
+  x %>%
+    purrr::map_chr(~ {
+      paste0("- ", usethis::ui_value(.x))
+    }) %>%
+    glue::glue_collapse("\n")
+}
