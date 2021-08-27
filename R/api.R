@@ -41,8 +41,6 @@ kgl_api_call <- function(path, ...) {
 ## for GET requests
 kgl_api_get <- function(path, ..., auth = kgl_auth()) {
   get_url <- kgl_api_call(path, ...)
-  get_url_value <- usethis::ui_value(get_url)
-  # usethis::ui_info("Sending GET request to {get_url_value}...")
 
   ## build and make request
   r <- httr::GET(
