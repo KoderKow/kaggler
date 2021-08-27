@@ -6,6 +6,6 @@
 #' @keywords internal
 "_PACKAGE"
 
-gv <- c(".", "download.file", "name", "ref", "submission_date", "unzip", "score", "browseURL", "name_old", "total_bytes")
+gv <- c(".", "download.file", "name", "ref", "submission_date", "unzip", "score", "browseURL", "name_old", "total_bytes", "check_path_competition_id")
 
 globalVariables(gv)
