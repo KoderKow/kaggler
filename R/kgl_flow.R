@@ -36,7 +36,7 @@ kgl_flow <- function(id = NULL) {
   ## Create Kaggle directory
   fs::dir_create(dir_path)
 
-  check_path_competition_id(
+  validator_path_competition_id(
     path_competition_id = path_competition_id,
     competition_id = competition_id,
     dir_path = dir_path,
