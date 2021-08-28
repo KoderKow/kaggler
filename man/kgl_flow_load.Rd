@@ -26,6 +26,7 @@ kgl_flow_load()
 }
 \seealso{
 Other Kaggle Flows: 
+\code{\link{kgl_flow_competition_info}()},
 \code{\link{kgl_flow_meta}()},
 \code{\link{kgl_flow}()}
 }
