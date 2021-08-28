@@ -12,3 +12,4 @@
 ^docs$
 ^pkgdown$
 ^dev_testing\.R$
+^_kaggle_data$
