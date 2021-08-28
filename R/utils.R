@@ -121,6 +121,22 @@ validator_rules <- function(competition_id, file_name) {
   return(v_result)
 }
 
+validator_api_key <- function() {
+  # kgl_auth()
+  get_request <- kgl_api_get(
+    path = "competitions/list",
+    search = "titanic"
+  )
+
+  if (get_request$status_code != 200) {
+    kgl_auth_ui <- usethis::ui_value("?kgl_auth()")
+
+    msg <- glue::glue("Request failed. Please make sure you have correctly setup your Kaggle API Key Type {kgl_auth_ui} for more information.")
+
+    stop(msg)
+  }
+}
+
 ## ----------------------------------------------------------------------------##
 ##                                RENVIRON FUNS                               ##
 ## ----------------------------------------------------------------------------##

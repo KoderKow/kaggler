@@ -21,6 +21,8 @@ kgl_flow <- function(id = NULL) {
     id <- readLines(path_competition_id)[2]
   }
 
+  validator_api_key()
+
   validator_param_id(id)
 
   competition_id <- id_type_guesser(id)
@@ -32,6 +34,12 @@ kgl_flow <- function(id = NULL) {
   dir_meta <- fs::path(dir_path, "meta")
   path_meta <- fs::path(dir_meta, "meta")
   path_competition_id <- fs::path(dir_meta, "competition_id")
+
+ ## Ignore Kaggle dir for git and R packages
+  usethis::use_git_ignore(.kgl_dir)
+  if (fs::file_exists("DESCRIPTION")) {
+    usethis::use_build_ignore(.kgl_dir)
+  }
 
   ## Create Kaggle directory
   fs::dir_create(dir_path)
@@ -127,6 +135,11 @@ kgl_flow <- function(id = NULL) {
         saveRDS(file = path_meta)
     } else {
       ## * Create ----
+      path_competition_info <- fs::path(dir_meta, "competition_info")
+      d_competition_info <-
+        kgl_competitions_list(search = competition_id) %>%
+        saveRDS(file = path_competition_info)
+
       data_list %>%
         dplyr::mutate(name = name_old) %>%
         dplyr::select(-name_old) %>%
