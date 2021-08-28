@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Loan the Kaggle data — kgl_flow_load • kaggler</title>
+<title>Show competition info — kgl_flow_competition_info • kaggler</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Loan the Kaggle data — kgl_flow_load" />
-<meta property="og:description" content="If all of the files in _kaggle_data are in csv format (excluding the meta directory) then this function will load all of the kaggle data into the current environment (or the environment of your choosing) via readr::read_csv()." />
+<meta property="og:title" content="Show competition info — kgl_flow_competition_info" />
+<meta property="og:description" content="This function will show some competition information for the current project." />
 <meta property="og:image" content="https://koderkow.github.io/kaggler/logo.png" />
 
 
@@ -116,33 +116,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Loan the Kaggle data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/kgl_flow_load.R'><code>R/kgl_flow_load.R</code></a></small>
-    <div class="hidden name"><code>kgl_flow_load.Rd</code></div>
+    <h1>Show competition info</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/kgl_flow_meta.R'><code>R/kgl_flow_meta.R</code></a></small>
+    <div class="hidden name"><code>kgl_flow_competition_info.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>If all of the files in <code>_kaggle_data</code> are in <strong>csv</strong> format (excluding the meta directory) then this function will load all of the kaggle data into the current environment (or the environment of your choosing) via <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code>.</p>
+    <p>This function will show some competition information for the current project.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_flow_load</span><span class='op'>(</span>envir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_flow_competition_info</span><span class='op'>(</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>envir</th>
-      <td><p>Environment to put the loaded kaggle data.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Nothing.</p>
+    <p>Compeition info.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Kaggle Flows: 
-<code><a href='kgl_flow_competition_info.html'>kgl_flow_competition_info</a>()</code>,
+<code><a href='kgl_flow_load.html'>kgl_flow_load</a>()</code>,
 <code><a href='kgl_flow_meta.html'>kgl_flow_meta</a>()</code>,
 <code><a href='kgl_flow.html'>kgl_flow</a>()</code></p></div>
 
@@ -152,7 +144,7 @@
 
 <span class='fu'><a href='kgl_flow.html'>kgl_flow</a></span><span class='op'>(</span><span class='st'>"titanic"</span><span class='op'>)</span>
 
-<span class='fu'>kgl_flow_load</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>kgl_flow_competition_info</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
