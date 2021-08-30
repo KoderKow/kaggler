@@ -10,3 +10,4 @@ README_cache
 .httr-oauth
 dev_testing.R
 _kaggle_data
+inst/doc
