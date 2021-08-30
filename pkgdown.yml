@@ -1,8 +1,10 @@
 pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2021-08-28T16:34Z
+articles:
+  kaggler: kaggler.html
+  kgl-flow: kgl-flow.html
+last_built: 2021-08-30T03:37Z
 urls:
   reference: https://koderkow.github.io/kaggler/reference
   article: https://koderkow.github.io/kaggler/articles
