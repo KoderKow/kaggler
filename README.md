@@ -15,175 +15,41 @@
 ## Installation
 
 You can install the dev version of **{kaggler}** from
-[CRAN](https://github.com/mkearney/kaggler) with:
+[CRAN](https://github.com/koderkow/kaggler) with:
 
 ``` r
 ## install kaggler package from github
 devtools::install_packages("koderkow/kaggler")
 ```
 
-## API authorization
+# API Authorization
 
-<span>1.</span> Go to [https://www.kaggle.com/](kaggle.com) and sign in
-
-<span>2.</span> Click `Account` or navigate to
-`https://www.kaggle.com/{username}/account`
-
-<span>3.</span> Scroll down to the `API` section and click `Create New
-API Token` (which should cause you to download a `kaggle.json` file with
-your username and API key)
-
-<p style="align:center">
-
-<img src='man/figures/kag.png' />
-
-</p>
-
-<span>4.</span> There are a few different ways to store your credentials
-
-  - Save/move the `kaggle.json` file as `~/.kaggle/kaggle.json`
-  - Save/move the `kaggle.json` file to your current working directory
-  - Enter your `username` and `key` and use the `kgl_auth()` function
-    like in the example below
-
-<!-- end list -->
-
-``` r
-library(kaggler)
-
-kgl_auth(username = "koderkow", key = "example")
-#> Your Kaggle key has been recorded for this session and saved as `KAGGLE_PAT` environment variable for future sessions.
-```
+All users must be authenticated to interact with Kaggle’s APIs. To setup
+your API key refer to the [Get
+Started](https://koderkow.github.io/kaggler/articles/kaggler.html)
+guide.
 
 # Kaggle Flow
 
 This is an **experimental** and **opinionated** reproducible workflow
-for working with Kaggle competitions. The Kaggle Flow will always check
-if the competition rules are accepted and the data files for the
-competition are readily available. If they are not, they will be
-downloaded.
-
-## ID input
-
-Find the competition you want to work on. Methods have been built out to
-accept multiple forms of `id`.
-
-1.  The competition URL
-      - `https://www.kaggle.com/c/titanic` and
-        `https://www.kaggle.com/c/titanic/code` will recognize `titanic`
-        as the ID
-2.  Kaggle’s API command
-      - Kaggles official API is built in python and they supply a
-        command to download the data on the data tab of a competition.
-        The download functions will take `kaggle competitions download
-        -c titanic`and recognize the ID as `titanic`
-3.  Explicit ID
-      - If the above two cases don’t match in the logic then everything
-        else will be considered an ID
-      - Example; entering `titanic` directly
-
-## Example Work Flow
-
-The flow will always check if the user have accepted the rules to the
-competition. If the rules have not been accepted, a prompt will be shown
-notifying the user of the error and an input to take the user to the
-competitions rules.
+for working with Kaggle competitions.
 
 ``` r
-kgl_flow(id = "tabular-playground-series-jun-2021")
+library(kaggler)
 
-#> x You must accept this competition's rules before you'll be able to download files.
-#> Would you like to visit 'https://www.kaggle.com/c/tabular-playground-series-jun-2021/rules' to  accept the rules?
-#> 
-#> 1: Nope
-#> 2: Yup
-#> 3: No way
-```
-
-Now lets switch to a different project and a competition my account has
-accepted the rules for. Running `kgl_flow()` will download all the files
-I need and also store some metadata to keep track of the competition ID
-and information about the competitions data files.
-
-``` r
 kgl_flow("titanic")
-#> ✓ Setting active project to '<no active project>'
-#> ● These files will be downloaded:
+
+#> • These files will be downloaded:
 #>   - 'gender_submission'
 #>   - 'test'
 #>   - 'train'.
-#> ● Downloading 'gender_submission.csv'...
-#> ● Downloading 'test.csv'...
-#> ● Downloading 'train.csv'...
+#> • Downloading 'gender_submission.csv'...
+#> • Downloading 'test.csv'...
+#> • Downloading 'train.csv'...
 ```
 
-The files have been saved into a new directory; `_kaggle_data`.
-
-``` r
-fs::dir_ls("_kaggle_data")
-#> _kaggle_data/gender_submission.csv _kaggle_data/meta                  
-#> _kaggle_data/test.csv              _kaggle_data/train.csv
-```
-
-We can get some information about our competition data by looking at the
-metadata.
-
-``` r
-kgl_flow_meta()
-
-#> ℹ Competition ID: 'titanic'
-#> # A tibble: 3 x 10
-#>   id     ref      name    description                total_bytes url      creation_date       download_time       nrows ncols
-#>   <chr>  <chr>    <chr>   <chr>                            <int> <chr>   <dttm>              <dttm>              <int> <int>
-#> 1 titan… gender_… gender… "An example of what a sub…        3258 https:… 2018-04-09 05:33:22 2021-08-26 16:19:50   418     2
-#> 2 titan… test.csv test.c… "test data to check the a…       28629 https:… 2018-04-09 05:33:22 2021-08-26 16:19:51   418    11
-#> 3 titan… train.c… train.… "contains data "                 61194 https:… 2018-04-09 05:33:22 2021-08-26 16:19:52   891    12
-```
-
-If the competitions data is all in csv format, then they can easily be
-loaded in.
-
-``` r
-kgl_flow_load()
-
-#> ℹ Competition ID: 'titanic'
-#> ✓ The data has been loaded into the global environment!
-#>   - 'gender_submission'
-#>   - 'test'
-#>   - 'train'
-```
-
-In an unwanted situation where one of the files gets accidentily
-deleted, kgl\_flow\_load() will reference the metadata to make sure all
-files are available before loading them in.
-
-``` r
-fs::file_delete("_kaggle_data/train.csv")
-
-kgl_flow_load()
-#> x There seem to be files missing! Run 'kgl_flow()' to make sure all files are present.
-```
-
-As prompted, we can run `kgl_flow()` again to get the files back.
-
-``` r
-kgl_flow()
-
-#> ℹ These files are detected in '_kaggle_data/' and will not be downloaded:
-#>   - 'gender_submission'
-#>   - 'test'
-#> ● These files will be downloaded:
-#>   - 'train'.
-#> ● Downloading 'train.csv'...
-```
-
-We did not need to supply the `id` this time because the flow will check
-if an ID has been recorded in the metadata.
-
-This has been heavily influenced by the
-[{targets}](https://github.com/ropensci/targets) package. Any issues or
-ideas for improvements to this experimental flow is greatly
-appreciated\!
+For a more in-depth walkthrough visit the [Kaggle
+Flow](https://koderkow.github.io/kaggler/articles/kgl-flow.html) page.
 
 # Direct API Interaction
 
@@ -256,12 +122,12 @@ API.
 ## data list for a given competition
 c1_datalist <- kgl_competitions_data_list(comps1$ref[1])
 c1_datalist
-#> # A tibble: 3 x 7
-#>   id              ref          name         description total_bytes url          creation_date      
-#>   <chr>           <chr>        <chr>        <lgl>             <int> <chr>        <dttm>             
-#> 1 contradictory-… test.csv     test.csv     NA              1180141 https://www… 2020-07-27 19:45:43
-#> 2 contradictory-… sample_subm… sample_subm… NA                67549 https://www… 2020-07-27 19:45:43
-#> 3 contradictory-… train.csv    train.csv    NA              2771659 https://www… 2020-07-27 19:45:43
+#> # A tibble: 3 × 7
+#>   id                           ref                   name  description total_bytes url   creation_date      
+#>   <chr>                        <chr>                 <chr> <lgl>             <int> <chr> <dttm>             
+#> 1 contradictory-my-dear-watson test.csv              test… NA              1180141 http… 2020-07-27 19:45:43
+#> 2 contradictory-my-dear-watson train.csv             trai… NA              2771659 http… 2020-07-27 19:45:43
+#> 3 contradictory-my-dear-watson sample_submission.csv samp… NA                67549 http… 2020-07-27 19:45:43
 ```
 
 Downloading single files is possible by supplying the competition ID and
@@ -287,13 +153,14 @@ called `_kaggle_data` into the main working directory.
 kgl_data <- kgl_competitions_data_download_all(
   id = "https://www.kaggle.com/c/titanic/"
   )
-#> ● Iterating over all files names to download...
-#> ● Downloading 'gender_submission.csv'...
-#> ✓ Data has been saved in '_kaggle_data/'.
-#> ● Downloading 'test.csv'...
-#> ✓ Data has been saved in '_kaggle_data/'.
-#> ● Downloading 'train.csv'...
-#> ✓ Data has been saved in '_kaggle_data/'.
+#> ✓ Setting active project to '/Users/Kow/projects/kaggler'
+#> • Iterating over all files names to download...
+#> • Downloading 'test.csv'...
+#> ✓ Data has been saved in '/Users/Kow/projects/kaggler/_kaggle_data/'.
+#> • Downloading 'gender_submission.csv'...
+#> ✓ Data has been saved in '/Users/Kow/projects/kaggler/_kaggle_data/'.
+#> • Downloading 'train.csv'...
+#> ✓ Data has been saved in '/Users/Kow/projects/kaggler/_kaggle_data/'.
 #> ✓ Iteration complete! Returning all data in a list and data is available in '_kaggle_data'!
 ```
 
@@ -310,7 +177,7 @@ assigned it to, in this example its `kgl_data`.
 
 ``` r
 kgl_data$train
-#> # A tibble: 891 x 12
+#> # A tibble: 891 × 12
 #>   PassengerId Survived Pclass Name             Sex     Age SibSp Parch Ticket    Fare Cabin Embarked
 #>         <dbl>    <dbl>  <dbl> <chr>            <chr> <dbl> <dbl> <dbl> <chr>    <dbl> <chr> <chr>   
 #> 1           1        0      3 Braund, Mr. Owe… male     22     1     0 A/5 211…  7.25 <NA>  S       
@@ -320,7 +187,7 @@ kgl_data$train
 #> 5           5        0      3 Allen, Mr. Will… male     35     0     0 373450    8.05 <NA>  S       
 #> # … with 886 more rows
 kgl_data$test
-#> # A tibble: 418 x 11
+#> # A tibble: 418 × 11
 #>   PassengerId Pclass Name                       Sex      Age SibSp Parch Ticket  Fare Cabin Embarked
 #>         <dbl>  <dbl> <chr>                      <chr>  <dbl> <dbl> <dbl> <chr>  <dbl> <chr> <chr>   
 #> 1         892      3 Kelly, Mr. James           male    34.5     0     0 330911  7.83 <NA>  Q       
@@ -330,7 +197,7 @@ kgl_data$test
 #> 5         896      3 Hirvonen, Mrs. Alexander … female  22       1     1 31012… 12.3  <NA>  S       
 #> # … with 413 more rows
 kgl_data$gender_submission
-#> # A tibble: 418 x 2
+#> # A tibble: 418 × 2
 #>   PassengerId Survived
 #>         <dbl>    <dbl>
 #> 1         892        0
