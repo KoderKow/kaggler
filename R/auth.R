@@ -1,5 +1,3 @@
-
-
 #' Kaggle API authorization
 #'
 #' Authorizing access to Kaggle's API
@@ -33,7 +31,6 @@
 #' it'll use it. Otherwise it'll look for environment variables, which it will
 #' create and save for you manually the first time you enter your username/key
 #' or path to your \code{kaggle.json} file.
-#' @export
 kgl_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
 
   ## if all null, look for environment variables
@@ -127,4 +124,50 @@ kgl_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
 
   ## return basic http authorization method (with kaggle-generated key as password)
   httr::authenticate(username, key)
+}
+
+#' Setup API authorization file
+#'
+#' This function aims to simplify the authorization setup process. Once the API key has been generated and the `kaggle.json` file is saved, use the path of the downloaded file to have it correctly stored in the home directory. This function will only need to be ran once per API key that is generated.
+#'
+#' @param path Character. Path to `kaggle.json`
+#'
+#' @return Nothing.
+#' @export
+#' @family Authorization
+#'
+#' @examples
+#' \dontrun{
+#' library(kaggler)
+#'
+#' kgl_auth_file_setup("/Users/Kow/Downloads/kaggle.json")
+#' }
+kgl_auth_file_setup <- function(path) {
+  dir_kgl_home <- fs::path("~/.kaggle/")
+  path_kgl_home <- fs::path(kgl_home_dir, "kaggle.json")
+  path_kgl_home_ui <- usethis::ui_value(path_kgl_home)
+
+  if(!fs::dir_exists(dir_kgl_home)) {
+    fs::dir_create(dir_kgl_home)
+  }
+
+  if (fs::file_exists(path_kgl_home)) {
+    user_prompt <- usethis::ui_yeah("The file {path_kgl_home_ui} already exists. Only overwrite this file if you have generated a new API key. Overwrite?")
+
+    if (user_prompt) {
+      fs::file_delete(path_kgl_home)
+    } else {
+      usethis::ui_done("No action was taken.")
+      return(invisible())
+    }
+  }
+
+  fs::file_copy(
+    path = path,
+    new_path = path_kgl_home
+  )
+
+  usethis::ui_done("File has been copied to {path_kgl_home_ui}!")
+
+  return(invisible())
 }
