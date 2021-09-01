@@ -144,7 +144,7 @@ kgl_auth <- function(username = NULL, key = NULL, creds_file = NULL) {
 #' }
 kgl_auth_file_setup <- function(path) {
   dir_kgl_home <- fs::path("~/.kaggle/")
-  path_kgl_home <- fs::path(kgl_home_dir, "kaggle.json")
+  path_kgl_home <- fs::path(dir_kgl_home, "kaggle.json")
   path_kgl_home_ui <- usethis::ui_value(path_kgl_home)
 
   if(!fs::dir_exists(dir_kgl_home)) {
