@@ -38,7 +38,7 @@ knitr::include_graphics("../man/figures/kag.png")
   
 <span>6.</span> Thats it! When calling any of the `{kaggler}` functions the authorization function will check for that file and create an environment variable, `KAGGLE_PAT`, in your `.Renviron` file
 
-  - You can view and edit their .Renviron with `usethis::edit_r_environ()`
+  - You can view and edit the .Renviron with `usethis::edit_r_environ()`
 
 # Next steps
 
