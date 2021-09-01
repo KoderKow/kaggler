@@ -17,6 +17,12 @@
 #' kgl_flow("titanic")
 #' }
 kgl_flow <- function(id = NULL) {
+  ## Set up directories and paths
+  dir_path <- usethis::proj_path(.kgl_dir)
+  dir_meta <- fs::path(dir_path, "meta")
+  path_meta <- fs::path(dir_meta, "meta")
+  path_competition_id <- fs::path(dir_meta, "competition_id")
+
   if (is.null(id) && fs::file_exists(path_competition_id)) {
     id <- readLines(path_competition_id)[2]
   }
@@ -28,12 +34,6 @@ kgl_flow <- function(id = NULL) {
   competition_id <- id_type_guesser(id)
 
   validator_competition_id(competition_id)
-
-  ## Set up directories and paths
-  dir_path <- usethis::proj_path(.kgl_dir)
-  dir_meta <- fs::path(dir_path, "meta")
-  path_meta <- fs::path(dir_meta, "meta")
-  path_competition_id <- fs::path(dir_meta, "competition_id")
 
  ## Ignore Kaggle dir for git and R packages
   usethis::use_git_ignore(.kgl_dir)
