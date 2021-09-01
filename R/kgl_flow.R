@@ -150,7 +150,7 @@ kgl_flow <- function(id = NULL) {
         saveRDS(file = path_meta)
     }
   } else {
-    usethis::ui_todo("All data files already exist in {.kgl_dir_ui}.")
+    usethis::ui_todo("Data files are ready in {.kgl_dir_ui}!")
   }
 
   return(invisible())
