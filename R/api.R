@@ -49,12 +49,14 @@ kgl_api_get <- function(path, ..., auth = kgl_auth()) {
   )
 
   ## check status
-  # httr::warn_for_status(r)
+  httr::warn_for_status(r)
 
   ## print message
   if (r$status_code != 200) {
     m <- httr::content(r)
-    if ("message" %in% names(m)) usethis::ui_oops(m$message)
+    if ("message" %in% names(m)) {
+      usethis::ui_oops("Request failed. Status code: {m$code}. Message: {m$message}.")
+    }
   }
 
   return(r)
