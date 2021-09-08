@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Show competition info — kgl_flow_competition_info • kaggler</title>
+<title>Download the Competition Leaderboard — kgl_flow_leaderboard • kaggler</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Show competition info — kgl_flow_competition_info" />
-<meta property="og:description" content="This function will show some competition information for the current project." />
+<meta property="og:title" content="Download the Competition Leaderboard — kgl_flow_leaderboard" />
+<meta property="og:description" content="Download the entire leaderboard for the competition specified
+in the metadata." />
 <meta property="og:image" content="https://koderkow.github.io/kaggler/logo.png" />
 
 
@@ -131,25 +132,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Show competition info</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/kgl_flow_meta.R'><code>R/kgl_flow_meta.R</code></a></small>
-    <div class="hidden name"><code>kgl_flow_competition_info.Rd</code></div>
+    <h1>Download the Competition Leaderboard</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/kgl_flow_leaderboard.R'><code>R/kgl_flow_leaderboard.R</code></a></small>
+    <div class="hidden name"><code>kgl_flow_leaderboard.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function will show some competition information for the current project.</p>
+    <p>Download the entire leaderboard for the competition specified
+in the metadata.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_flow_competition_info</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_flow_leaderboard</span><span class='op'>(</span><span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Compeition info.</p>
+    <p>A data frame with one row per user who has submitted
+results to the competition.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Kaggle Flows: 
-<code><a href='kgl_flow_leaderboard.html'>kgl_flow_leaderboard</a>()</code>,
+<code><a href='kgl_flow_competition_info.html'>kgl_flow_competition_info</a>()</code>,
 <code><a href='kgl_flow_load.html'>kgl_flow_load</a>()</code>,
 <code><a href='kgl_flow_meta.html'>kgl_flow_meta</a>()</code>,
 <code><a href='kgl_flow.html'>kgl_flow</a>()</code></p></div>
@@ -160,7 +163,7 @@
 
 <span class='fu'><a href='kgl_flow.html'>kgl_flow</a></span><span class='op'>(</span><span class='st'>"titanic"</span><span class='op'>)</span>
 
-<span class='fu'>kgl_flow_competition_info</span><span class='op'>(</span><span class='op'>)</span>
+<span class='fu'>kgl_flow_leaderboard</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
