@@ -7,21 +7,7 @@
 kgl_flow(id = NULL)
 }
 \arguments{
-\item{id}{Character. Competition name. This accepts 3 formats. Based on the input, the function will try to obtain the correct compeition ID.
-\itemize{
-\item The competition's URL
-\itemize{
-\item Checks to see if string start with \verb{https://}
-}
-\item Kaggle API command from the data tab
-\itemize{
-\item Checks to see if string starts with \verb{kaggle competitions }
-}
-\item Direct Competition ID/Name
-\itemize{
-\item If the two checks above fail, the function will interpret the string as is
-}
-}}
+\item{id}{Character. Competition name.}
 }
 \value{
 Nothing.
