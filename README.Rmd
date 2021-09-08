@@ -65,11 +65,9 @@ For a more in-depth walkthrough visit the [Kaggle Flow](https://koderkow.github.
 
 # Direct API Interaction
 
-These will be functions the user can call to have custom control over the returns and interactions with the API.
+These will be functions the user can call to have custom control over the returns and interactions with the API, similar to Kaggle's python API.
 
-## `kgl_competitions_list_.*()`
-
-Browse or search for Kaggle compeitions.
+Browse or search for Kaggle competitions.
 
 ```{r complist}
 ## look through all competitions (paginated)
@@ -85,8 +83,6 @@ imagecomps <- kgl_competitions_list(search = "image")
 imagecomps
 ```
 
-## `kgl_competitions_data_.*()`
-
 You can look up the datalist for a given Kaggle competition using the API. 
 
 ```{r}
@@ -95,67 +91,7 @@ c1_datalist <- kgl_competitions_data_list(comps1$ref[1])
 c1_datalist
 ```
 
-Downloading single files is possible by supplying the competition ID and the wanted file.
-
-```{r, eval = FALSE}
-## download set sets (IF YOU HAVE ACCEPTED COMPETITION RULES)
-c1_data <- kgl_competitions_data_download(
-  id = comps1$ref[1],
-  file_name = c1_datalist$name[1]
-  )
-#> x You must accept this competition's rules before you'll be able to download files.
-```
-
-### Downloading all data for a competition
-  
-#### `kgl_competitions_data_download_all()`
-
-This function will download all the competitions data files into a dir called `_kaggle_data` into the main working directory.
-
-```{r}
-kgl_data <- kgl_competitions_data_download_all(
-  id = "https://www.kaggle.com/c/titanic/"
-  )
-```
-
-The data is available in the `_kaggle_data` directory.
-
-```{r}
-list.files("_kaggle_data")
-```
-
-```{r, include = FALSE}
-fs::dir_delete("_kaggle_data")
-```
-
-The data is also returned in a list and available in the variable you assigned it to, in this example its `kgl_data`.
-
-```{r}
-kgl_data$train
-kgl_data$test
-kgl_data$gender_submission
-```
-
-## `kgl_datasets_.*()`
-
-Get a list of all of the datasets.
-
-```{r datalist}
-## get competitions data list
-datasets <- kgl_datasets_list()
-datasets
-```
-
-## `kgl_competitions_leaderboard_.*()`
-
-View the leaderboard for a given competition.
-
-```{r leaderboard}
-## get competitions data list
-c1_leaderboard <- kgl_competitions_leaderboard_view(comps1$ref[1])
-c1_leaderboard
-```
-
+For a more in-depth walkthrough visit the [Kaggle API](https://koderkow.github.io/kaggler/articles/kaggle-api.html) page.
 
 ## Note(s)
 
