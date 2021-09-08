@@ -2,27 +2,27 @@
 % Please edit documentation in R/competitions-data.R
 \name{kgl_competitions_data_download_all}
 \alias{kgl_competitions_data_download_all}
-\title{Download all compeition data.}
+\title{Download all competition data.}
 \usage{
-kgl_competitions_data_download_all(id)
+kgl_competitions_data_download_all(id, output_dir = ".")
 }
 \arguments{
-\item{id}{Character. Competition name. This accepts 3 formats. Based on the input, the function will try to obtain the correct compeition ID.
-\itemize{
-\item The competition's URL
-\itemize{
-\item Checks to see if string start with \verb{https://}
+\item{id}{Character. Competition name.}
+
+\item{output_dir}{Character. Directory to save the file.}
 }
-\item Kaggle API command from the data tab
-\itemize{
-\item Checks to see if string starts with \verb{kaggle competitions }
-}
-\item Direct Competition ID/Name
-\itemize{
-\item If the two checks above fail, the function will interpret the string as is
-}
-}}
+\value{
+An invisible \code{\link[httr:GET]{httr::GET()}} object.
 }
 \description{
-Download all compeition data.
+Downloads all data into a zip file.
 }
+\seealso{
+Other Competitions: 
+\code{\link{kgl_competitions_data_download}()},
+\code{\link{kgl_competitions_data_list}()},
+\code{\link{kgl_competitions_leaderboard_download}()},
+\code{\link{kgl_competitions_leaderboard_view}()},
+\code{\link{kgl_competitions_list}()}
+}
+\concept{Competitions}

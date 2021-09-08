@@ -7,24 +7,22 @@
 kgl_competitions_data_list(id, clean_response = TRUE)
 }
 \arguments{
-\item{id}{Character. Competition name. This accepts 3 formats. Based on the input, the function will try to obtain the correct compeition ID.
-\itemize{
-\item The competition's URL
-\itemize{
-\item Checks to see if string start with \verb{https://}
-}
-\item Kaggle API command from the data tab
-\itemize{
-\item Checks to see if string starts with \verb{kaggle competitions }
-}
-\item Direct Competition ID/Name
-\itemize{
-\item If the two checks above fail, the function will interpret the string as is
-}
-}}
+\item{id}{Character. Competition name.}
 
-\item{clean_response}{Logical. Clean the response from the Kaggle API.}
+\item{clean_response}{Logical. Clean the response from the Kaggle API. If \code{FALSE}, this will return the object from the \code{\link[httr:GET]{httr::GET()}} call.}
+}
+\value{
+Based on \code{clean_response}: A tibble containing information on the given \code{id} or a \code{\link[httr:GET]{httr::GET()}} object.
 }
 \description{
 List competition data files
 }
+\seealso{
+Other Competitions: 
+\code{\link{kgl_competitions_data_download_all}()},
+\code{\link{kgl_competitions_data_download}()},
+\code{\link{kgl_competitions_leaderboard_download}()},
+\code{\link{kgl_competitions_leaderboard_view}()},
+\code{\link{kgl_competitions_list}()}
+}
+\concept{Competitions}

@@ -2,13 +2,27 @@
 % Please edit documentation in R/competitions-leaderboard.R
 \name{kgl_competitions_leaderboard_view}
 \alias{kgl_competitions_leaderboard_view}
-\title{Competition View Leaderboard}
+\title{Competition view leaderboard}
 \usage{
-kgl_competitions_leaderboard_view(id)
+kgl_competitions_leaderboard_view(id, clean_response = TRUE)
 }
 \arguments{
-\item{id}{Character. Competition name. Required: TRUE.}
+\item{id}{Character. Competition name.}
+
+\item{clean_response}{Logical. Clean the response from the Kaggle API. If \code{FALSE}, this will return the object from the \code{\link[httr:GET]{httr::GET()}} call.}
+}
+\value{
+Based on \code{clean_response}: A tibble containing information on the given \code{id} or a \code{\link[httr:GET]{httr::GET()}} object.
 }
 \description{
-VIew competition leaderboard
+View the top 50 positions in a competition's leaderboard.
 }
+\seealso{
+Other Competitions: 
+\code{\link{kgl_competitions_data_download_all}()},
+\code{\link{kgl_competitions_data_download}()},
+\code{\link{kgl_competitions_data_list}()},
+\code{\link{kgl_competitions_leaderboard_download}()},
+\code{\link{kgl_competitions_list}()}
+}
+\concept{Competitions}

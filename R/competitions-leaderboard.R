@@ -1,46 +1,68 @@
-
 #' Competition Download Leaderboard
 #'
-#' Download competition leaderboard
+#' Download the entire competition leaderboard into a zip file.
 #'
-#' @param id Character. Competition name. Required: TRUE.
+#' @inheritParams kgl_competitions_data_download
+#'
+#' @return An invisible [httr::GET()] object.
 #' @export
-kgl_competitions_leaderboard_download <- function(id) {
+#' @family Competitions
+kgl_competitions_leaderboard_download <- function(
+  id,
+  output_dir = "."
+  ) {
   if (!assertthat::is.string(id)) {
     usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
     usethis::ui_stop("'id' is not a string.")
   }
 
-  competition_id <- id_type_guesser(id)
-
-  get_url <- glue::glue("competitions/{competition_id}/leaderboard/download")
+  get_url <- glue::glue("competitions/{id}/leaderboard/download")
 
   get_request <- kgl_api_get(get_url)
+
+  if (get_request$status_code != 200) {
+    return(invisible(get_request))
+  }
+
+  path_output <- fs::path(output_dir, file_name)
+
+  get_request %>%
+    purrr::pluck("url") %>%
+    download.file(
+      destfile = path_output,
+      quiet = TRUE
+    )
 
   return(get_request)
 }
 
-#' Competition View Leaderboard
+#' Competition view leaderboard
 #'
-#' VIew competition leaderboard
+#' View the top 50 positions in a competition's leaderboard.
 #'
-#' @param id Character. Competition name. Required: TRUE.
+#' @inheritParams kgl_competitions_data_list
+#'
+#' @return Based on `clean_response`: A tibble containing information on the given `id` or a [httr::GET()] object.
 #' @export
-kgl_competitions_leaderboard_view <- function(id) {
+#' @family Competitions
+kgl_competitions_leaderboard_view <- function(
+  id,
+  clean_response = TRUE
+) {
   if (!assertthat::is.string(id)) {
     usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
     usethis::ui_stop("'id' is not a string.")
   }
 
-  competition_id <- id_type_guesser(id)
+  get_url <- glue::glue("competitions/{id}/leaderboard/view")
 
-  get_url <- glue::glue("competitions/{competition_id}/leaderboard/view")
+  get_request <- kgl_api_get(get_url)
 
-  d_final <-
-    get_url %>%
-    kgl_api_get() %>%
-    kgl_as_tbl() %>%
-    dplyr::mutate(score = as.numeric(score))
+  if (clean_response == TRUE) {
+    get_request <-
+      get_request %>%
+      kgl_as_tbl()
+  }
 
-  return(d_final)
+  return(get_request)
 }

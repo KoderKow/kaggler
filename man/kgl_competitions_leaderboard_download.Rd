@@ -4,11 +4,25 @@
 \alias{kgl_competitions_leaderboard_download}
 \title{Competition Download Leaderboard}
 \usage{
-kgl_competitions_leaderboard_download(id)
+kgl_competitions_leaderboard_download(id, output_dir = ".")
 }
 \arguments{
-\item{id}{Character. Competition name. Required: TRUE.}
+\item{id}{Character. Competition name.}
+
+\item{output_dir}{Character. Directory to save the file.}
+}
+\value{
+An invisible \code{\link[httr:GET]{httr::GET()}} object.
 }
 \description{
-Download competition leaderboard
+Download the entire competition leaderboard into a zip file.
 }
+\seealso{
+Other Competitions: 
+\code{\link{kgl_competitions_data_download_all}()},
+\code{\link{kgl_competitions_data_download}()},
+\code{\link{kgl_competitions_data_list}()},
+\code{\link{kgl_competitions_leaderboard_view}()},
+\code{\link{kgl_competitions_list}()}
+}
+\concept{Competitions}

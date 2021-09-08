@@ -1,0 +1,105 @@
+---
+title: "Kaggle API"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Kaggle API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```r
+library(kaggler)
+```
+
+These set of functions aim to replicate what most of Kaggle's python API functions do.
+
+# Competitions
+
+Search for competitions
+
+```r
+kgl_competitions_list(search = "titanic")
+
+#> # A tibble: 1 × 23
+#>      id ref     title   url     description    organization_na… organization_ref category reward
+#>   <int> <chr>   <chr>   <chr>   <chr>          <chr>            <chr>            <chr>    <chr> 
+#> 1  3136 titanic Titani… https:… Start here! P… Kaggle           kaggle           Getting… Knowl…
+#> # … with 14 more variables: deadline <dttm>, kernel_count <int>, team_count <int>,
+#> #   user_has_entered <lgl>, user_rank <lgl>, merger_deadline <dttm>,
+#> #   new_entrant_deadline <dttm>, enabled_date <dttm>, max_daily_submissions <int>,
+#> #   max_team_size <lgl>, evaluation_metric <chr>, awards_points <lgl>,
+#> #   is_kernels_submissions_only <lgl>, submissions_disabled <lgl>
+```
+
+The `ref` column is the `id` used for the other competition functions.
+
+List the datasets for a competition
+
+```r
+kgl_competitions_data_list("titanic")
+
+#> # A tibble: 3 × 7
+#>   id      ref                   name  description total_bytes url   creation_date      
+#>   <chr>   <chr>                 <chr> <chr>             <int> <chr> <dttm>             
+#> 1 titanic test.csv              test… "test data…       28629 http… 2018-04-09 05:33:22
+#> 2 titanic train.csv             trai… "contains …       61194 http… 2018-04-09 05:33:22
+#> 3 titanic gender_submission.csv gend… "An exampl…        3258 http… 2018-04-09 05:33:22
+```
+
+Download a single file
+
+```r
+kgl_competitions_data_download(
+  id = "titanic",
+  file_name = "train.csv",
+  output_dir = "."
+)
+```
+
+Download all datafiles into a zip
+
+```r
+kgl_competitions_data_download_all(
+  id = "titanic",
+  output_dir = "."
+)
+```
+
+## Leaderboard
+
+View the top 50 spots
+
+```r
+kgl_competitions_leaderboard_view("titanic")
+
+#> # A tibble: 50 × 4
+#>    team_id team_name           submission_date     score
+#>      <int> <chr>               <dttm>              <dbl>
+#>  1 2596702 Itaegyun            2021-07-12 08:15:47     1
+#>  2 6650429 arduin              2021-07-12 12:00:53     1
+#>  3 6931429 Nguyen Duc Tung (K… 2021-07-14 00:57:27     1
+#>  4 6931547 Bach Nguyen #3      2021-07-14 05:27:44     1
+#>  5 6931673 DDWanderer          2021-07-14 02:00:10     1
+#>  6 6931524 he130230            2021-07-14 02:11:04     1
+#>  7 6931497 (K12_HN) Pham Vu T… 2021-07-14 02:55:22     1
+#>  8 6933163 HE130793            2021-07-14 04:21:24     1
+#>  9 7006924 hebimonhp           2021-07-14 04:08:43     1
+#> 10 6931521 Duc North           2021-07-14 04:45:48     1
+#> # … with 40 more rows
+```
+
+Or download the entire leaderboard into a zip.
+
+```r
+kgl_competitions_leaderboard_download("titanic")
+```
+

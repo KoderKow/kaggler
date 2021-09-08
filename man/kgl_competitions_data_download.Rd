@@ -4,42 +4,27 @@
 \alias{kgl_competitions_data_download}
 \title{CompetitionsDataDownloadFile}
 \usage{
-kgl_competitions_data_download(
-  id,
-  file_name,
-  return_data = TRUE,
-  save_data = TRUE,
-  dir_name = "_kaggle_data",
-  quiet = TRUE
-)
+kgl_competitions_data_download(id, file_name, output_dir = ".")
 }
 \arguments{
-\item{id}{Character. Competition name. This accepts 3 formats. Based on the input, the function will try to obtain the correct compeition ID.
-\itemize{
-\item The competition's URL
-\itemize{
-\item Checks to see if string start with \verb{https://}
+\item{id}{Character. Competition name.}
+
+\item{file_name}{Character. Competition name.}
+
+\item{output_dir}{Character. Directory to save the file.}
 }
-\item Kaggle API command from the data tab
-\itemize{
-\item Checks to see if string starts with \verb{kaggle competitions }
-}
-\item Direct Competition ID/Name
-\itemize{
-\item If the two checks above fail, the function will interpret the string as is
-}
-}}
-
-\item{file_name}{Character. Competition name. Required: TRUE.}
-
-\item{return_data}{Logical. Read in the data with \code{readr::read_csv()} and have it returned. If \code{FALSE} this will return \code{NULL}.}
-
-\item{save_data}{Logical. Save the data in \code{dir_name}. If \code{FALSE} this will remove the \code{dir_name} directory.}
-
-\item{dir_name}{Character. Name of the directory to make to store data.}
-
-\item{quiet}{Logical. Silence output from \code{download.file()}.}
+\value{
+An invisible \code{\link[httr:GET]{httr::GET()}} object.
 }
 \description{
 Download competition data file
 }
+\seealso{
+Other Competitions: 
+\code{\link{kgl_competitions_data_download_all}()},
+\code{\link{kgl_competitions_data_list}()},
+\code{\link{kgl_competitions_leaderboard_download}()},
+\code{\link{kgl_competitions_leaderboard_view}()},
+\code{\link{kgl_competitions_list}()}
+}
+\concept{Competitions}
