@@ -22,9 +22,11 @@ kgl_as_tbl <- function(x) {
     x %>%
     purrr::map(~ .x %||% NA) %>%
     .[!is_recursive(.)] %>%
-    tibble::as_tibble(validate = FALSE) %>%
-    parse_datetimes() %>%
-    janitor::clean_names()
+    tibble::as_tibble(
+      .name_repair = snakecase::to_snake_case,
+      validate = FALSE
+      ) %>%
+    readr::type_convert(col_types = readr::cols())
 
   return(x)
 }
