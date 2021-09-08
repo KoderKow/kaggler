@@ -46,6 +46,8 @@ This section is still under development! 👷
 
 ## Interact with the API
 
+[Kaggle Flow](https://koderkow.github.io/kaggler/articles/kaggle-api.html)
+
 ## Kaggle Flow
 
 [Kaggle Flow](https://koderkow.github.io/kaggler/articles/kgl-flow.html)
