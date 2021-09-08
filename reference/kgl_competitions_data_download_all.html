@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download all compeition data. — kgl_competitions_data_download_all • kaggler</title>
+<title>Download all competition data. — kgl_competitions_data_download_all • kaggler</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Download all compeition data. — kgl_competitions_data_download_all" />
-<meta property="og:description" content="Download all compeition data." />
+<meta property="og:title" content="Download all competition data. — kgl_competitions_data_download_all" />
+<meta property="og:description" content="Downloads all data into a zip file." />
 <meta property="og:image" content="https://koderkow.github.io/kaggler/logo.png" />
 
 
@@ -106,6 +106,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/kaggle-api.html">Kaggle API</a>
+    </li>
+    <li>
       <a href="../articles/kgl-flow.html">Kaggle Flow</a>
     </li>
   </ul>
@@ -131,36 +134,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download all compeition data.</h1>
+    <h1>Download all competition data.</h1>
     <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/competitions-data.R'><code>R/competitions-data.R</code></a></small>
     <div class="hidden name"><code>kgl_competitions_data_download_all.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Download all compeition data.</p>
+    <p>Downloads all data into a zip file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_competitions_data_download_all</span><span class='op'>(</span><span class='va'>id</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_competitions_data_download_all</span><span class='op'>(</span><span class='va'>id</span>, output_dir <span class='op'>=</span> <span class='st'>"."</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>id</th>
-      <td><p>Character. Competition name. This accepts 3 formats. Based on the input, the function will try to obtain the correct compeition ID.</p><ul>
-<li><p>The competition's URL</p><ul>
-<li><p>Checks to see if string start with <code>https://</code></p></li>
-</ul></li>
-<li><p>Kaggle API command from the data tab</p><ul>
-<li><p>Checks to see if string starts with <code>kaggle competitions </code></p></li>
-</ul></li>
-<li><p>Direct Competition ID/Name</p><ul>
-<li><p>If the two checks above fail, the function will interpret the string as is</p></li>
-</ul></li>
-</ul></td>
+      <td><p>Character. Competition name.</p></td>
+    </tr>
+    <tr>
+      <th>output_dir</th>
+      <td><p>Character. Directory to save the file.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An invisible <code><a href='https://httr.r-lib.org/reference/GET.html'>httr::GET()</a></code> object.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Competitions: 
+<code><a href='kgl_competitions_data_download.html'>kgl_competitions_data_download</a>()</code>,
+<code><a href='kgl_competitions_data_list.html'>kgl_competitions_data_list</a>()</code>,
+<code><a href='kgl_competitions_leaderboard_download.html'>kgl_competitions_leaderboard_download</a>()</code>,
+<code><a href='kgl_competitions_leaderboard_view.html'>kgl_competitions_leaderboard_view</a>()</code>,
+<code><a href='kgl_competitions_list.html'>kgl_competitions_list</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

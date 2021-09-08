@@ -106,6 +106,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/kaggle-api.html">Kaggle API</a>
+    </li>
+    <li>
       <a href="../articles/kgl-flow.html">Kaggle Flow</a>
     </li>
   </ul>
@@ -140,21 +143,36 @@
     <p>List competitions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_competitions_list</span><span class='op'>(</span>page <span class='op'>=</span> <span class='fl'>1</span>, search <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_competitions_list</span><span class='op'>(</span>page <span class='op'>=</span> <span class='fl'>1</span>, search <span class='op'>=</span> <span class='cn'>NULL</span>, clean_response <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>page</th>
-      <td><p>Numeric. Page number. Defaults to 1. Required: FALSE.</p></td>
+      <td><p>Numeric. Page number.</p></td>
     </tr>
     <tr>
       <th>search</th>
-      <td><p>Character. Search terms. Required: FALSE.</p></td>
+      <td><p>Character. Search terms.</p></td>
+    </tr>
+    <tr>
+      <th>clean_response</th>
+      <td><p>Logical. Clean the response from the Kaggle API. If <code>FALSE</code>, this will return the object from the <code><a href='https://httr.r-lib.org/reference/GET.html'>httr::GET()</a></code> call.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Based on <code>clean_response</code>: A tibble containing information on the given <code>id</code> or a <code><a href='https://httr.r-lib.org/reference/GET.html'>httr::GET()</a></code> object.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other Competitions: 
+<code><a href='kgl_competitions_data_download_all.html'>kgl_competitions_data_download_all</a>()</code>,
+<code><a href='kgl_competitions_data_download.html'>kgl_competitions_data_download</a>()</code>,
+<code><a href='kgl_competitions_data_list.html'>kgl_competitions_data_list</a>()</code>,
+<code><a href='kgl_competitions_leaderboard_download.html'>kgl_competitions_leaderboard_download</a>()</code>,
+<code><a href='kgl_competitions_leaderboard_view.html'>kgl_competitions_leaderboard_view</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

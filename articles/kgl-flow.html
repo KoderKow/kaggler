@@ -64,6 +64,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/kaggle-api.html">Kaggle API</a>
+    </li>
+    <li>
       <a href="../articles/kgl-flow.html">Kaggle Flow</a>
     </li>
   </ul>
@@ -214,6 +217,38 @@
 <span class="co">#&gt;   - 'train'.</span>
 <span class="co">#&gt; ● Downloading 'train.csv'...</span></code></pre></div>
 <p>We did not need to supply the <code>id</code> this time because the flow will check if an ID has been recorded in the metadata.</p>
+</div>
+<div id="submit-to-competition" class="section level2">
+<h2 class="hasAnchor">
+<a href="#submit-to-competition" class="anchor"></a>Submit to competition</h2>
+<p>Work in progress 👷</p>
+</div>
+<div id="leaderboard" class="section level2">
+<h2 class="hasAnchor">
+<a href="#leaderboard" class="anchor"></a>Leaderboard</h2>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_flow_leaderboard.html">kgl_flow_leaderboard</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co">#&gt; • Downloading leaderboard data for 'titanic'</span>
+<span class="co">#&gt; ✓ Leaderboard Data Downloaded!                                        #&gt;                      </span>
+<span class="co">#&gt; # A tibble: 50,327 × 4</span>
+<span class="co">#&gt;    team_id team_name           submission_date     score</span>
+<span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt;               &lt;dttm&gt;              &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 2596702 Itaegyun            2021-07-12 08:15:47     1</span>
+<span class="co">#&gt;  2 6650429 arduin              2021-07-12 12:00:53     1</span>
+<span class="co">#&gt;  3 6931429 Nguyen Duc Tung (K… 2021-07-14 00:57:27     1</span>
+<span class="co">#&gt;  4 6931547 Bach Nguyen #3      2021-07-14 05:27:44     1</span>
+<span class="co">#&gt;  5 6931673 DDWanderer          2021-07-14 02:00:10     1</span>
+<span class="co">#&gt;  6 6931524 he130230            2021-07-14 02:11:04     1</span>
+<span class="co">#&gt;  7 6931497 (K12_HN) Pham Vu T… 2021-07-14 02:55:22     1</span>
+<span class="co">#&gt;  8 6933163 HE130793            2021-07-14 04:21:24     1</span>
+<span class="co">#&gt;  9 7006924 hebimonhp           2021-07-14 04:08:43     1</span>
+<span class="co">#&gt; 10 6931521 Duc North           2021-07-14 04:45:48     1</span>
+<span class="co">#&gt; # … with 50,317 more rows</span></code></pre></div>
+</div>
+<div id="special-thanks" class="section level2">
+<h2 class="hasAnchor">
+<a href="#special-thanks" class="anchor"></a>Special thanks</h2>
 <p>This has been heavily influenced by the <a href="https://github.com/ropensci/targets">{targets}</a> package. Any issues or ideas for improvements to this experimental flow is greatly appreciated!</p>
 </div>
 </div>
