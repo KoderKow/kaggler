@@ -18,7 +18,7 @@
 #' }
 kgl_flow_leaderboard <- function() {
 
-  usethis::ui_todo("Validating Project and Competition ID")
+  # usethis::ui_todo("Validating Project and Competition ID")
 
   ## Set up directories and paths
   dir_path <- usethis::proj_path(.kgl_dir)
@@ -46,32 +46,43 @@ kgl_flow_leaderboard <- function() {
   get_url <- glue::glue("competitions/{competition_id}/leaderboard/download")
 
   id_val <- usethis::ui_value(id)
-  usethis::ui_todo("Downloading Leaderboard Data for {id_val}")
+
+  usethis::ui_todo("Downloading leaderboard data for {id_val}")
+
   get_request <- kgl_api_get(get_url)
 
   ## Save the request content in a temp directory and unzip it
-  usethis::ui_todo("Unzipping Leaderboard Data...")
+  # usethis::ui_todo("Unzipping Leaderboard Data...")
+
   tmp <- tempdir()
-  httr::content(get_request) %>%
+
+  get_request %>%
+    httr::content() %>%
     readr::write_file(
-      fs::path(tmp, "leaderboard.zipped"))
+      fs::path(tmp, "leaderboard.zipped")
+      )
+
   unzip(
     fs::path(tmp, "leaderboard.zipped"),
     exdir = tmp
   )
 
   ## Read in the unzipped data
-  usethis::ui_todo("Loading Leaderboard Data...")
-  leaderboard <- readr::read_csv(
-    fs::path(
-      tmp,
-      stringr::str_c(id, "-publicleaderboard.csv")
+  # usethis::ui_todo("Loading Leaderboard Data...")
+  leaderboard <-
+    readr::read_csv(
+      fs::path(
+        tmp,
+        stringr::str_c(competition_id, "-publicleaderboard.csv")
+      ),
+      show_col_types = FALSE,
+      name_repair = snakecase::to_snake_case
     )
-  ) %>%
-    suppressMessages()
+
   unlink(tmp)
-  usethis::ui_done("Leaderboard Data Downloaded!")
+
+  usethis::ui_done("Leaderboard data downloaded!")
 
   ## Return the leaderboard data
-  leaderboard
+  return(leaderboard)
 }
