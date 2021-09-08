@@ -155,3 +155,30 @@ kgl_flow <- function(id = NULL) {
 
   return(invisible())
 }
+
+id_type_guesser <- function(id) {
+  id_type <- dplyr::case_when(
+    stringr::str_detect(id, "^https://") ~ "url",
+    stringr::str_detect(id, "^kaggle competitions ") ~ "api",
+    TRUE ~ "id"
+  )
+
+  if (id_type == "api") {
+    competition_id <-
+      id %>%
+      stringr::str_split(" ") %>%
+      unlist() %>%
+      .[length(.)]
+  } else if (id_type == "id") {
+    competition_id <- id
+  } else {
+    competition_id <-
+      id %>%
+      stringr::str_remove("https://www\\.kaggle\\.com/c/") %>%
+      stringr::str_split("/") %>%
+      unlist() %>%
+      .[1]
+  }
+
+  return(competition_id)
+}
