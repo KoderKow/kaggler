@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^logo\.R$
 ^make\.R$
 ^\.DS_Store$
@@ -13,3 +15,4 @@
 ^pkgdown$
 ^dev_testing\.R$
 ^_kaggle_data$
+^FUNDING\.yml$
