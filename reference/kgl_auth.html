@@ -143,11 +143,15 @@
     <p>Authorizing access to Kaggle's API</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_auth</span><span class='op'>(</span>username <span class='op'>=</span> <span class='cn'>NULL</span>, key <span class='op'>=</span> <span class='cn'>NULL</span>, creds_file <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_auth</span><span class='op'>(</span><span class='va'>req</span>, username <span class='op'>=</span> <span class='cn'>NULL</span>, key <span class='op'>=</span> <span class='cn'>NULL</span>, creds_file <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>req</th>
+      <td><p>A <a href='https://httr2.r-lib.org/reference/request.html'>request</a>.</p></td>
+    </tr>
     <tr>
       <th>username</th>
       <td><p>Name associated with user's account at

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Competition Download Leaderboard — kgl_competitions_leaderboard_download • kaggler</title>
+<title>Make requests to Kaggle's API — kgl_request • kaggler</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Competition Download Leaderboard — kgl_competitions_leaderboard_download" />
-<meta property="og:description" content="Download the entire competition leaderboard into a zip file." />
+<meta property="og:title" content="Make requests to Kaggle's API — kgl_request" />
+<meta property="og:description" content="Make requests to Kaggle's API" />
 <meta property="og:image" content="https://koderkow.github.io/kaggler/logo.png" />
 
 
@@ -134,49 +134,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Competition Download Leaderboard</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/competitions-leaderboard.R'><code>R/competitions-leaderboard.R</code></a></small>
-    <div class="hidden name"><code>kgl_competitions_leaderboard_download.Rd</code></div>
+    <h1>Make requests to Kaggle's API</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/api.R'><code>R/api.R</code></a></small>
+    <div class="hidden name"><code>kgl_request.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Download the entire competition leaderboard into a zip file.</p>
+    <p>Make requests to Kaggle's API</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_competitions_leaderboard_download</span><span class='op'>(</span>
-  <span class='va'>id</span>,
-  output_dir <span class='op'>=</span> <span class='st'>"."</span>,
-  clean_response <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_request</span><span class='op'>(</span><span class='va'>endpoint</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>id</th>
-      <td><p>Character. Competition name.</p></td>
+      <th>endpoint</th>
+      <td><p>Character. Endpoint to call.</p></td>
     </tr>
     <tr>
-      <th>output_dir</th>
-      <td><p>Character. Directory to save the file.</p></td>
-    </tr>
-    <tr>
-      <th>clean_response</th>
-      <td><p>Logical. Download the data within the response from the Kaggle API. If <code>FALSE</code>, this will return the object from the <code><a href='https://httr2.r-lib.org/reference/req_perform.html'>httr2::req_perform()</a></code> call.</p></td>
+      <th>...</th>
+      <td><p>For req_url_query(): Name-value pairs that provide query parameters. Each value must be either length-1 atomic vector or NULL (which is automatically dropped).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An invisible <code><a href='https://httr.r-lib.org/reference/GET.html'>httr::GET()</a></code> object.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other Competitions: 
-<code><a href='kgl_competitions_data_download_all.html'>kgl_competitions_data_download_all</a>()</code>,
-<code><a href='kgl_competitions_data_download.html'>kgl_competitions_data_download</a>()</code>,
-<code><a href='kgl_competitions_data_list.html'>kgl_competitions_data_list</a>()</code>,
-<code><a href='kgl_competitions_leaderboard_view.html'>kgl_competitions_leaderboard_view</a>()</code>,
-<code><a href='kgl_competitions_list.html'>kgl_competitions_list</a>()</code></p></div>
+    <p>httr2 response object.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

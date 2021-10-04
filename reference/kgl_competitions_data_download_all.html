@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Download all competition data. — kgl_competitions_data_download_all" />
-<meta property="og:description" content="Downloads all data into a zip file." />
+<meta property="og:description" content="Downloads all data from a competition." />
 <meta property="og:image" content="https://koderkow.github.io/kaggler/logo.png" />
 
 
@@ -140,10 +140,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Downloads all data into a zip file.</p>
+    <p>Downloads all data from a competition.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_competitions_data_download_all</span><span class='op'>(</span><span class='va'>id</span>, output_dir <span class='op'>=</span> <span class='st'>"."</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_competitions_data_download_all</span><span class='op'>(</span><span class='va'>id</span>, output_dir <span class='op'>=</span> <span class='st'>"."</span>, clean_response <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,6 +155,10 @@
     <tr>
       <th>output_dir</th>
       <td><p>Character. Directory to save the file.</p></td>
+    </tr>
+    <tr>
+      <th>clean_response</th>
+      <td><p>Logical. Download the data within the response from the Kaggle API. If <code>FALSE</code>, this will return the object from the <code><a href='https://httr2.r-lib.org/reference/req_perform.html'>httr2::req_perform()</a></code> call.</p></td>
     </tr>
     </table>
 

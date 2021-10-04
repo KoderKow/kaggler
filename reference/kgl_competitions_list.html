@@ -158,13 +158,17 @@
     </tr>
     <tr>
       <th>clean_response</th>
-      <td><p>Logical. Clean the response from the Kaggle API. If <code>FALSE</code>, this will return the object from the <code><a href='https://httr.r-lib.org/reference/GET.html'>httr::GET()</a></code> call.</p></td>
+      <td><p>Logical. Clean the response from the Kaggle API. If <code>FALSE</code>, this will return the object from the <code><a href='https://httr2.r-lib.org/reference/req_perform.html'>httr2::req_perform()</a></code> call.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Based on <code>clean_response</code>: A tibble containing information on the given <code>id</code> or a <code><a href='https://httr.r-lib.org/reference/GET.html'>httr::GET()</a></code> object.</p>
+    <p>Based on <code>clean_response</code></p><ul>
+<li><p><code>TRUE</code>: A tibble containing information on the given <code>id</code></p></li>
+<li><p><code>FALSE</code>: httr2 httr2_response object</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Competitions: 

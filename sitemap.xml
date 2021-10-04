@@ -4,6 +4,9 @@
     <loc>https://koderkow.github.io/kaggler/index.html</loc>
   </url>
   <url>
+    <loc>https://koderkow.github.io/kaggler/reference/flatten.html</loc>
+  </url>
+  <url>
     <loc>https://koderkow.github.io/kaggler/reference/kaggler-package.html</loc>
   </url>
   <url>
@@ -74,6 +77,9 @@
   </url>
   <url>
     <loc>https://koderkow.github.io/kaggler/reference/kgl_flow_meta.html</loc>
+  </url>
+  <url>
+    <loc>https://koderkow.github.io/kaggler/reference/kgl_request.html</loc>
   </url>
   <url>
     <loc>https://koderkow.github.io/kaggler/reference/pipe.html</loc>
