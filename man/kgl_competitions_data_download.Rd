@@ -2,9 +2,14 @@
 % Please edit documentation in R/competitions-data.R
 \name{kgl_competitions_data_download}
 \alias{kgl_competitions_data_download}
-\title{CompetitionsDataDownloadFile}
+\title{Download competition data}
 \usage{
-kgl_competitions_data_download(id, file_name, output_dir = ".")
+kgl_competitions_data_download(
+  id,
+  file_name,
+  output_dir = ".",
+  clean_response = TRUE
+)
 }
 \arguments{
 \item{id}{Character. Competition name.}
@@ -12,12 +17,14 @@ kgl_competitions_data_download(id, file_name, output_dir = ".")
 \item{file_name}{Character. Competition name.}
 
 \item{output_dir}{Character. Directory to save the file.}
+
+\item{clean_response}{Logical. Download the data within the response from the Kaggle API. If \code{FALSE}, this will return the object from the \code{\link[httr2:req_perform]{httr2::req_perform()}} call.}
 }
 \value{
-An invisible \code{\link[httr:GET]{httr::GET()}} object.
+An invisible {httr2} httr2_response object.
 }
 \description{
-Download competition data file
+Download competition data file(s)
 }
 \seealso{
 Other Competitions: 

@@ -61,9 +61,7 @@ kgl_competitions_submissions_submit <- function(
   submission_description,
   id
 ) {
-  competition_id <- id_type_guesser(id)
-
-  post_url <- glue::glue("competitions/submissions/submit/{competition_id}")
+  post_url <- glue::glue("competitions/submissions/submit/{id}")
 
   kgl_api_post(
     post_url,

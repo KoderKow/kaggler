@@ -3,83 +3,102 @@
 #' List competition data files
 #'
 #' @param id Character. Competition name.
-#' @param clean_response Logical. Clean the response from the Kaggle API. If `FALSE`, this will return the object from the [httr::GET()] call.
+#' @param clean_response Logical. Clean the response from the Kaggle API. If `FALSE`, this will return the object from the [httr2::req_perform()] call.
 #'
-#' @return Based on `clean_response`: A tibble containing information on the given `id` or a [httr::GET()] object.
+#' @return Based on `clean_response`
+#' - `TRUE`: A tibble containing information on the given `id`
+#' - `FALSE`: {httr2} httr2_response object
 #' @export
 #' @family Competitions
 #'
 kgl_competitions_data_list <- function(id, clean_response = TRUE) {
-  if (!assertthat::is.string(id)) {
-    usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
-    usethis::ui_stop("'id' is not a string.")
-  }
+  assertthat::assert_that(
+    assertthat::is.string(id),
+    assertthat::is.flag(clean_response)
+  )
 
-  get_url <- glue::glue("competitions/data/list/{id}")
+  req_url <- glue::glue("competitions/data/list/{id}")
 
-  get_request <- kgl_api_get(get_url)
-
-  if (get_request$status_code != 200) {
-    return(invisible(get_request))
-  }
+  resp <- kgl_request(
+    endpoint = req_url
+  )
 
   if (clean_response == TRUE) {
-    get_request <-
-      get_request %>%
+    resp <-
+      resp %>%
+      httr2::resp_body_json() %>%
       kgl_as_tbl()
   }
 
-  return(get_request)
+  return(resp)
 }
 
-#' CompetitionsDataDownloadFile
+#' Download competition data
 #'
-#' Download competition data file
+#' Download competition data file(s)
 #'
 #' @inheritParams kgl_competitions_data_list
 #' @param file_name Character. Competition name.
 #' @param output_dir Character. Directory to save the file.
+#' @param clean_response Logical. Download the data within the response from the Kaggle API. If `FALSE`, this will return the object from the [httr2::req_perform()] call.
 #'
-#' @return An invisible [httr::GET()] object.
+#' @return An invisible {httr2} httr2_response object.
 #' @export
 #' @family Competitions
 kgl_competitions_data_download <- function(
   id,
   file_name,
-  output_dir = "."
+  output_dir = ".",
+  clean_response = TRUE
 ) {
-  if (!assertthat::is.string(id)) {
-    usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
-    usethis::ui_stop("'id' is not a string.")
-  }
+  assertthat::assert_that(
+    assertthat::is.string(id),
+    assertthat::is.string(file_name),
+    assertthat::is.string(output_dir),
+    assertthat::is.dir(output_dir),
+    assertthat::is.flag(clean_response)
+  )
 
   if (!fs::file_exists(output_dir)) {
     stop("output_dir does not exist!")
   }
 
-  get_url <- glue::glue("competitions/data/download/{id}/{file_name}")
+  req_url <- glue::glue("competitions/data/download/{id}/{file_name}")
 
-  get_request <- kgl_api_get(get_url)
+  resp <- kgl_request(req_url)
 
-  if (get_request$status_code != 200) {
-    return(invisible(get_request))
+  if (clean_response) {
+    path_output <- fs::path(output_dir, file_name)
+
+    if (httr2::resp_content_type(resp) == "text/csv") {
+      resp %>%
+        httr2::resp_body_string() %>%
+        writeBin(path_output)
+
+    } else {
+      path_zip <- fs::file_temp(ext = "zip")
+
+      resp %>%
+        httr2::resp_body_raw() %>%
+        writeBin(path_zip)
+
+      archive::archive_extract(
+        archive = path_zip,
+        dir = output_dir
+      )
+
+      if (fs::file_exists(path_zip)) {
+        fs::file_delete(path_zip)
+      }
+    }
   }
 
-  path_output <- fs::path(output_dir, file_name)
-
-  get_request %>%
-    purrr::pluck("url") %>%
-    download.file(
-      destfile = path_output,
-      quiet = TRUE
-    )
-
-  return(invisible(get_request))
+  return(invisible(resp))
 }
 
 #' Download all competition data.
 #'
-#' Downloads all data into a zip file.
+#' Downloads all data from a competition.
 #'
 #' @inheritParams kgl_competitions_data_download
 #'
@@ -88,29 +107,36 @@ kgl_competitions_data_download <- function(
 #' @family Competitions
 kgl_competitions_data_download_all <- function(
   id,
-  output_dir = "."
-  ) {
-  if (!assertthat::is.string(id)) {
-    usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
-    usethis::ui_stop("'id' is not a string.")
-  }
+  output_dir = ".",
+  clean_response = TRUE
+) {
+  assertthat::assert_that(
+    assertthat::is.string(id),
+    assertthat::is.string(output_dir),
+    assertthat::is.dir(output_dir),
+    assertthat::is.flag(clean_response)
+  )
 
-  get_url <- glue::glue("competitions/data/download-all/{id}")
+  req_url <- glue::glue("competitions/data/download-all/{id}")
 
-  get_request <- kgl_api_get(get_url)
+  resp <- kgl_request(req_url)
 
-  if (get_request$status_code != 200) {
-    return(invisible(get_request))
-  }
+  if (clean_response) {
+    path_zip <- fs::file_temp(ext = "zip")
 
-  path_output <- fs::path(output_dir, id, ext = "zip")
+    resp %>%
+      httr2::resp_body_raw() %>%
+      writeBin(path_zip)
 
-  get_request %>%
-    purrr::pluck("url") %>%
-    download.file(
-      destfile = path_output,
-      quiet = TRUE
+    archive::archive_extract(
+      archive = path_zip,
+      dir = output_dir
     )
 
-  return(invisible(get_request))
+    if (fs::file_exists(path_zip)) {
+      fs::file_delete(path_zip)
+    }
+  }
+
+  return(invisible(resp))
 }

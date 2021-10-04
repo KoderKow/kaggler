@@ -45,7 +45,8 @@ kgl_api_get <- function(path, ..., auth = kgl_auth()) {
   ## build and make request
   r <- httr::GET(
     url = get_url,
-    auth
+    auth,
+    httr::verbose()
   )
 
   ## check status
@@ -78,4 +79,35 @@ kgl_api_post <- function(path, ..., body = NULL) {
 
   ## return data/response
   invisible(r)
+}
+
+#' Make requests to Kaggle's API
+#'
+#' @param endpoint Character. Endpoint to call.
+#' @param ... For req_url_query(): Name-value pairs that provide query parameters. Each value must be either length-1 atomic vector or NULL (which is automatically dropped).
+#'
+#' @return {httr2} response object.
+kgl_request <- function(
+  endpoint,
+  ...
+) {
+  resp <-
+    .kaggle_base_url %>%
+    httr2::request() %>%
+    httr2::req_headers("Accept" = "application/json") %>%
+    httr2::req_user_agent("kaggler (https://github.com/KoderKow/kaggler)") %>%
+    kgl_auth() %>%
+    httr2::req_url_path_append(endpoint) %>%
+    # httr2::req_url_query(...) %>%
+    httr2::req_error(body = kgl_error) %>%
+    httr2::req_cache(tempdir()) %>%
+    httr2::req_perform()
+
+  return(resp)
+}
+
+kgl_error <- function(resp) {
+  body <- httr2::resp_body_json(resp)
+
+  return(body$message)
 }

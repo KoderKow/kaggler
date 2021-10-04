@@ -4,18 +4,20 @@
 \alias{kgl_competitions_data_download_all}
 \title{Download all competition data.}
 \usage{
-kgl_competitions_data_download_all(id, output_dir = ".")
+kgl_competitions_data_download_all(id, output_dir = ".", clean_response = TRUE)
 }
 \arguments{
 \item{id}{Character. Competition name.}
 
 \item{output_dir}{Character. Directory to save the file.}
+
+\item{clean_response}{Logical. Download the data within the response from the Kaggle API. If \code{FALSE}, this will return the object from the \code{\link[httr2:req_perform]{httr2::req_perform()}} call.}
 }
 \value{
 An invisible \code{\link[httr:GET]{httr::GET()}} object.
 }
 \description{
-Downloads all data into a zip file.
+Downloads all data from a competition.
 }
 \seealso{
 Other Competitions: 

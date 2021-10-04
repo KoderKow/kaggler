@@ -11,24 +11,54 @@
 #' @return Print out of summary info and a tibble of the data.
 #' @export
 kgl_as_tbl <- function(x) {
-  if (inherits(x, "response")) {
-    x <- tryCatch(as_json(x), error = function(e) as_parsed(x))
-  }
-  if (length(x) == 1 && is.list(x) && is.data.frame(x[[1]])) {
-    x <- x[[1]]
-  }
-
   x <-
     x %>%
-    purrr::map(~ .x %||% NA) %>%
-    .[!is_recursive(.)] %>%
+    purrr::map_dfr(~ .x %||% NA) %>%
     tibble::as_tibble(
-      .name_repair = snakecase::to_snake_case,
-      validate = FALSE
-      ) %>%
+      .name_repair = snakecase::to_snake_case
+    ) %>%
     readr::type_convert(col_types = readr::cols())
 
   return(x)
+}
+
+
+#' Flatten list and keep names
+#'
+#' @param x List.
+#' @param use.names Logical. Should the names of x be kept?
+#' @param classes Character. Vector of class names, or "ANY" to match any class.
+#'
+#' @return Flattened named list.
+#' @references https://stackoverflow.com/questions/49252400/r-purrr-flatten-list-of-named-lists-to-list-and-keep-names
+flatten <- function (x, use.names = TRUE, classes = "ANY") {
+  len <- sum(rapply(x, function(x) 1L, classes = classes))
+  y <- vector("list", len)
+  i <- 0L
+  env <- environment()
+
+  items <- rapply(
+    object = x,
+    f = function(.x) {
+
+      i <- get("i", envir = env)
+      i <- i + 1
+      assign("i", i, envir = env)
+
+      y <- get("y", envir = env)
+      y[[i]] <- .x
+      assign("y", y, envir = env)
+
+      TRUE
+    },
+    classes = classes
+  )
+
+  if (use.names && !is.null(nm <- names(items))) {
+    names(y) <- snakecase::to_snake_case(nm)
+  }
+
+  return(y)
 }
 
 "%||%" <- function(x, y) {

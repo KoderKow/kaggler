@@ -6,7 +6,9 @@
 #' @param search Character. Search terms.
 #' @inheritParams kgl_competitions_data_list
 #'
-#' @return Based on `clean_response`: A tibble containing information on the given `id` or a [httr::GET()] object.
+#' @return Based on `clean_response`
+#' - `TRUE`: A tibble containing information on the given `id`
+#' - `FALSE`: {httr2} httr2_response object
 #' @export
 #' @family Competitions
 kgl_competitions_list <- function(
@@ -14,21 +16,24 @@ kgl_competitions_list <- function(
   search = NULL,
   clean_response = TRUE
 ) {
-  get_request <- kgl_api_get(
-    path = "competitions/list",
+  assertthat::assert_that(
+    assertthat::is.number(page),
+    is.null(search) || assertthat::is.string(search),
+    assertthat::is.flag(clean_response)
+    )
+
+  resp <- kgl_request(
+    endpoint = "competitions/list",
     page = page,
     search = search
   )
 
-  if (get_request$status_code != 200) {
-    return(invisible(get_request))
-  }
-
   if (clean_response == TRUE) {
-    get_request <-
-      get_request %>%
+    resp <-
+      resp %>%
+      httr2::resp_body_json() %>%
       kgl_as_tbl()
   }
 
-  return(get_request)
+  return(resp)
 }

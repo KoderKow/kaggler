@@ -4,9 +4,11 @@
 \alias{kgl_auth}
 \title{Kaggle API authorization}
 \usage{
-kgl_auth(username = NULL, key = NULL, creds_file = NULL)
+kgl_auth(req, username = NULL, key = NULL, creds_file = NULL)
 }
 \arguments{
+\item{req}{A \link[httr2]{request}.}
+
 \item{username}{Name associated with user's account at
 \href{https://www.kaggle.com}{Kaggle.com}.}
 

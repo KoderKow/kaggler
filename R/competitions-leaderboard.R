@@ -9,29 +9,36 @@
 #' @family Competitions
 kgl_competitions_leaderboard_download <- function(
   id,
-  output_dir = "."
+  output_dir = ".",
+  clean_response = TRUE
   ) {
-  if (!assertthat::is.string(id)) {
-    usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
-    usethis::ui_stop("'id' is not a string.")
-  }
+  assertthat::assert_that(
+    assertthat::is.string(id),
+    assertthat::is.string(output_dir),
+    assertthat::is.dir(output_dir),
+    assertthat::is.flag(clean_response)
+  )
 
-  get_url <- glue::glue("competitions/{id}/leaderboard/download")
+  req_url <- glue::glue("competitions/{id}/leaderboard/download")
 
-  get_request <- kgl_api_get(get_url)
+  resp <- kgl_request(req_url)
 
-  if (get_request$status_code != 200) {
-    return(invisible(get_request))
-  }
+  if (clean_response) {
+    path_zip <- fs::file_temp(ext = "zip")
 
-  path_output <- fs::path(output_dir, file_name)
+    resp %>%
+      httr2::resp_body_raw() %>%
+      writeBin(path_zip)
 
-  get_request %>%
-    purrr::pluck("url") %>%
-    download.file(
-      destfile = path_output,
-      quiet = TRUE
+    archive::archive_extract(
+      archive = path_zip,
+      dir = output_dir
     )
+
+    if (fs::file_exists(path_zip)) {
+      fs::file_delete(path_zip)
+    }
+  }
 
   return(get_request)
 }
@@ -49,20 +56,21 @@ kgl_competitions_leaderboard_view <- function(
   id,
   clean_response = TRUE
 ) {
-  if (!assertthat::is.string(id)) {
-    usethis::ui_oops("'id' must be a character that references (ref) the competition. This dos not accept the numeric ID.")
-    usethis::ui_stop("'id' is not a string.")
-  }
+  assertthat::assert_that(
+    assertthat::is.string(id),
+    assertthat::is.flag(clean_response)
+  )
 
-  get_url <- glue::glue("competitions/{id}/leaderboard/view")
+  req_url <- glue::glue("competitions/{id}/leaderboard/view")
 
-  get_request <- kgl_api_get(get_url)
+  resp <- kgl_request(req_url)
 
   if (clean_response == TRUE) {
-    get_request <-
-      get_request %>%
+    resp <-
+      resp %>%
+      httr2::resp_body_json() %>%
       kgl_as_tbl()
   }
 
-  return(get_request)
+  return(resp)
 }
