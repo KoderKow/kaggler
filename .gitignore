@@ -11,3 +11,4 @@ README_cache
 dev_testing.R
 _kaggle_data
 inst/doc
+*.csv
