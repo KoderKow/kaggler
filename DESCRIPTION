@@ -10,7 +10,11 @@ Authors@R:
              family = "Kearney",
              role = "aut",
              email = "kearneymw@missouri.edu",
-             comment = c(ORCID = "0000-0002-0730-4694")))
+             comment = c(ORCID = "0000-0002-0730-4694")),
+      person(given = "Spencer",
+             family = "Matthews",
+             role = "ctb",
+             comment = "kgl_flow_leaderboard"))
 Description: An interface for interacting with the public API offered by
     \href{https://www.kaggle.com}{Kaggle}, a machine learning competition
     platform.
@@ -37,7 +41,6 @@ Imports:
     usethis
 Suggests: 
     knitr,
-    markdown,
     rmarkdown
 VignetteBuilder: 
     knitr
