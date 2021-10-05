@@ -19,5 +19,10 @@ Authors:
   \item Michael Wayne Kearney \email{kearneymw@missouri.edu} (\href{https://orcid.org/0000-0002-0730-4694}{ORCID})
 }
 
+Other contributors:
+\itemize{
+  \item Spencer Matthews (kgl_flow_leaderboard) [contributor]
+}
+
 }
 \keyword{internal}
