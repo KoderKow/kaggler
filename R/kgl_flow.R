@@ -12,8 +12,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(kaggler)
-#'
 #' kgl_flow("titanic")
 #' }
 kgl_flow <- function(id = NULL) {

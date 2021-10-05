@@ -144,8 +144,6 @@ kgl_auth <- function(req, username = NULL, key = NULL, creds_file = NULL) {
 #'
 #' @examples
 #' \dontrun{
-#' library(kaggler)
-#'
 #' kgl_auth_file_setup("/Users/Kow/Downloads/kaggle.json")
 #' }
 kgl_auth_file_setup <- function(path) {

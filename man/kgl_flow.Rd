@@ -20,8 +20,6 @@ If \code{id} is NULL this function will check to see if there is a previously re
 }
 \examples{
 \dontrun{
-library(kaggler)
-
 kgl_flow("titanic")
 }
 }

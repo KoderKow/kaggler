@@ -10,8 +10,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(kaggler)
-#'
 #' kgl_flow("titanic")
 #'
 #' kgl_flow_leaderboard()

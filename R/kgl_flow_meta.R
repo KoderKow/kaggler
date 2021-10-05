@@ -8,8 +8,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(kaggler)
-#'
 #' kgl_flow("titanic")
 #'
 #' kgl_flow_meta()
@@ -41,8 +39,6 @@ kgl_flow_meta <- function() {
 #'
 #' @examples
 #' \dontrun{
-#' library(kaggler)
-#'
 #' kgl_flow("titanic")
 #'
 #' kgl_flow_competition_info()

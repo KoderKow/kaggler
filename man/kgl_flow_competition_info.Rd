@@ -14,8 +14,6 @@ This function will show some competition information for the current project.
 }
 \examples{
 \dontrun{
-library(kaggler)
-
 kgl_flow("titanic")
 
 kgl_flow_competition_info()

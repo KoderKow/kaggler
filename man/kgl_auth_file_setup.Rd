@@ -17,8 +17,6 @@ This function aims to simplify the authorization setup process. Once the API key
 }
 \examples{
 \dontrun{
-library(kaggler)
-
 kgl_auth_file_setup("/Users/Kow/Downloads/kaggle.json")
 }
 }

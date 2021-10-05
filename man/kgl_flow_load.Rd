@@ -17,8 +17,6 @@ If all of the files in \verb{_kaggle_data} are in \strong{csv} format (excluding
 }
 \examples{
 \dontrun{
-library(kaggler)
-
 kgl_flow("titanic")
 
 kgl_flow_load()

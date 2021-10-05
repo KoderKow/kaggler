@@ -14,8 +14,6 @@ Read the metadata of the competitions datasets.
 }
 \examples{
 \dontrun{
-library(kaggler)
-
 kgl_flow("titanic")
 
 kgl_flow_meta()
