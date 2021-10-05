@@ -12,3 +12,4 @@ dev_testing.R
 _kaggle_data
 inst/doc
 *.csv
+dev_notes.R

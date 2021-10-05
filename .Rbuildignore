@@ -16,3 +16,4 @@
 ^dev_testing\.R$
 ^_kaggle_data$
 ^FUNDING\.yml$
+^dev_notes\.R
