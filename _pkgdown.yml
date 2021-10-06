@@ -4,3 +4,9 @@ template:
   package: preferably
   params:
     toggle: manual
+    github-sponsor:
+      url: https://ko-fi.com/theeatgamelove
+
+authors:
+  Kyle Harris:
+    href: https://koderkow.rbind.io/
