@@ -6,7 +6,38 @@ template:
     toggle: manual
     github-sponsor:
       url: https://ko-fi.com/theeatgamelove
+    # docsearch:
+    #   api_key: API_KEY
+    #   index_name: INDEX_NAME
+    opengraph:
+    image:
+      src: man/figures/logo.png
+      alt: "kaggler hex sticker"
+    twitter:
+      creator: "@koderkow"
+      site: https://koderkow.rbind.io/
+      card: summary_large_image
 
 authors:
   Kyle Harris:
     href: https://koderkow.rbind.io/
+
+reference:
+- title: Kaggle Flow
+  desc: >
+    This is an **experimental** and **opinionated** reproducible workflow
+    for working with Kaggle competitions. For a more in-depth walkthrough
+    visit the
+    [Kaggle Flow](https://koderkow.github.io/kaggler/articles/kgl-flow.html)
+    page.
+- contents:
+  - has_concept("Kaggle Flow")
+- title: Kaggle API
+  desc: >
+    Directly interact with the API. For a more in-depth walkthrough
+    visit the
+    [Kaggle API](https://koderkow.github.io/kaggler/articles/kaggle-api.html)
+    page.
+- subtitle: Competitions
+  contents:
+  - has_concept("Competitions")
