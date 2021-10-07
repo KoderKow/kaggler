@@ -22,7 +22,7 @@
   }
 </script>
 
-<title>DatasetsCreateNew — kgl_datasets_create_new • kaggler</title>
+<title>List competition submissions — kgl_competitions_list_submissions • kaggler</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -73,8 +73,8 @@
 
 
 
-<meta property="og:title" content="DatasetsCreateNew — kgl_datasets_create_new" />
-<meta property="og:description" content="Create a new dataset" />
+<meta property="og:title" content="List competition submissions — kgl_competitions_list_submissions" />
+<meta property="og:description" content="List competition submissions" />
 <meta property="og:image" content="https://koderkow.github.io/kaggler/logo.png" />
 
 
@@ -181,34 +181,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>DatasetsCreateNew</h1>
-    <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
-    <div class="hidden name"><code>kgl_datasets_create_new.Rd</code></div>
+    <h1>List competition submissions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/KoderKow/kaggler/blob/master/R/competition-submissions.R'><code>R/competition-submissions.R</code></a></small>
+    <div class="hidden name"><code>kgl_competitions_list_submissions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a new dataset</p>
+    <p>List competition submissions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_datasets_create_new</span><span class='op'>(</span><span class='va'>datasetNewRequest</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_competitions_list_submissions</span><span class='op'>(</span><span class='va'>id</span>, page <span class='op'>=</span> <span class='fl'>1</span>, clean_response <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>datasetNewRequest</th>
-      <td><p>Information for creating a new dataset. Required: TRUE.</p></td>
+      <th>id</th>
+      <td><p>Character. Competition name.</p></td>
+    </tr>
+    <tr>
+      <th>page</th>
+      <td><p>Numeric. Page number.</p></td>
+    </tr>
+    <tr>
+      <th>clean_response</th>
+      <td><p>Logical. Clean the response from the Kaggle API. If <code>FALSE</code>, this will return the object from the <code><a href='https://httr2.r-lib.org/reference/req_perform.html'>httr2::req_perform()</a></code> call.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Based on <code>clean_response</code></p><ul>
+<li><p><code>TRUE</code>: A tibble containing information on the given <code>id</code></p></li>
+<li><p><code>FALSE</code>: httr2 httr2_response object</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Datasets: 
-<code><a href='kgl_datasets_create_version.html'>kgl_datasets_create_version</a>()</code>,
-<code><a href='kgl_datasets_download.html'>kgl_datasets_download</a>()</code>,
-<code><a href='kgl_datasets_list.html'>kgl_datasets_list</a>()</code>,
-<code><a href='kgl_datasets_upload_file.html'>kgl_datasets_upload_file</a>()</code>,
-<code><a href='kgl_datasets_view.html'>kgl_datasets_view</a>()</code></p></div>
+    <div class='dont-index'><p>Other Competitions: 
+<code><a href='kgl_competitions_data_download_all.html'>kgl_competitions_data_download_all</a>()</code>,
+<code><a href='kgl_competitions_data_download.html'>kgl_competitions_data_download</a>()</code>,
+<code><a href='kgl_competitions_data_list.html'>kgl_competitions_data_list</a>()</code>,
+<code><a href='kgl_competitions_leaderboard_download.html'>kgl_competitions_leaderboard_download</a>()</code>,
+<code><a href='kgl_competitions_leaderboard_view.html'>kgl_competitions_leaderboard_view</a>()</code>,
+<code><a href='kgl_competitions_list.html'>kgl_competitions_list</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

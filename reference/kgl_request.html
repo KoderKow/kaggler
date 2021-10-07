@@ -190,7 +190,7 @@
     <p>Make requests to Kaggle's API</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kgl_request</span><span class='op'>(</span><span class='va'>endpoint</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>kgl_request</span><span class='op'>(</span><span class='va'>endpoint</span>, <span class='va'>...</span>, body <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,6 +202,10 @@
     <tr>
       <th>...</th>
       <td><p>For req_url_query(): Name-value pairs that provide query parameters. Each value must be either length-1 atomic vector or NULL (which is automatically dropped).</p></td>
+    </tr>
+    <tr>
+      <th>body</th>
+      <td><p>Send data in the request body.</p></td>
     </tr>
     </table>
 
