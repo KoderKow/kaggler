@@ -39,12 +39,13 @@ kgl_api_call <- function(path, ...) {
 }
 
 ## for GET requests
-kgl_api_get <- function(path, ..., auth = kgl_auth()) {
+kgl_api_get <- function(path, ..., body = NULL, auth = kgl_auth()) {
   get_url <- kgl_api_call(path, ...)
 
   ## build and make request
   r <- httr::GET(
     url = get_url,
+    body = body,
     auth,
     httr::verbose()
   )
@@ -64,9 +65,16 @@ kgl_api_get <- function(path, ..., auth = kgl_auth()) {
 }
 
 ## for POST requests
-kgl_api_post <- function(path, ..., body = NULL) {
+kgl_api_post <- function(path, ..., body = NULL, auth = kgl_auth()) {
   ## build and make request
-  r <- httr::POST(kgl_api_call(path, ...), body = body)
+  x <<- kgl_api_call(path, ...)
+
+  r <- httr::POST(
+    kgl_api_call(path, ...),
+    auth,
+    body = body,
+    httr::verbose()
+    )
 
   ## check status
   httr::warn_for_status(r)
@@ -85,11 +93,13 @@ kgl_api_post <- function(path, ..., body = NULL) {
 #'
 #' @param endpoint Character. Endpoint to call.
 #' @param ... For req_url_query(): Name-value pairs that provide query parameters. Each value must be either length-1 atomic vector or NULL (which is automatically dropped).
+#' @param body Send data in the request body.
 #'
 #' @return {httr2} response object.
 kgl_request <- function(
   endpoint,
-  ...
+  ...,
+  body = NULL
 ) {
   resp <-
     .kaggle_base_url %>%
@@ -98,7 +108,14 @@ kgl_request <- function(
     httr2::req_user_agent("kaggler (https://github.com/KoderKow/kaggler)") %>%
     kgl_auth() %>%
     httr2::req_url_path_append(endpoint) %>%
-    # httr2::req_url_query(...) %>%
+    httr2::req_url_query(...) %>%
+    {
+      if (!is.null(body)) {
+        httr2::req_body_form(., body)
+      } else {
+        .
+      }
+    } %>%
     httr2::req_error(body = kgl_error) %>%
     httr2::req_cache(tempdir()) %>%
     httr2::req_perform()
@@ -110,4 +127,17 @@ kgl_error <- function(resp) {
   body <- httr2::resp_body_json(resp)
 
   return(body$message)
+}
+
+kgl_post_request <- function() {
+  resp <-
+    .kaggle_base_url %>%
+    httr2::request() %>%
+    httr2::req_headers("Accept" = "application/json") %>%
+    httr2::req_user_agent("kaggler (https://github.com/KoderKow/kaggler)") %>%
+    kgl_auth() %>%
+    httr2::req_url_path_append(endpoint) %>%
+    httr2::req_error(body = kgl_error) %>%
+    httr2::req_cache(tempdir()) %>%
+    httr2::req_perform()
 }
