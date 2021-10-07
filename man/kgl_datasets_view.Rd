@@ -12,3 +12,12 @@ kgl_datasets_view(owner_dataset)
 \description{
 Show details about a dataset
 }
+\seealso{
+Other Datasets: 
+\code{\link{kgl_datasets_create_new}()},
+\code{\link{kgl_datasets_create_version}()},
+\code{\link{kgl_datasets_download}()},
+\code{\link{kgl_datasets_list}()},
+\code{\link{kgl_datasets_upload_file}()}
+}
+\concept{Datasets}

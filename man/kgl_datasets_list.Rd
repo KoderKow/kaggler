@@ -16,3 +16,12 @@ kgl_datasets_list(page = 1, search = NULL, owner_dataset = NULL)
 \description{
 List datasets
 }
+\seealso{
+Other Datasets: 
+\code{\link{kgl_datasets_create_new}()},
+\code{\link{kgl_datasets_create_version}()},
+\code{\link{kgl_datasets_download}()},
+\code{\link{kgl_datasets_upload_file}()},
+\code{\link{kgl_datasets_view}()}
+}
+\concept{Datasets}

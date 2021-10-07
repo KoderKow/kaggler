@@ -17,3 +17,12 @@ i.e., \code{"mathan/fifa-2018-match-statistics"}.}
 \description{
 Download dataset file
 }
+\seealso{
+Other Datasets: 
+\code{\link{kgl_datasets_create_new}()},
+\code{\link{kgl_datasets_create_version}()},
+\code{\link{kgl_datasets_list}()},
+\code{\link{kgl_datasets_upload_file}()},
+\code{\link{kgl_datasets_view}()}
+}
+\concept{Datasets}

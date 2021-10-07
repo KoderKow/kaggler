@@ -32,7 +32,7 @@
 #' it'll use it. Otherwise it'll look for environment variables, which it will
 #' create and save for you manually the first time you enter your username/key
 #' or path to your \code{kaggle.json} file.
-kgl_auth <- function(req, username = NULL, key = NULL, creds_file = NULL) {
+kgl_auth <- function(req = NULL, username = NULL, key = NULL, creds_file = NULL) {
 
   ## if all null, look for environment variables
   if (is.null(username) && is.null(key) && is.null(creds_file)) {
@@ -129,7 +129,11 @@ kgl_auth <- function(req, username = NULL, key = NULL, creds_file = NULL) {
   }
 
   ## return basic http authorization method (with kaggle-generated key as password)
-  httr2::req_auth_basic(req, username, key)
+  if (is.null(req)) {
+    httr::authenticate(username, key)
+  } else {
+    httr2::req_auth_basic(req, username, key)
+  }
 }
 
 #' Setup API authorization file

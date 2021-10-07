@@ -12,3 +12,12 @@ kgl_datasets_create_new(datasetNewRequest)
 \description{
 Create a new dataset
 }
+\seealso{
+Other Datasets: 
+\code{\link{kgl_datasets_create_version}()},
+\code{\link{kgl_datasets_download}()},
+\code{\link{kgl_datasets_list}()},
+\code{\link{kgl_datasets_upload_file}()},
+\code{\link{kgl_datasets_view}()}
+}
+\concept{Datasets}
