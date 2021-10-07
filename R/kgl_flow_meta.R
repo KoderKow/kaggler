@@ -4,7 +4,7 @@
 #'
 #' @return A data frame with one row per competition dataset.
 #' @export
-#' @family Kaggle Flows
+#' @family Kaggle Flow
 #'
 #' @examples
 #' \dontrun{
@@ -35,7 +35,7 @@ kgl_flow_meta <- function() {
 #'
 #' @return Compeition info.
 #' @export
-#' @family Kaggle Flows
+#' @family Kaggle Flow
 #'
 #' @examples
 #' \dontrun{

@@ -20,10 +20,10 @@ kgl_flow_competition_info()
 }
 }
 \seealso{
-Other Kaggle Flows: 
+Other Kaggle Flow: 
 \code{\link{kgl_flow_leaderboard}()},
 \code{\link{kgl_flow_load}()},
 \code{\link{kgl_flow_meta}()},
 \code{\link{kgl_flow}()}
 }
-\concept{Kaggle Flows}
+\concept{Kaggle Flow}

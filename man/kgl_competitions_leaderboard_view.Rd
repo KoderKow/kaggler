@@ -23,6 +23,7 @@ Other Competitions:
 \code{\link{kgl_competitions_data_download}()},
 \code{\link{kgl_competitions_data_list}()},
 \code{\link{kgl_competitions_leaderboard_download}()},
+\code{\link{kgl_competitions_list_submissions}()},
 \code{\link{kgl_competitions_list}()}
 }
 \concept{Competitions}

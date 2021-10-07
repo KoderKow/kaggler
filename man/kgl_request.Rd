@@ -4,12 +4,14 @@
 \alias{kgl_request}
 \title{Make requests to Kaggle's API}
 \usage{
-kgl_request(endpoint, ...)
+kgl_request(endpoint, ..., body = NULL)
 }
 \arguments{
 \item{endpoint}{Character. Endpoint to call.}
 
 \item{...}{For req_url_query(): Name-value pairs that provide query parameters. Each value must be either length-1 atomic vector or NULL (which is automatically dropped).}
+
+\item{body}{Send data in the request body.}
 }
 \value{
 {httr2} response object.

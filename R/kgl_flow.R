@@ -8,7 +8,7 @@
 #'
 #' @return Nothing.
 #' @export
-#' @family Kaggle Flows
+#' @family Kaggle Flow
 #'
 #' @examples
 #' \dontrun{

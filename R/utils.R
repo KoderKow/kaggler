@@ -155,8 +155,8 @@ validator_rules <- function(competition_id, file_name) {
 
 validator_api_key <- function() {
   # kgl_auth()
-  get_request <- kgl_api_get(
-    path = "competitions/list",
+  resp <- kgl_request(
+    endpoint = "competitions/list",
     search = "titanic"
   )
 

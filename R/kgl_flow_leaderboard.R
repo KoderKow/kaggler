@@ -6,7 +6,7 @@
 #' @return A data frame with one row per user who has submitted
 #'   results to the competition.
 #' @export
-#' @family Kaggle Flows
+#' @family Kaggle Flow
 #'
 #' @examples
 #' \dontrun{
