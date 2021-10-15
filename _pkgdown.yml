@@ -6,9 +6,9 @@ template:
     toggle: manual
     github-sponsor:
       url: https://ko-fi.com/theeatgamelove
-    # docsearch:
-    #   api_key: API_KEY
-    #   index_name: INDEX_NAME
+    docsearch:
+      api_key: 6e1fa124c5b1c43163668b61649e2b1a
+      index_name: kaggler
     opengraph:
     image:
       src: man/figures/logo.png
