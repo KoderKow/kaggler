@@ -40,9 +40,9 @@ kgl_competitions_submissions_url <- function(file = NULL) {
     file.info(file)$mtime %>%
     lubridate::ymd_hms() %>%
     lubridate::seconds() %>%
-    as.numeric() * 1e3
+    as.numeric() #* 1e3
 
-  last_modified_date_utc <- "2021-10-06T06:28:48.202Z"
+  # last_modified_date_utc <- "2021-10-06T06:28:48.202Z"
 
   req_url <- glue::glue("competitions/{id}/submissions/url/{content_length}/{last_modified_date_utc}")
 
@@ -52,6 +52,9 @@ kgl_competitions_submissions_url <- function(file = NULL) {
       fileName =  fs::path_file(file)
     )
   )
+
+  resp %>%
+    httr2::resp_body_json()
 }
 
 #' Competition Submission Upload
@@ -63,17 +66,19 @@ kgl_competitions_submissions_url <- function(file = NULL) {
 kgl_competitions_submissions_upload <- function(file, guid) {
   content_length <- file.size(file)
 
-  last_modified_date_utc <- format(
-    x = file.info(file)$mtime,
-    format = "%Y-%m-%d %H-%M-%S",
-    tz = "UTC"
-  )
+  last_modified_date_utc <-
+    file.info(file)$mtime %>%
+    lubridate::ymd_hms() %>%
+    lubridate::seconds() %>%
+    as.numeric()
 
-  post_url <- glue::glue("competitions/submissions/upload/{guid}/{content_length}/", "{last_modified_date_utc}")
+  req_url <- glue::glue("competitions/submissions/upload/{guid}/{content_length}/{last_modified_date_utc}")
 
-  kgl_api_post(
-    post_url,
-    body = httr::upload_file(file)
+  resp <- kgl_request(
+    endpoint = req_url,
+    body = list(
+      file = file
+    )
   )
 }
 
