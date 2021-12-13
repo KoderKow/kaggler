@@ -63,7 +63,13 @@ kgl_competitions_data_download <- function(
     stop("output_dir does not exist!")
   }
 
-  req_url <- glue::glue("competitions/data/download/{id}/{file_name}")
+  encoded_id_file_name <- paste0(
+    URLencode(id, TRUE),
+    "/",
+    URLencode(file_name, TRUE)
+  )
+
+  req_url <- glue::glue("/competitions/data/download/{encoded_id_file_name}")
 
   resp <- kgl_request(req_url)
 
