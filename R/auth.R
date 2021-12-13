@@ -34,10 +34,16 @@
 #' or path to your \code{kaggle.json} file.
 kgl_auth <- function(req = NULL, username = NULL, key = NULL, creds_file = NULL) {
 
+  if (get_os() == "windows") {
+    path_cred_os <- fs::path("C:/Users/", Sys.getenv("USERNAME"), ".kaggle", "kaggle.json")
+  } else {
+    path_cred_os <- fs::path("~/.kaggle/kaggle.json")
+  }
+
   ## if all null, look for environment variables
   if (is.null(username) && is.null(key) && is.null(creds_file)) {
-    if (file.exists("~/.kaggle/kaggle.json")) {
-      creds_file <- "~/.kaggle/kaggle.json"
+    if (file.exists(path_cred_os)) {
+      creds_file <- path_cred_os
     } else if (file.exists("kaggle.json")) {
       creds_file <- "kaggle.json"
     }
@@ -152,9 +158,9 @@ kgl_auth <- function(req = NULL, username = NULL, key = NULL, creds_file = NULL)
 #' }
 kgl_auth_file_setup <- function(path) {
   if (.Platform$OS.type == "windows") {
-    dir_kgl_home <- fs::path(Sys.getenv("HOME"), ".kaggle")
+    dir_kgl_home <- fs::path("C:/Users/", Sys.getenv("USERNAME"), ".kaggle")
   } else {
-    dir_kgl_home <- fs::path("~/.kaggle/")
+    dir_kgl_home <- fs::path("~/.kaggle")
   }
 
   path_kgl_home <- fs::path(dir_kgl_home, "kaggle.json")
@@ -181,6 +187,31 @@ kgl_auth_file_setup <- function(path) {
   )
 
   usethis::ui_done("File has been copied to {path_kgl_home_ui}!")
+  usethis::ui_todo("Be sure to run {usethis::ui_value('kgl_auth()')} to setup environment variables!")
 
   return(invisible())
+}
+
+#' Get current OS
+#'
+#' @return
+#'
+#' @references [Source code](https://conjugateprior.org/2015/06/identifying-the-os-from-r/)
+#' @examples
+#' get_os()
+get_os <- function(){
+  sysinf <- Sys.info()
+  if (!is.null(sysinf)){
+    os <- sysinf['sysname']
+    if (os == 'Darwin')
+      os <- "osx"
+  } else { ## mystery machine
+    os <- .Platform$OS.type
+    if (grepl("^darwin", R.version$os))
+      os <- "osx"
+    if (grepl("linux-gnu", R.version$os))
+      os <- "linux"
+  }
+
+  tolower(os)
 }
