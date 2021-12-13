@@ -4,7 +4,12 @@
 \alias{kgl_datasets_list}
 \title{DatasetsList}
 \usage{
-kgl_datasets_list(page = 1, search = NULL, owner_dataset = NULL)
+kgl_datasets_list(
+  page = 1,
+  search = NULL,
+  owner_dataset = NULL,
+  clean_response = TRUE
+)
 }
 \arguments{
 \item{page}{Numeric. Page number. Defaults to 1. Retrieve datasets via page, search, or (ownerSlug and datasetSlug)}
@@ -12,6 +17,8 @@ kgl_datasets_list(page = 1, search = NULL, owner_dataset = NULL)
 \item{search}{Character. Search terms. Defaults to . Retrieve datasets via page, search, or (ownerSlug and datasetSlug)}
 
 \item{owner_dataset}{Character. Alternative to page/search.  The owner and dataset slug as it appears in the URL, i.e., \code{"mathan/fifa-2018-match-statistics"}.}
+
+\item{clean_response}{Logical. Clean the response from the Kaggle API. If \code{FALSE}, this will return the object from the \code{\link[httr2:req_perform]{httr2::req_perform()}} call.}
 }
 \description{
 List datasets

@@ -3,6 +3,7 @@
 export("%>%")
 export(kgl_as_tbl)
 export(kgl_auth_file_setup)
+export(kgl_competition_submit)
 export(kgl_competitions_data_download)
 export(kgl_competitions_data_download_all)
 export(kgl_competitions_data_list)

@@ -40,7 +40,7 @@ kgl_competitions_leaderboard_download <- function(
     }
   }
 
-  return(get_request)
+  return(resp)
 }
 
 #' Competition view leaderboard

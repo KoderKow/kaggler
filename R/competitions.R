@@ -22,8 +22,10 @@ kgl_competitions_list <- function(
     assertthat::is.flag(clean_response)
     )
 
+  endpoint <- "competitions/list"
+
   resp <- kgl_request(
-    endpoint = "competitions/list",
+    endpoint = endpoint,
     page = page,
     search = search
   )

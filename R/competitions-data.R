@@ -17,11 +17,11 @@ kgl_competitions_data_list <- function(id, clean_response = TRUE) {
     assertthat::is.flag(clean_response)
   )
 
-  req_url <- glue::glue("competitions/data/list/{id}")
+  encoded_params <- url_encode(id)
 
-  resp <- kgl_request(
-    endpoint = req_url
-  )
+  endpoint <- glue::glue("competitions/data/list/{encoded_params}")
+
+  resp <- kgl_request(endpoint)
 
   if (clean_response == TRUE) {
     resp <-
@@ -63,20 +63,16 @@ kgl_competitions_data_download <- function(
     stop("output_dir does not exist!")
   }
 
-  encoded_id_file_name <- paste0(
-    URLencode(id, TRUE),
-    "/",
-    URLencode(file_name, TRUE)
-  )
+  encoded_params <- url_encode(id, file_name)
 
-  req_url <- glue::glue("/competitions/data/download/{encoded_id_file_name}")
+  endpoint <- glue::glue("/competitions/data/download/{encoded_params}")
 
-  resp <- kgl_request(req_url)
+  resp <- kgl_request(endpoint)
 
   if (clean_response) {
-    path_output <- fs::path(output_dir, file_name)
+    path_output <- fs::path(output_dir, fs::path_file(file_name))
 
-    if (httr2::resp_content_type(resp) == "text/csv") {
+    if (stringr::str_detect(file_name, "\\.csv$")) {
       resp %>%
         httr2::resp_body_string() %>%
         writeBin(path_output)
@@ -123,9 +119,11 @@ kgl_competitions_data_download_all <- function(
     assertthat::is.flag(clean_response)
   )
 
-  req_url <- glue::glue("competitions/data/download-all/{id}")
+  encoded_params <- url_encode(id)
 
-  resp <- kgl_request(req_url)
+  endpoint <- glue::glue("competitions/data/download-all/{encoded_params}")
+
+  resp <- kgl_request(endpoint)
 
   if (clean_response) {
     path_zip <- fs::file_temp(ext = "zip")

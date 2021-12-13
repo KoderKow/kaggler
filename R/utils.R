@@ -1,4 +1,3 @@
-
 ## ----------------------------------------------------------------------------##
 ##                                  WRANGLING                                 ##
 ## ----------------------------------------------------------------------------##
@@ -22,6 +21,13 @@ kgl_as_tbl <- function(x) {
   return(x)
 }
 
+url_encode <- function(...) {
+  ... |>
+    list() |>
+    purrr::map_chr(as.character) |>
+    purrr::map_chr(URLencode, reserved = TRUE) |>
+    stringr::str_c(collapse = "/")
+}
 
 #' Flatten list and keep names
 #'
@@ -160,7 +166,7 @@ validator_api_key <- function() {
     search = "titanic"
   )
 
-  if (get_request$status_code != 200) {
+  if (resp$status_code != 200) {
     kgl_auth_ui <- usethis::ui_value("?kgl_auth()")
 
     msg <- glue::glue("Request failed. Please make sure you have correctly setup your Kaggle API Key Type {kgl_auth_ui} for more information.")

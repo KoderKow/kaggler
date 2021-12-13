@@ -1,20 +1,13 @@
 Package: kaggler
 Title: Kaggle API Client
 Version: 0.0.0.9000
-Authors@R: 
-    c(person(given = "Kyle",
-             family = "Harris",
-             role = c("aut", "cre"),
-             email = "koderkow@gmail.com"),
-      person(given = "Michael Wayne",
-             family = "Kearney",
-             role = "aut",
-             email = "kearneymw@missouri.edu",
-             comment = c(ORCID = "0000-0002-0730-4694")),
-      person(given = "Spencer",
-             family = "Matthews",
-             role = "ctb",
-             comment = "kgl_flow_leaderboard"))
+Authors@R: c(
+    person("Kyle", "Harris", , "koderkow@gmail.com", role = c("aut", "cre")),
+    person("Michael Wayne", "Kearney", , "kearneymw@missouri.edu", role = "aut",
+           comment = c(ORCID = "0000-0002-0730-4694")),
+    person("Spencer", "Matthews", role = "ctb",
+           comment = "kgl_flow_leaderboard")
+  )
 Description: An interface for interacting with the public API offered by
     \href{https://www.kaggle.com}{Kaggle}, a machine learning competition
     platform.

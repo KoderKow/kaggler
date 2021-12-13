@@ -194,13 +194,14 @@ kgl_auth_file_setup <- function(path) {
 
 #' Get current OS
 #'
-#' @return
+#' @return Character displaying current OS.
 #'
 #' @references [Source code](https://conjugateprior.org/2015/06/identifying-the-os-from-r/)
-#' @examples
-#' get_os()
+#'
+#' @noRd
 get_os <- function(){
-  sysinf <- Sys.info()
+  sysinf <- tolower(Sys.info())
+
   if (!is.null(sysinf)){
     os <- sysinf['sysname']
     if (os == 'Darwin')
@@ -213,5 +214,5 @@ get_os <- function(){
       os <- "linux"
   }
 
-  tolower(os)
+  return(os)
 }
