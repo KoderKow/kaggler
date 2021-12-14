@@ -24,6 +24,8 @@ These set of functions aim to replicate what most of Kaggle's python API functio
 
 # Competitions
 
+## Search
+
 Search for competitions
 
 ```r
@@ -41,6 +43,8 @@ kgl_competitions_list(search = "titanic")
 ```
 
 The `ref` column is the `id` used for the other competition functions.
+
+## Data
 
 List the datasets for a competition
 
@@ -103,3 +107,16 @@ Or download the entire leaderboard into a zip.
 kgl_competitions_leaderboard_download("titanic")
 ```
 
+## Submit to competition
+
+Submit a file to the competition
+
+```r
+> kgl_competition_submit(
+  id = "titanic",
+  file = "gender_submission.csv",
+  submission_description = "Submitted with kaggler"
+)
+
+#> √ Successfully submitted to Titanic - Machine Learning from Disaster
+```
