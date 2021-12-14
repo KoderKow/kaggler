@@ -23,6 +23,10 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install preferably
+        run: |
+          remotes::install_github("amirmasoudabdol/preferably", type = "source")
+
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: pkgdown
