@@ -13,7 +13,8 @@ Description: An interface for interacting with the public API offered by
     platform.
 License: MIT + file LICENSE
 URL: https://koderkow.github.io/kaggler,
-    https://github.com/KoderKow/kaggler
+    https://github.com/KoderKow/kaggler,
+    https://koderkow.github.io/kaggler/
 BugReports: https://github.com/KoderKow/kaggler/issues
 Imports:
     archive,
