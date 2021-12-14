@@ -23,8 +23,14 @@ Based on \code{clean_response}
 \description{
 List competition submissions
 }
+\examples{
+\dontrun{
+kgl_competitions_list_submissions("titanic")
+}
+}
 \seealso{
 Other Competitions: 
+\code{\link{kgl_competition_submit}()},
 \code{\link{kgl_competitions_data_download_all}()},
 \code{\link{kgl_competitions_data_download}()},
 \code{\link{kgl_competitions_data_list}()},

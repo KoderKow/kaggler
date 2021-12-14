@@ -23,6 +23,7 @@ List competition data files
 }
 \seealso{
 Other Competitions: 
+\code{\link{kgl_competition_submit}()},
 \code{\link{kgl_competitions_data_download_all}()},
 \code{\link{kgl_competitions_data_download}()},
 \code{\link{kgl_competitions_leaderboard_download}()},

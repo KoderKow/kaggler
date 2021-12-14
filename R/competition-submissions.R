@@ -8,6 +8,10 @@
 #' - `FALSE`: {httr2} httr2_response object
 #' @export
 #' @family Competitions
+#' @examples
+#' \dontrun{
+#' kgl_competitions_list_submissions("titanic")
+#' }
 kgl_competitions_list_submissions <- function(
   id,
   page = 1,
@@ -142,6 +146,7 @@ kgl_competitions_submissions_submit <- function(
 #'
 #' @return Nothing.
 #' @export
+#' @family Competitions
 #'
 #' @examples
 #' \dontrun{
