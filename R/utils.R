@@ -8,7 +8,7 @@
 #'
 #' @param x Output from kaggle function
 #' @return Print out of summary info and a tibble of the data.
-#' @export
+#' @noRd
 kgl_as_tbl <- function(x) {
   x <-
     x %>%
