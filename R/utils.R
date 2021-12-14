@@ -37,6 +37,8 @@ url_encode <- function(...) {
 #'
 #' @return Flattened named list.
 #' @references https://stackoverflow.com/questions/49252400/r-purrr-flatten-list-of-named-lists-to-list-and-keep-names
+#'
+#' @noRd
 flatten <- function (x, use.names = TRUE, classes = "ANY") {
   len <- sum(rapply(x, function(x) 1L, classes = classes))
   y <- vector("list", len)
