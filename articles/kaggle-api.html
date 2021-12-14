@@ -144,6 +144,9 @@
 <div class="section level1">
 <h1 id="competitions">Competitions<a class="anchor" aria-label="anchor" href="#competitions"></a>
 </h1>
+<div class="section level2">
+<h2 id="search">Search<a class="anchor" aria-label="anchor" href="#search"></a>
+</h2>
 <p>Search for competitions</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"titanic"</span><span class="op">)</span>
@@ -158,6 +161,10 @@
 <span class="co">#&gt; #   max_team_size &lt;lgl&gt;, evaluation_metric &lt;chr&gt;, awards_points &lt;lgl&gt;,</span>
 <span class="co">#&gt; #   is_kernels_submissions_only &lt;lgl&gt;, submissions_disabled &lt;lgl&gt;</span></code></pre></div>
 <p>The <code>ref</code> column is the <code>id</code> used for the other competition functions.</p>
+</div>
+<div class="section level2">
+<h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h2>
 <p>List the datasets for a competition</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_data_list.html">kgl_competitions_data_list</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span>
@@ -181,6 +188,7 @@
   id <span class="op">=</span> <span class="st">"titanic"</span>,
   output_dir <span class="op">=</span> <span class="st">"."</span>
 <span class="op">)</span></code></pre></div>
+</div>
 <div class="section level2">
 <h2 id="leaderboard">Leaderboard<a class="anchor" aria-label="anchor" href="#leaderboard"></a>
 </h2>
@@ -205,6 +213,18 @@
 <p>Or download the entire leaderboard into a zip.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_leaderboard_download.html">kgl_competitions_leaderboard_download</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="submit-to-competition">Submit to competition<a class="anchor" aria-label="anchor" href="#submit-to-competition"></a>
+</h2>
+<p>Submit a file to the competition</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">kgl_competition_submit</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">id =</span> <span class="st">"titanic"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="dt">file =</span> <span class="st">"gender_submission.csv"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="dt">submission_description =</span> <span class="st">"Submitted with kaggler"</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; √ Successfully submitted to Titanic - Machine Learning from Disaster</span></span></code></pre></div>
 </div>
 </div>
   </div>
