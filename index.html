@@ -25,12 +25,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- Flatly Theme - Light  --><link id="css-light" rel="stylesheet" href="https://bootswatch.com/3/flatly/bootstrap.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
-<!-- Darkly Theme - Dark --><link id="css-dark" rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.css" media="(prefers-color-scheme: dark)">
-<!-- preferably CSS --><link rel="stylesheet" href="preferably.css">
-<link id="css-code-light" rel="stylesheet" href="code-color-scheme-light.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
-<link id="css-code-dark" rel="stylesheet" href="code-color-scheme-dark.css" media="(prefers-color-scheme: dark)">
-<script src="darkswitch.js"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -44,9 +39,16 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Flatly Theme - Light  --><link id="css-light" rel="stylesheet" href="https://bootswatch.com/3/flatly/bootstrap.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
+<!-- Darkly Theme - Dark --><link id="css-dark" rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.css" media="(prefers-color-scheme: dark)">
+<!-- preferably CSS --><link rel="stylesheet" href="preferably.css">
+<link id="css-code-light" rel="stylesheet" href="code-color-scheme-light.css" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
+<link id="css-code-dark" rel="stylesheet" href="code-color-scheme-dark.css" media="(prefers-color-scheme: dark)">
+<script src="darkswitch.js"></script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -59,18 +61,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">kaggler</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/kaggler.html">Get started</a>
 </li>
@@ -101,7 +97,7 @@
         </li>
         
         <li>
-  <a href="https://github.com/KoderKow/kaggler/">
+  <a href="https://github.com/KoderKow/kaggler/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -109,7 +105,7 @@
         
         
           <li>
-            <a href="https://ko-fi.com/theeatgamelove" style="margin-top: 5px !important; padding-top: 12.5px !important; padding-bottom: 13.5px !important;">
+            <a href="https://ko-fi.com/theeatgamelove" style="margin-top: 5px !important; padding-top: 12.5px !important; padding-bottom: 13.5px !important;" class="external-link">
               <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" class="github-love" d="M6.736 4C4.657 4 2.5 5.88 2.5 8.514c0 3.107 2.324 5.96 4.861 8.12a29.66 29.66 0 004.566 3.175l.073.041.073-.04c.271-.153.661-.38 1.13-.674.94-.588 2.19-1.441 3.436-2.502 2.537-2.16 4.861-5.013 4.861-8.12C21.5 5.88 19.343 4 17.264 4c-2.106 0-3.801 1.389-4.553 3.643a.75.75 0 01-1.422 0C10.537 5.389 8.841 4 6.736 4zM12 20.703l.343.667a.75.75 0 01-.686 0l.343-.667zM1 8.513C1 5.053 3.829 2.5 6.736 2.5 9.03 2.5 10.881 3.726 12 5.605 13.12 3.726 14.97 2.5 17.264 2.5 20.17 2.5 23 5.052 23 8.514c0 3.818-2.801 7.06-5.389 9.262a31.146 31.146 0 01-5.233 3.576l-.025.013-.007.003-.002.001-.344-.666-.343.667-.003-.002-.007-.003-.025-.013A29.308 29.308 0 0110 20.408a31.147 31.147 0 01-3.611-2.632C3.8 15.573 1 12.332 1 8.514z"></path></svg></a>
           </li>
         
@@ -135,35 +131,34 @@
   <div class="contents col-md-9">
 
 <hr>
-<div id="kaggler-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#kaggler-" class="anchor"></a>kaggler <img src="reference/figures/logo.png" width="160px" align="right">
+<div class="section level1">
+<div class="page-header"><h1 id="kaggler-">kaggler <img src="reference/figures/logo.png" width="160px" align="right"><a class="anchor" aria-label="anchor" href="#kaggler-"></a>
 </h1></div>
 <blockquote>
-<p>🏁 An R client for accessing <a href="https://www.kaggle.com">Kaggle</a>’s API</p>
+<p>🏁 An R client for accessing <a href="https://www.kaggle.com" class="external-link">Kaggle</a>’s API</p>
 </blockquote>
 <!-- badges: start -->
-<p><a href="https://github.com/KoderKow/kaggler/actions"><img src="https://github.com/KoderKow/kaggler/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <!-- badges: end --></p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the dev version of <strong>{kaggler}</strong> from <a href="https://github.com/koderkow/kaggler">CRAN</a> with:</p>
+
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the dev version of <strong>{kaggler}</strong> from <a href="https://github.com/koderkow/kaggler" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## install kaggler package from github</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_packages</span><span class="op">(</span><span class="st">"koderkow/kaggler"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="api-authorization" class="section level1">
-<h1 class="hasAnchor">
-<a href="#api-authorization" class="anchor"></a>API Authorization</h1>
+<div class="section level1">
+<h1 id="api-authorization">API Authorization<a class="anchor" aria-label="anchor" href="#api-authorization"></a>
+</h1>
 <p>All users must be authenticated to interact with Kaggle’s APIs. To setup your API key refer to the <a href="https://koderkow.github.io/kaggler/articles/kaggler.html">Get Started</a> guide.</p>
 </div>
-<div id="kaggle-flow" class="section level1">
-<h1 class="hasAnchor">
-<a href="#kaggle-flow" class="anchor"></a>Kaggle Flow</h1>
+<div class="section level1">
+<h1 id="kaggle-flow">Kaggle Flow<a class="anchor" aria-label="anchor" href="#kaggle-flow"></a>
+</h1>
 <p>This is an <strong>experimental</strong> and <strong>opinionated</strong> reproducible workflow for working with Kaggle competitions.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span>
 
 <span class="fu"><a href="reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span>
 
@@ -176,9 +171,9 @@
 <span class="co">#&gt; • Downloading 'train.csv'...</span></code></pre></div>
 <p>For a more in-depth walkthrough visit the <a href="https://koderkow.github.io/kaggler/articles/kgl-flow.html">Kaggle Flow</a> page.</p>
 </div>
-<div id="direct-api-interaction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#direct-api-interaction" class="anchor"></a>Direct API Interaction</h1>
+<div class="section level1">
+<h1 id="direct-api-interaction">Direct API Interaction<a class="anchor" aria-label="anchor" href="#direct-api-interaction"></a>
+</h1>
 <p>These will be functions the user can call to have custom control over the returns and interactions with the API, similar to Kaggle’s python API.</p>
 <p>Browse or search for Kaggle competitions.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -244,17 +239,17 @@
 <span class="co">#&gt; 2 contradictory-my-dear-watson train.csv             trai… NA              2771659 http… 2020-07-27 19:45:43</span>
 <span class="co">#&gt; 3 contradictory-my-dear-watson sample_submission.csv samp… NA                67549 http… 2020-07-27 19:45:43</span></code></pre></div>
 <p>For a more in-depth walkthrough visit the <a href="https://koderkow.github.io/kaggler/articles/kaggle-api.html">Kaggle API</a> page.</p>
-<div id="notes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#notes" class="anchor"></a>Note(s)</h2>
+<div class="section level2">
+<h2 id="notes">Note(s)<a class="anchor" aria-label="anchor" href="#notes"></a>
+</h2>
 <ul>
-<li>The base of this package was cloned from the original at <a href="https://github.com/mkearney/kaggler">{kaggler}</a>. I have decided to take the developers work and continue their amazing development! Major props and recognition goes out to the original developer(s) of this package.
+<li>The base of this package was cloned from the original at <a href="https://github.com/mkearney/kaggler" class="external-link">{kaggler}</a>. I have decided to take the developers work and continue their amazing development! Major props and recognition goes out to the original developer(s) of this package.
 <ul>
 <li>I will be updating all documentation and examples for the README and functions for this package as time goes on</li>
 </ul>
 </li>
 <li>The the developers are in no way affiliated with Kaggle.com, and, as such, makes no assurances that there won’t be breaking changes to the API at any time</li>
-<li>Although the developers are not affiliated, it’s good practice to be informed, so here is the link to Kaggle’s terms of service: <a href="https://www.kaggle.com/terms" class="uri">https://www.kaggle.com/terms</a>
+<li>Although the developers are not affiliated, it’s good practice to be informed, so here is the link to Kaggle’s terms of service: <a href="https://www.kaggle.com/terms" class="external-link uri">https://www.kaggle.com/terms</a>
 </li>
 </ul>
 </div>
@@ -264,28 +259,43 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/KoderKow/kaggler/">https://​github.com/​KoderKow/​kaggler/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/KoderKow/kaggler/issues">https://​github.com/​KoderKow/​kaggler/​issues</a>
-</li>
+<li><a href="https://github.com/KoderKow/kaggler/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/KoderKow/kaggler/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing kaggler</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://koderkow.rbind.io/">Kyle Harris</a> <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Michael Wayne Kearney <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0730-4694" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<a href="https://koderkow.rbind.io/" class="external-link">Kyle Harris</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Michael Wayne Kearney <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-0730-4694" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/KoderKow/kaggler/actions" class="external-link"><img src="https://github.com/KoderKow/kaggler/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
@@ -294,11 +304,14 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://koderkow.rbind.io/">Kyle Harris</a>, Michael Wayne Kearney.</p>
+  <p></p>
+<p>Developed by <a href="https://koderkow.rbind.io/" class="external-link">Kyle Harris</a>, Michael Wayne Kearney.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Made with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1, using <a href="https://preferably.amirmasoudabdol.name/?source=footer">preferably</a> template.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 
       </footer>
