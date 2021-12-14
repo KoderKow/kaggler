@@ -22,9 +22,9 @@ Submit data to competition
 \examples{
 \dontrun{
 kgl_competition_submit(
-id = "titanic",
-file = "gender_submission.csv",
-submission_description = "Trained via rpart"
+  id = "titanic",
+  file = "gender_submission.csv",
+  submission_description = "Trained via rpart"
 )
 }
 }

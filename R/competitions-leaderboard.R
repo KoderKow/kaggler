@@ -11,7 +11,7 @@ kgl_competitions_leaderboard_download <- function(
   id,
   output_dir = ".",
   clean_response = TRUE
-  ) {
+) {
   assertthat::assert_that(
     assertthat::is.string(id),
     assertthat::is.string(output_dir),

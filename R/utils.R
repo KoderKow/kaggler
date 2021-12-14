@@ -8,7 +8,6 @@
 #'
 #' @param x Output from kaggle function
 #' @return Print out of summary info and a tibble of the data.
-#' @noRd
 kgl_as_tbl <- function(x) {
   x <-
     x %>%
@@ -39,7 +38,7 @@ url_encode <- function(...) {
 #' @references https://stackoverflow.com/questions/49252400/r-purrr-flatten-list-of-named-lists-to-list-and-keep-names
 #'
 #' @noRd
-flatten <- function (x, use.names = TRUE, classes = "ANY") {
+flatten <- function(x, use.names = TRUE, classes = "ANY") {
   len <- sum(rapply(x, function(x) 1L, classes = classes))
   y <- vector("list", len)
   i <- 0L
@@ -48,7 +47,6 @@ flatten <- function (x, use.names = TRUE, classes = "ANY") {
   items <- rapply(
     object = x,
     f = function(.x) {
-
       i <- get("i", envir = env)
       i <- i + 1
       assign("i", i, envir = env)

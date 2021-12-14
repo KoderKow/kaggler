@@ -23,15 +23,6 @@ authors:
     href: https://koderkow.rbind.io/
 
 reference:
-- title: Kaggle Flow
-  desc: >
-    This is an **experimental** and **opinionated** reproducible workflow
-    for working with Kaggle competitions. For a more in-depth walkthrough
-    visit the
-    [Kaggle Flow](https://koderkow.github.io/kaggler/articles/kgl-flow.html)
-    page.
-- contents:
-  - has_concept("Kaggle Flow")
 - title: Kaggle API
   desc: >
     Directly interact with the API. For a more in-depth walkthrough
@@ -41,3 +32,15 @@ reference:
 - subtitle: Competitions
   contents:
   - has_concept("Competitions")
+- title: Kaggle Flow
+  desc: >
+    This is an **experimental** and **opinionated** reproducible workflow
+    for working with Kaggle competitions. For a more in-depth walkthrough
+    visit the
+    [Kaggle Flow](https://koderkow.github.io/kaggler/articles/kgl-flow.html)
+    page.
+- contents:
+  - has_concept("Kaggle Flow")
+- title: Everything else
+- contents:
+  - lacks_concepts(c("Competitions", "Kaggle Flow"))

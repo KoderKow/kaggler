@@ -33,7 +33,7 @@ kgl_flow <- function(id = NULL) {
 
   validator_competition_id(competition_id)
 
- ## Ignore Kaggle dir for git and R packages
+  ## Ignore Kaggle dir for git and R packages
   usethis::use_git_ignore(.kgl_dir)
   if (fs::file_exists("DESCRIPTION")) {
     usethis::use_build_ignore(.kgl_dir)
@@ -47,7 +47,7 @@ kgl_flow <- function(id = NULL) {
     competition_id = competition_id,
     dir_path = dir_path,
     dir_meta = dir_meta
-    )
+  )
 
   data_list <- kgl_competitions_data_list(
     id = competition_id
@@ -62,7 +62,9 @@ kgl_flow <- function(id = NULL) {
 
   rules_check <- validator_rules(competition_id, names(v_file_names)[1])
 
-  if (!rules_check) return(invisible())
+  if (!rules_check) {
+    return(invisible())
+  }
 
   files_to_check <- fs::path(dir_path, data_list$name_old)
 

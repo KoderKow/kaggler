@@ -76,7 +76,6 @@ kgl_competitions_data_download <- function(
       resp %>%
         httr2::resp_body_string() %>%
         writeBin(path_output)
-
     } else {
       path_zip <- fs::file_temp(ext = "zip")
 

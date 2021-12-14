@@ -59,7 +59,7 @@ kgl_competitions_submissions_url <- function(
 
   endpoint <- glue::glue("competitions/{encoded_params}/submissions/url/{content_length}/{last_modified_date_utc}")
 
-  body <- list(fileName =  fs::path_file(file))
+  body <- list(fileName = fs::path_file(file))
 
   resp <- kgl_request(
     endpoint = endpoint,
@@ -116,7 +116,6 @@ kgl_competitions_submissions_submit <- function(
   blob_file_tokens,
   submission_description
 ) {
-
   encoded_params <- url_encode(id)
 
   endpoint <- glue::glue("competitions/submissions/submit/{encoded_params}")
@@ -147,9 +146,9 @@ kgl_competitions_submissions_submit <- function(
 #' @examples
 #' \dontrun{
 #' kgl_competition_submit(
-#' id = "titanic",
-#' file = "gender_submission.csv",
-#' submission_description = "Trained via rpart"
+#'   id = "titanic",
+#'   file = "gender_submission.csv",
+#'   submission_description = "Trained via rpart"
 #' )
 #' }
 kgl_competition_submit <- function(

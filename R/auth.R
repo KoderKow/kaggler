@@ -33,7 +33,6 @@
 #' create and save for you manually the first time you enter your username/key
 #' or path to your \code{kaggle.json} file.
 kgl_auth <- function(req = NULL, username = NULL, key = NULL, creds_file = NULL) {
-
   if (get_os() == "windows") {
     path_cred_os <- fs::path("C:/Users/", Sys.getenv("USERNAME"), ".kaggle", "kaggle.json")
   } else {
@@ -111,7 +110,6 @@ kgl_auth <- function(req = NULL, username = NULL, key = NULL, creds_file = NULL)
 
     ## set as store as env variable
     set_renv(KAGGLE_PAT = paste0(username, "/", key))
-
   } else {
     ## validate username and key inputs
     stopifnot(
@@ -166,7 +164,7 @@ kgl_auth_file_setup <- function(path) {
   path_kgl_home <- fs::path(dir_kgl_home, "kaggle.json")
   path_kgl_home_ui <- usethis::ui_value(path_kgl_home)
 
-  if(!fs::dir_exists(dir_kgl_home)) {
+  if (!fs::dir_exists(dir_kgl_home)) {
     fs::dir_create(dir_kgl_home)
   }
 
@@ -199,19 +197,22 @@ kgl_auth_file_setup <- function(path) {
 #' @references [Source code](https://conjugateprior.org/2015/06/identifying-the-os-from-r/)
 #'
 #' @noRd
-get_os <- function(){
+get_os <- function() {
   sysinf <- tolower(Sys.info())
 
-  if (!is.null(sysinf)){
-    os <- sysinf['sysname']
-    if (os == 'Darwin')
+  if (!is.null(sysinf)) {
+    os <- sysinf["sysname"]
+    if (os == "Darwin") {
       os <- "osx"
+    }
   } else { ## mystery machine
     os <- .Platform$OS.type
-    if (grepl("^darwin", R.version$os))
+    if (grepl("^darwin", R.version$os)) {
       os <- "osx"
-    if (grepl("linux-gnu", R.version$os))
+    }
+    if (grepl("linux-gnu", R.version$os)) {
       os <- "linux"
+    }
   }
 
   return(os)

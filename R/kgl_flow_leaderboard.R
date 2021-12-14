@@ -58,7 +58,7 @@ kgl_flow_leaderboard <- function() {
     httr::content() %>%
     readr::write_file(
       fs::path(tmp, "leaderboard.zipped")
-      )
+    )
 
   unzip(
     fs::path(tmp, "leaderboard.zipped"),

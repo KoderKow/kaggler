@@ -20,7 +20,7 @@ kgl_competitions_list <- function(
     assertthat::is.number(page),
     is.null(search) || assertthat::is.string(search),
     assertthat::is.flag(clean_response)
-    )
+  )
 
   endpoint <- "competitions/list"
 

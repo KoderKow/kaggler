@@ -74,7 +74,7 @@ kgl_api_post <- function(path, ..., body = NULL, auth = kgl_auth()) {
     auth,
     body = body,
     httr::verbose()
-    )
+  )
 
   ## check status
   httr::warn_for_status(r)
