@@ -95,11 +95,11 @@ kgl_competitions_submissions_upload <- function(
     as.numeric()
 
   resp <-
-    create_url |>
+    create_url %>%
     httr2::request() %>%
     httr2::req_user_agent("kaggler (https://github.com/KoderKow/kaggler)") %>%
     httr2::req_body_file(file) %>%
-    httr2::req_method("PUT") |>
+    httr2::req_method("PUT") %>%
     httr2::req_perform() %>%
     httr2::resp_body_json()
 
