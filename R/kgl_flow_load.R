@@ -14,8 +14,8 @@
 #'
 #' kgl_flow_load()
 #' }
-kgl_flow_load <- function(envir = parent.frame()) {
-  d_meta <- kgl_flow_meta()
+kgl_flow_load <- function(..., prefix = "", envir = parent.frame()) {
+  # d_meta <- kgl_flow_meta()
 
   dir_kgl <- usethis::proj_path(.kgl_dir)
 
@@ -24,10 +24,10 @@ kgl_flow_load <- function(envir = parent.frame()) {
     type = "file"
   )
 
-  if (nrow(d_meta) != length(files_to_check)) {
-    usethis::ui_oops("There seem to be files missing! Run {usethis::ui_value('kgl_flow()')} to make sure all files are present.")
-    return(invisible())
-  }
+  # if (nrow(d_meta) != length(files_to_check)) {
+  #   usethis::ui_oops("There seem to be files missing! Run {usethis::ui_value('kgl_flow()')} to make sure all files are present.")
+  #   return(invisible())
+  # }
 
   if (all(stringr::str_detect(files_to_check, "\\.csv$"))) {
     v_files_to_iterate_over <- fs::dir_ls(dir_kgl, regexp = "\\.csv$")
@@ -36,15 +36,19 @@ kgl_flow_load <- function(envir = parent.frame()) {
       fs::path_file() %>%
       fs::path_ext_remove()
 
+    if (prefix != "") {
+      v_file_names <- paste0(prefix, "_", v_file_names)
+    }
+
     l_d <-
       v_files_to_iterate_over %>%
       purrr::set_names(v_file_names) %>%
-      purrr::map(readr::read_csv, col_types = readr::cols()) %>%
+      purrr::map(readr::read_csv, ...) %>%
       purrr::imap(~ {
         assign(
           x = .y,
           value = .x,
-          env = envir
+          envir = envir
         )
       })
 

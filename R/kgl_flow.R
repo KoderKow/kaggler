@@ -104,10 +104,10 @@ kgl_flow <- function(id = NULL) {
     d_info <-
       v_to_download %>%
       purrr::map_dfr(~ {
-        d <- kgl_flow_data_download(
-          competition_id = competition_id,
+        d <- kgl_competitions_data_download(
+          id = competition_id,
           file_name = .x,
-          dir_name = dir_path
+          output_dir = dir_path
         )
 
         return(d)

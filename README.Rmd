@@ -43,29 +43,9 @@ devtools::install_packages("koderkow/kaggler")
 
 All users must be authenticated to interact with Kaggle’s APIs. To setup your API key refer to the [Get Started](https://koderkow.github.io/kaggler/articles/kaggler.html) guide.
 
-# Kaggle Flow
+# Interacting with the API
 
-This is an **experimental** and **opinionated** reproducible workflow for working with Kaggle competitions.
-
-```r
-library(kaggler)
-
-kgl_flow("titanic")
-
-#> • These files will be downloaded:
-#>   - 'gender_submission'
-#>   - 'test'
-#>   - 'train'.
-#> • Downloading 'gender_submission.csv'...
-#> • Downloading 'test.csv'...
-#> • Downloading 'train.csv'...
-```
-
-For a more in-depth walkthrough visit the [Kaggle Flow](https://koderkow.github.io/kaggler/articles/kgl-flow.html) page.
-
-# Direct API Interaction
-
-These will be functions the user can call to have custom control over the returns and interactions with the API, similar to Kaggle's python API.
+These will be functions the user can call to have custom control over the returns and interactions with the Kaggle API.
 
 Browse or search for Kaggle competitions.
 

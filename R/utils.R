@@ -21,8 +21,7 @@ kgl_as_tbl <- function(x) {
 }
 
 url_encode <- function(...) {
-  ... %>%
-    list() %>%
+  list(...) %>%
     purrr::map_chr(as.character) %>%
     purrr::map_chr(URLencode, reserved = TRUE) %>%
     stringr::str_c(collapse = "/")
