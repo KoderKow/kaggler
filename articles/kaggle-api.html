@@ -72,7 +72,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -141,12 +141,12 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span></code></pre></div>
 <p>These set of functions aim to replicate what most of Kaggle’s python API functions do.</p>
-<div class="section level1">
-<h1 id="competitions">Competitions<a class="anchor" aria-label="anchor" href="#competitions"></a>
-</h1>
 <div class="section level2">
-<h2 id="search">Search<a class="anchor" aria-label="anchor" href="#search"></a>
+<h2 id="competitions">Competitions<a class="anchor" aria-label="anchor" href="#competitions"></a>
 </h2>
+<div class="section level3">
+<h3 id="search">Search<a class="anchor" aria-label="anchor" href="#search"></a>
+</h3>
 <p>Search for competitions</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"titanic"</span><span class="op">)</span>
@@ -162,9 +162,9 @@
 <span class="co">#&gt; #   is_kernels_submissions_only &lt;lgl&gt;, submissions_disabled &lt;lgl&gt;</span></code></pre></div>
 <p>The <code>ref</code> column is the <code>id</code> used for the other competition functions.</p>
 </div>
-<div class="section level2">
-<h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
-</h2>
+<div class="section level3">
+<h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h3>
 <p>List the datasets for a competition</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_data_list.html">kgl_competitions_data_list</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span>
@@ -189,9 +189,9 @@
   output_dir <span class="op">=</span> <span class="st">"."</span>
 <span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="leaderboard">Leaderboard<a class="anchor" aria-label="anchor" href="#leaderboard"></a>
-</h2>
+<div class="section level3">
+<h3 id="leaderboard">Leaderboard<a class="anchor" aria-label="anchor" href="#leaderboard"></a>
+</h3>
 <p>View the top 50 spots</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_leaderboard_view.html">kgl_competitions_leaderboard_view</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span>
@@ -214,9 +214,9 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_leaderboard_download.html">kgl_competitions_leaderboard_download</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="submit-to-competition">Submit to competition<a class="anchor" aria-label="anchor" href="#submit-to-competition"></a>
-</h2>
+<div class="section level3">
+<h3 id="submit-to-competition">Submit to competition<a class="anchor" aria-label="anchor" href="#submit-to-competition"></a>
+</h3>
 <p>Submit a file to the competition</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">kgl_competition_submit</span>(</span>
 <span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">id =</span> <span class="st">"titanic"</span>,</span>
@@ -246,7 +246,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 

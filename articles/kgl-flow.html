@@ -72,7 +72,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -138,13 +138,13 @@
 
     
     
-<div class="section level1">
-<h1 id="kaggle-flow">Kaggle Flow<a class="anchor" aria-label="anchor" href="#kaggle-flow"></a>
-</h1>
-<p>This is an <strong>experimental</strong> and <strong>opinionated</strong> reproducible workflow for working with Kaggle competitions. The Kaggle Flow will always check if the competition rules are accepted and the data files for the competition are readily available. If they are not, they will be downloaded.</p>
 <div class="section level2">
-<h2 id="id-input">ID input<a class="anchor" aria-label="anchor" href="#id-input"></a>
+<h2 id="kaggle-flow">Kaggle Flow<a class="anchor" aria-label="anchor" href="#kaggle-flow"></a>
 </h2>
+<p>This is an <strong>experimental</strong> and <strong>opinionated</strong> reproducible workflow for working with Kaggle competitions. The Kaggle Flow will always check if the competition rules are accepted and the data files for the competition are readily available. If they are not, they will be downloaded.</p>
+<div class="section level3">
+<h3 id="id-input">ID input<a class="anchor" aria-label="anchor" href="#id-input"></a>
+</h3>
 <p>Find the competition you want to work on. Methods have been built out to accept multiple forms of <code>id</code>. The follow examples below will be using the <code>titanic</code> competition to show the example inputs.</p>
 <ol style="list-style-type: decimal">
 <li>The competition URL
@@ -168,9 +168,9 @@
 </li>
 </ol>
 </div>
-<div class="section level2">
-<h2 id="example-work-flow">Example Work Flow<a class="anchor" aria-label="anchor" href="#example-work-flow"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-work-flow">Example Work Flow<a class="anchor" aria-label="anchor" href="#example-work-flow"></a>
+</h3>
 <p>The flow will always check if the user has accepted the rules to the competition. If the rules have not been accepted, a prompt will be shown notifying the user of the error and an input to take the user to the competitions rules.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span>
@@ -254,14 +254,14 @@
 <span class="co">#&gt; ● Downloading 'train.csv'...</span></code></pre></div>
 <p>We did not need to supply the <code>id</code> this time because the flow will check if an ID has been recorded in the metadata.</p>
 </div>
-<div class="section level2">
-<h2 id="submit-to-competition">Submit to competition<a class="anchor" aria-label="anchor" href="#submit-to-competition"></a>
-</h2>
+<div class="section level3">
+<h3 id="submit-to-competition">Submit to competition<a class="anchor" aria-label="anchor" href="#submit-to-competition"></a>
+</h3>
 <p>Work in progress 👷</p>
 </div>
-<div class="section level2">
-<h2 id="leaderboard">Leaderboard<a class="anchor" aria-label="anchor" href="#leaderboard"></a>
-</h2>
+<div class="section level3">
+<h3 id="leaderboard">Leaderboard<a class="anchor" aria-label="anchor" href="#leaderboard"></a>
+</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/kgl_flow_leaderboard.html">kgl_flow_leaderboard</a></span><span class="op">(</span><span class="op">)</span>
 
@@ -282,9 +282,9 @@
 <span class="co">#&gt; 10 6931521 Duc North           2021-07-14 04:45:48     1</span>
 <span class="co">#&gt; # … with 50,317 more rows</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="special-thanks">Special thanks<a class="anchor" aria-label="anchor" href="#special-thanks"></a>
-</h2>
+<div class="section level3">
+<h3 id="special-thanks">Special thanks<a class="anchor" aria-label="anchor" href="#special-thanks"></a>
+</h3>
 <p>This has been heavily influenced by the <a href="https://github.com/ropensci/targets" class="external-link">{targets}</a> package. Any issues or ideas for improvements to this experimental flow is greatly appreciated!</p>
 </div>
 </div>
@@ -307,7 +307,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 
