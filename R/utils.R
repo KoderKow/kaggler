@@ -9,21 +9,24 @@
 #' @param x Output from kaggle function
 #' @return Print out of summary info and a tibble of the data.
 kgl_as_tbl <- function(x) {
-  x <-
+  d <-
     x %>%
     purrr::map_dfr(~ .x %||% NA) %>%
     tibble::as_tibble(
       .name_repair = snakecase::to_snake_case
-    ) %>%
-    readr::type_convert(col_types = readr::cols())
+    )
 
-  return(x)
+  if (nrow(d) > 0) {
+    d <- readr::type_convert(d, col_types = readr::cols())
+  }
+
+  return(d)
 }
 
 url_encode <- function(...) {
   list(...) %>%
     purrr::map_chr(as.character) %>%
-    purrr::map_chr(URLencode, reserved = TRUE) %>%
+    purrr::map_chr(utils::URLencode, reserved = TRUE) %>%
     stringr::str_c(collapse = "/")
 }
 

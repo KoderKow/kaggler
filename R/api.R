@@ -46,8 +46,7 @@ kgl_api_get <- function(path, ..., body = NULL, auth = kgl_auth()) {
   r <- httr::GET(
     url = get_url,
     body = body,
-    auth,
-    httr::verbose()
+    auth
   )
 
   ## check status
@@ -100,7 +99,7 @@ kgl_request <- function(
   endpoint,
   ...,
   body = NULL
-) {
+    ) {
   resp <-
     .kaggle_base_url %>%
     httr2::request() %>%

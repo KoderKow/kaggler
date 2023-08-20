@@ -2,6 +2,7 @@
 #'
 #' If all of the files in `_kaggle_data` are in **csv** format (excluding the meta directory) then this function will load all of the kaggle data into the current environment (or the environment of your choosing) via `readr::read_csv()`.
 #'
+#' @inheritDotParams readr::read_csv
 #' @param envir Environment to put the loaded kaggle data.
 #'
 #' @return Nothing.
@@ -14,7 +15,7 @@
 #'
 #' kgl_flow_load()
 #' }
-kgl_flow_load <- function(..., prefix = "", envir = parent.frame()) {
+kgl_flow_load <- function(..., envir = parent.frame()) {
   # d_meta <- kgl_flow_meta()
 
   dir_kgl <- usethis::proj_path(.kgl_dir)
@@ -36,9 +37,9 @@ kgl_flow_load <- function(..., prefix = "", envir = parent.frame()) {
       fs::path_file() %>%
       fs::path_ext_remove()
 
-    if (prefix != "") {
-      v_file_names <- paste0(prefix, "_", v_file_names)
-    }
+    # if (prefix != "") {
+    #   v_file_names <- paste0(prefix, "_", v_file_names)
+    # }
 
     l_d <-
       v_files_to_iterate_over %>%

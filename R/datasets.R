@@ -13,7 +13,7 @@ kgl_datasets_list <- function(
   search = NULL,
   owner_dataset = NULL,
   clean_response = TRUE
-) {
+    ) {
   assertthat::assert_that(
     assertthat::is.number(page),
     is.null(search) || assertthat::is.string(search),
@@ -130,7 +130,7 @@ kgl_datasets_download <- function(
   owner_dataset,
   fileName,
   datasetVersionNumber = NULL
-) {
+    ) {
   owner_dataset_clean <- owner_dataset_parser(owner_dataset)
   owner_slug <- owner_dataset_clean[1]
   dataset_slug <- owner_dataset_clean[2]
@@ -156,7 +156,7 @@ kgl_datasets_upload_file <- function(
   fileName,
   contentLength,
   lastModifiedDateUtc
-) {
+    ) {
   contentLength <- file.size(fileName)
   lastModifiedDateUtc <- format(
     file.info(fileName)$mtime,
@@ -183,7 +183,7 @@ kgl_datasets_upload_file <- function(
 kgl_datasets_create_version <- function(
   owner_dataset,
   datasetNewVersionRequest
-) {
+    ) {
   owner_dataset_clean <- owner_dataset_parser(owner_dataset)
   owner_slug <- owner_dataset_clean[1]
   dataset_slug <- owner_dataset_clean[2]

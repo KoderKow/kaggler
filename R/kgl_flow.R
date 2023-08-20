@@ -98,12 +98,13 @@ kgl_flow <- function(id = NULL) {
 
     usethis::ui_todo(
       "These files will be downloaded:
-      {v_needs_to_download}."
+      {v_needs_to_download}
+      ------"
     )
 
     d_info <-
       v_to_download %>%
-      purrr::map_dfr(~ {
+      purrr::map(~ {
         d <- kgl_competitions_data_download(
           id = competition_id,
           file_name = .x,
@@ -143,10 +144,10 @@ kgl_flow <- function(id = NULL) {
       data_list %>%
         dplyr::mutate(name = name_old) %>%
         dplyr::select(-name_old) %>%
-        dplyr::left_join(
-          y = d_info,
-          by = "name"
-        ) %>%
+        # dplyr::left_join(
+        #   y = d_info,
+        #   by = "name"
+        # ) %>%
         saveRDS(file = path_meta)
     }
   } else {

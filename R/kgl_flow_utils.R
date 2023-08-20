@@ -3,7 +3,7 @@ validator_path_competition_id <- function(
   competition_id,
   dir_path,
   dir_meta
-) {
+    ) {
   if (fs::file_exists(path_competition_id)) {
     logged_competition_id <- readLines(path_competition_id)[2]
 
@@ -56,7 +56,7 @@ kgl_flow_data_download <- function(
   competition_id,
   file_name,
   dir_name
-) {
+    ) {
   get_url <- glue::glue("competitions/data/download/{competition_id}/{file_name}")
 
   get_request <- kgl_api_get(get_url)

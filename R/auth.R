@@ -66,7 +66,6 @@ kgl_auth <- function(req = NULL, username = NULL, key = NULL, creds_file = NULL)
 
     ## alternatively, users can provide path to (or text of) creds_file
   } else if (!is.null(creds_file)) {
-
     ## read and parse kaggle.json creds file if it exists
     if (file.exists(creds_file)) {
       con <- file(creds_file)

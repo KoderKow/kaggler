@@ -36,7 +36,7 @@ You can install the dev version of **{kaggler}** from [CRAN](https://github.com/
 
 ```{r, eval = FALSE}
 ## install kaggler package from github
-devtools::install_packages("koderkow/kaggler")
+devtools::install_github("koderkow/kaggler")
 ```
 
 # API Authorization
@@ -54,10 +54,6 @@ Browse or search for Kaggle competitions.
 comps1 <- kgl_competitions_list()
 comps1
 
-## it's paginated, so to see page two:
-comps2 <- kgl_competitions_list(page = 2)
-comps2
-
 ## search by keyword for competitions
 imagecomps <- kgl_competitions_list(search = "image")
 imagecomps
@@ -67,11 +63,33 @@ You can look up the datalist for a given Kaggle competition using the API.
 
 ```{r}
 ## data list for a given competition
-c1_datalist <- kgl_competitions_data_list(comps1$ref[1])
+c1_datalist <- kgl_competitions_data_list("titanic")
 c1_datalist
 ```
 
 For a more in-depth walkthrough visit the [Kaggle API](https://koderkow.github.io/kaggler/articles/kaggle-api.html) page.
+
+# Kaggle Flow
+
+This is an **experimental** and **opinionated** reproducible workflow
+for working with Kaggle competitions.
+
+``` r
+library(kaggler)
+
+kgl_flow("titanic")
+
+#> • These files will be downloaded:
+#>   - 'gender_submission'
+#>   - 'test'
+#>   - 'train'.
+#> • Downloading 'gender_submission.csv'...
+#> • Downloading 'test.csv'...
+#> • Downloading 'train.csv'...
+```
+
+For a more in-depth walkthrough visit the [Kaggle
+Flow](https://koderkow.github.io/kaggler/articles/kgl-flow.html) page.
 
 ## Note(s)
 

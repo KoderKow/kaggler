@@ -16,7 +16,7 @@ kgl_competitions_list_submissions <- function(
   id,
   page = 1,
   clean_response = TRUE
-) {
+    ) {
   encoded_params <- url_encode(id)
 
   endpoint <- glue::glue("/competitions/submissions/list/{encoded_params}")
@@ -48,7 +48,7 @@ kgl_competitions_list_submissions <- function(
 kgl_competitions_submissions_url <- function(
   id,
   file
-) {
+    ) {
   ## TODO Check if file is a dataset, if it is, prompt user to save it.
 
   content_length <- file.size(file)
@@ -85,7 +85,7 @@ kgl_competitions_submissions_url <- function(
 kgl_competitions_submissions_upload <- function(
   file,
   create_url
-) {
+    ) {
   content_length <- file.size(file)
 
   last_modified_date_utc <-
@@ -119,7 +119,7 @@ kgl_competitions_submissions_submit <- function(
   id,
   blob_file_tokens,
   submission_description
-) {
+    ) {
   encoded_params <- url_encode(id)
 
   endpoint <- glue::glue("competitions/submissions/submit/{encoded_params}")
@@ -160,7 +160,7 @@ kgl_competition_submit <- function(
   id,
   file,
   submission_description = ""
-) {
+    ) {
   url_result <- kgl_competitions_submissions_url(
     id = id,
     file = file

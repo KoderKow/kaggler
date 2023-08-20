@@ -15,7 +15,7 @@ kgl_competitions_list <- function(
   page = 1,
   search = NULL,
   clean_response = TRUE
-) {
+    ) {
   assertthat::assert_that(
     assertthat::is.number(page),
     is.null(search) || assertthat::is.string(search),

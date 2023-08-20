@@ -15,7 +15,6 @@
 #' kgl_flow_leaderboard()
 #' }
 kgl_flow_leaderboard <- function() {
-
   # usethis::ui_todo("Validating Project and Competition ID")
 
   ## Set up directories and paths

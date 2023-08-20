@@ -50,7 +50,7 @@ kgl_competitions_data_download <- function(
   file_name,
   output_dir = ".",
   clean_response = TRUE
-) {
+    ) {
   assertthat::assert_that(
     assertthat::is.string(id),
     assertthat::is.string(file_name),
@@ -58,6 +58,8 @@ kgl_competitions_data_download <- function(
     assertthat::is.dir(output_dir),
     assertthat::is.flag(clean_response)
   )
+
+  cat("  - Downloading", file_name, "\n")
 
   if (!fs::file_exists(output_dir)) {
     stop("output_dir does not exist!")
@@ -110,7 +112,7 @@ kgl_competitions_data_download_all <- function(
   id,
   output_dir = ".",
   clean_response = TRUE
-) {
+    ) {
   assertthat::assert_that(
     assertthat::is.string(id),
     assertthat::is.string(output_dir),
