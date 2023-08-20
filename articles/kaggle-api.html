@@ -125,7 +125,7 @@
 
       
 
-      </header><script src="kaggle-api_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Kaggle API</h1>
@@ -139,8 +139,9 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span></code></pre></div>
-<p>These set of functions aim to replicate what most of Kaggle’s python API functions do.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span></span></code></pre></div>
+<p>These set of functions aim to replicate what most of Kaggle’s python
+API functions do.</p>
 <div class="section level2">
 <h2 id="competitions">Competitions<a class="anchor" aria-label="anchor" href="#competitions"></a>
 </h2>
@@ -149,82 +150,83 @@
 </h3>
 <p>Search for competitions</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"titanic"</span><span class="op">)</span>
-
-<span class="co">#&gt; # A tibble: 1 × 23</span>
-<span class="co">#&gt;      id ref     title   url     description    organization_na… organization_ref category reward</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; </span>
-<span class="co">#&gt; 1  3136 titanic Titani… https:… Start here! P… Kaggle           kaggle           Getting… Knowl…</span>
-<span class="co">#&gt; # … with 14 more variables: deadline &lt;dttm&gt;, kernel_count &lt;int&gt;, team_count &lt;int&gt;,</span>
-<span class="co">#&gt; #   user_has_entered &lt;lgl&gt;, user_rank &lt;lgl&gt;, merger_deadline &lt;dttm&gt;,</span>
-<span class="co">#&gt; #   new_entrant_deadline &lt;dttm&gt;, enabled_date &lt;dttm&gt;, max_daily_submissions &lt;int&gt;,</span>
-<span class="co">#&gt; #   max_team_size &lt;lgl&gt;, evaluation_metric &lt;chr&gt;, awards_points &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   is_kernels_submissions_only &lt;lgl&gt;, submissions_disabled &lt;lgl&gt;</span></code></pre></div>
-<p>The <code>ref</code> column is the <code>id</code> used for the other competition functions.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"titanic"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 23</span></span>
+<span><span class="co">#&gt;      id ref     title   url     description    organization_na… organization_ref category reward</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; </span></span>
+<span><span class="co">#&gt; 1  3136 titanic Titani… https:… Start here! P… Kaggle           kaggle           Getting… Knowl…</span></span>
+<span><span class="co">#&gt; # … with 14 more variables: deadline &lt;dttm&gt;, kernel_count &lt;int&gt;, team_count &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   user_has_entered &lt;lgl&gt;, user_rank &lt;lgl&gt;, merger_deadline &lt;dttm&gt;,</span></span>
+<span><span class="co">#&gt; #   new_entrant_deadline &lt;dttm&gt;, enabled_date &lt;dttm&gt;, max_daily_submissions &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   max_team_size &lt;lgl&gt;, evaluation_metric &lt;chr&gt;, awards_points &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   is_kernels_submissions_only &lt;lgl&gt;, submissions_disabled &lt;lgl&gt;</span></span></code></pre></div>
+<p>The <code>ref</code> column is the <code>id</code> used for the other
+competition functions.</p>
 </div>
 <div class="section level3">
 <h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h3>
 <p>List the datasets for a competition</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_data_list.html">kgl_competitions_data_list</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span>
-
-<span class="co">#&gt; # A tibble: 3 × 7</span>
-<span class="co">#&gt;   id      ref                   name  description total_bytes url   creation_date      </span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                 &lt;chr&gt; &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; &lt;dttm&gt;             </span>
-<span class="co">#&gt; 1 titanic test.csv              test… "test data…       28629 http… 2018-04-09 05:33:22</span>
-<span class="co">#&gt; 2 titanic train.csv             trai… "contains …       61194 http… 2018-04-09 05:33:22</span>
-<span class="co">#&gt; 3 titanic gender_submission.csv gend… "An exampl…        3258 http… 2018-04-09 05:33:22</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_competitions_data_list.html">kgl_competitions_data_list</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 7</span></span>
+<span><span class="co">#&gt;   id      ref                   name  description total_bytes url   creation_date      </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                 &lt;chr&gt; &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; &lt;dttm&gt;             </span></span>
+<span><span class="co">#&gt; 1 titanic test.csv              test… "test data…       28629 http… 2018-04-09 05:33:22</span></span>
+<span><span class="co">#&gt; 2 titanic train.csv             trai… "contains …       61194 http… 2018-04-09 05:33:22</span></span>
+<span><span class="co">#&gt; 3 titanic gender_submission.csv gend… "An exampl…        3258 http… 2018-04-09 05:33:22</span></span></code></pre></div>
 <p>Download a single file</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_data_download.html">kgl_competitions_data_download</a></span><span class="op">(</span>
-  id <span class="op">=</span> <span class="st">"titanic"</span>,
-  file_name <span class="op">=</span> <span class="st">"train.csv"</span>,
-  output_dir <span class="op">=</span> <span class="st">"."</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_competitions_data_download.html">kgl_competitions_data_download</a></span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="st">"titanic"</span>,</span>
+<span>  file_name <span class="op">=</span> <span class="st">"train.csv"</span>,</span>
+<span>  output_dir <span class="op">=</span> <span class="st">"."</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Download all datafiles into a zip</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_data_download_all.html">kgl_competitions_data_download_all</a></span><span class="op">(</span>
-  id <span class="op">=</span> <span class="st">"titanic"</span>,
-  output_dir <span class="op">=</span> <span class="st">"."</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_competitions_data_download_all.html">kgl_competitions_data_download_all</a></span><span class="op">(</span></span>
+<span>  id <span class="op">=</span> <span class="st">"titanic"</span>,</span>
+<span>  output_dir <span class="op">=</span> <span class="st">"."</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="leaderboard">Leaderboard<a class="anchor" aria-label="anchor" href="#leaderboard"></a>
 </h3>
 <p>View the top 50 spots</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_leaderboard_view.html">kgl_competitions_leaderboard_view</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span>
-
-<span class="co">#&gt; # A tibble: 50 × 4</span>
-<span class="co">#&gt;    team_id team_name           submission_date     score</span>
-<span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;               &lt;dttm&gt;              &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2596702 Itaegyun            2021-07-12 08:15:47     1</span>
-<span class="co">#&gt;  2 6650429 arduin              2021-07-12 12:00:53     1</span>
-<span class="co">#&gt;  3 6931429 Nguyen Duc Tung (K… 2021-07-14 00:57:27     1</span>
-<span class="co">#&gt;  4 6931547 Bach Nguyen #3      2021-07-14 05:27:44     1</span>
-<span class="co">#&gt;  5 6931673 DDWanderer          2021-07-14 02:00:10     1</span>
-<span class="co">#&gt;  6 6931524 he130230            2021-07-14 02:11:04     1</span>
-<span class="co">#&gt;  7 6931497 (K12_HN) Pham Vu T… 2021-07-14 02:55:22     1</span>
-<span class="co">#&gt;  8 6933163 HE130793            2021-07-14 04:21:24     1</span>
-<span class="co">#&gt;  9 7006924 hebimonhp           2021-07-14 04:08:43     1</span>
-<span class="co">#&gt; 10 6931521 Duc North           2021-07-14 04:45:48     1</span>
-<span class="co">#&gt; # … with 40 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_competitions_leaderboard_view.html">kgl_competitions_leaderboard_view</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 50 × 4</span></span>
+<span><span class="co">#&gt;    team_id team_name           submission_date     score</span></span>
+<span><span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;               &lt;dttm&gt;              &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 2596702 Itaegyun            2021-07-12 08:15:47     1</span></span>
+<span><span class="co">#&gt;  2 6650429 arduin              2021-07-12 12:00:53     1</span></span>
+<span><span class="co">#&gt;  3 6931429 Nguyen Duc Tung (K… 2021-07-14 00:57:27     1</span></span>
+<span><span class="co">#&gt;  4 6931547 Bach Nguyen #3      2021-07-14 05:27:44     1</span></span>
+<span><span class="co">#&gt;  5 6931673 DDWanderer          2021-07-14 02:00:10     1</span></span>
+<span><span class="co">#&gt;  6 6931524 he130230            2021-07-14 02:11:04     1</span></span>
+<span><span class="co">#&gt;  7 6931497 (K12_HN) Pham Vu T… 2021-07-14 02:55:22     1</span></span>
+<span><span class="co">#&gt;  8 6933163 HE130793            2021-07-14 04:21:24     1</span></span>
+<span><span class="co">#&gt;  9 7006924 hebimonhp           2021-07-14 04:08:43     1</span></span>
+<span><span class="co">#&gt; 10 6931521 Duc North           2021-07-14 04:45:48     1</span></span>
+<span><span class="co">#&gt; # … with 40 more rows</span></span></code></pre></div>
 <p>Or download the entire leaderboard into a zip.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_competitions_leaderboard_download.html">kgl_competitions_leaderboard_download</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_competitions_leaderboard_download.html">kgl_competitions_leaderboard_download</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="submit-to-competition">Submit to competition<a class="anchor" aria-label="anchor" href="#submit-to-competition"></a>
 </h3>
 <p>Submit a file to the competition</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">&gt;</span><span class="st"> </span><span class="kw">kgl_competition_submit</span>(</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="dt">id =</span> <span class="st">"titanic"</span>,</span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="dt">file =</span> <span class="st">"gender_submission.csv"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="dt">submission_description =</span> <span class="st">"Submitted with kaggler"</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>)</span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; √ Successfully submitted to Titanic - Machine Learning from Disaster</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">kgl_competition_submit</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">"titanic"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"gender_submission.csv"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">submission_description =</span> <span class="st">"Submitted with kaggler"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; √ Successfully submitted to Titanic - Machine Learning from Disaster</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -246,7 +248,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 

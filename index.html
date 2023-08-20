@@ -134,15 +134,18 @@
 <div class="section level1">
 <div class="page-header"><h1 id="kaggler-">kaggler <img src="reference/figures/logo.png" width="160px" align="right"><a class="anchor" aria-label="anchor" href="#kaggler-"></a>
 </h1></div>
-<blockquote><p>🏁 An R client for accessing <a href="https://www.kaggle.com" class="external-link">Kaggle</a>’s API</p></blockquote>
+<blockquote>
+<p>🏁 An R client for accessing <a href="https://www.kaggle.com" class="external-link">Kaggle</a>’s API</p>
+</blockquote>
 <!-- badges: start -->
+
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the dev version of <strong>{kaggler}</strong> from <a href="https://github.com/koderkow/kaggler" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## install kaggler package from github</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_packages</span><span class="op">(</span><span class="st">"koderkow/kaggler"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## install kaggler package from github</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"koderkow/kaggler"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level1">
@@ -151,96 +154,87 @@
 <p>All users must be authenticated to interact with Kaggle’s APIs. To setup your API key refer to the <a href="https://koderkow.github.io/kaggler/articles/kaggler.html">Get Started</a> guide.</p>
 </div>
 <div class="section level1">
+<h1 id="interacting-with-the-api">Interacting with the API<a class="anchor" aria-label="anchor" href="#interacting-with-the-api"></a>
+</h1>
+<p>These will be functions the user can call to have custom control over the returns and interactions with the Kaggle API.</p>
+<p>Browse or search for Kaggle competitions.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## look through all competitions (paginated)</span></span>
+<span><span class="va">comps1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">comps1</span></span>
+<span><span class="co">#&gt; # A tibble: 40 × 42</span></span>
+<span><span class="co">#&gt;   title_nullable          url_nullable description_nullable organization_name_nu…¹ category_nullable</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                   &lt;chr&gt;        &lt;chr&gt;                &lt;chr&gt;                  &lt;chr&gt;            </span></span>
+<span><span class="co">#&gt; 1 Google - American Sign… https://www… Train fast and accu… Google                 Research         </span></span>
+<span><span class="co">#&gt; 2 CommonLit - Evaluate S… https://www… Automatically asses… The Learning Agency L… Featured         </span></span>
+<span><span class="co">#&gt; 3 CommonLit - Evaluate S… https://www… Automatically asses… The Learning Agency L… Featured         </span></span>
+<span><span class="co">#&gt; 4 CommonLit - Evaluate S… https://www… Automatically asses… The Learning Agency L… Featured         </span></span>
+<span><span class="co">#&gt; 5 Bengali.AI Speech Reco… https://www… Recognize Bengali s… Bengali.AI             Research         </span></span>
+<span><span class="co">#&gt; # ℹ 35 more rows</span></span>
+<span><span class="co">#&gt; # ℹ abbreviated name: ¹​organization_name_nullable</span></span>
+<span><span class="co">#&gt; # ℹ 37 more variables: reward_nullable &lt;chr&gt;, max_team_size_nullable &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   evaluation_metric_nullable &lt;chr&gt;, id &lt;int&gt;, ref &lt;chr&gt;, title &lt;chr&gt;, has_title &lt;lgl&gt;, url &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   has_url &lt;lgl&gt;, description &lt;chr&gt;, has_description &lt;lgl&gt;, organization_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   has_organization_name &lt;lgl&gt;, organization_ref &lt;lgl&gt;, has_organization_ref &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   category &lt;chr&gt;, has_category &lt;lgl&gt;, reward &lt;chr&gt;, has_reward &lt;lgl&gt;, tags &lt;list&gt;, …</span></span>
+<span></span>
+<span><span class="co">## search by keyword for competitions</span></span>
+<span><span class="va">imagecomps</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"image"</span><span class="op">)</span></span>
+<span><span class="va">imagecomps</span></span>
+<span><span class="co">#&gt; # A tibble: 9 × 42</span></span>
+<span><span class="co">#&gt;   title_nullable          url_nullable description_nullable organization_name_nu…¹ category_nullable</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                   &lt;chr&gt;        &lt;chr&gt;                &lt;chr&gt;                  &lt;chr&gt;            </span></span>
+<span><span class="co">#&gt; 1 RSNA 2023 Abdominal Tr… https://www… Detect and classify… Radiological Society … Featured         </span></span>
+<span><span class="co">#&gt; 2 RSNA 2023 Abdominal Tr… https://www… Detect and classify… Radiological Society … Featured         </span></span>
+<span><span class="co">#&gt; 3 Digit Recognizer        https://www… Learn computer visi… Kaggle                 Getting Started  </span></span>
+<span><span class="co">#&gt; 4 Digit Recognizer        https://www… Learn computer visi… Kaggle                 Getting Started  </span></span>
+<span><span class="co">#&gt; 5 Digit Recognizer        https://www… Learn computer visi… Kaggle                 Getting Started  </span></span>
+<span><span class="co">#&gt; # ℹ 4 more rows</span></span>
+<span><span class="co">#&gt; # ℹ abbreviated name: ¹​organization_name_nullable</span></span>
+<span><span class="co">#&gt; # ℹ 37 more variables: reward_nullable &lt;chr&gt;, max_team_size_nullable &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   evaluation_metric_nullable &lt;chr&gt;, id &lt;int&gt;, ref &lt;chr&gt;, title &lt;chr&gt;, has_title &lt;lgl&gt;, url &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   has_url &lt;lgl&gt;, description &lt;chr&gt;, has_description &lt;lgl&gt;, organization_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   has_organization_name &lt;lgl&gt;, organization_ref &lt;lgl&gt;, has_organization_ref &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   category &lt;chr&gt;, has_category &lt;lgl&gt;, reward &lt;chr&gt;, has_reward &lt;lgl&gt;, tags &lt;list&gt;, …</span></span></code></pre></div>
+<p>You can look up the datalist for a given Kaggle competition using the API.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## data list for a given competition</span></span>
+<span><span class="va">c1_datalist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kgl_competitions_data_list.html">kgl_competitions_data_list</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></span>
+<span><span class="va">c1_datalist</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 12</span></span>
+<span><span class="co">#&gt;   name_nullable   description_nullable url_nullable ref   name  has_name description has_description</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;                &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt;    &lt;chr&gt;       &lt;lgl&gt;          </span></span>
+<span><span class="co">#&gt; 1 gender_submiss… "An example of what… https://www… gend… gend… TRUE     "An exampl… TRUE           </span></span>
+<span><span class="co">#&gt; 2 train.csv       "contains data"      https://www… trai… trai… TRUE     "contains … TRUE           </span></span>
+<span><span class="co">#&gt; 3 test.csv        "test data to check… https://www… test… test… TRUE     "test data… TRUE           </span></span>
+<span><span class="co">#&gt; # ℹ 4 more variables: total_bytes &lt;int&gt;, url &lt;chr&gt;, has_url &lt;lgl&gt;, creation_date &lt;dttm&gt;</span></span></code></pre></div>
+<p>For a more in-depth walkthrough visit the <a href="https://koderkow.github.io/kaggler/articles/kaggle-api.html">Kaggle API</a> page.</p>
+</div>
+<div class="section level1">
 <h1 id="kaggle-flow">Kaggle Flow<a class="anchor" aria-label="anchor" href="#kaggle-flow"></a>
 </h1>
 <p>This is an <strong>experimental</strong> and <strong>opinionated</strong> reproducible workflow for working with Kaggle competitions.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span>
-
-<span class="fu"><a href="reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span>
-
-<span class="co">#&gt; • These files will be downloaded:</span>
-<span class="co">#&gt;   - 'gender_submission'</span>
-<span class="co">#&gt;   - 'test'</span>
-<span class="co">#&gt;   - 'train'.</span>
-<span class="co">#&gt; • Downloading 'gender_submission.csv'...</span>
-<span class="co">#&gt; • Downloading 'test.csv'...</span>
-<span class="co">#&gt; • Downloading 'train.csv'...</span></code></pre></div>
-<p>For a more in-depth walkthrough visit the <a href="https://koderkow.github.io/kaggler/articles/kgl-flow.html">Kaggle Flow</a> page.</p>
-</div>
-<div class="section level1">
-<h1 id="direct-api-interaction">Direct API Interaction<a class="anchor" aria-label="anchor" href="#direct-api-interaction"></a>
-</h1>
-<p>These will be functions the user can call to have custom control over the returns and interactions with the API, similar to Kaggle’s python API.</p>
-<p>Browse or search for Kaggle competitions.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## look through all competitions (paginated)</span>
-<span class="va">comps1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="va">comps1</span>
-<span class="co">#&gt; # A tibble: 20 x 23</span>
-<span class="co">#&gt;      id ref     title     url      description     organization_na… organization_ref category reward</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; </span>
-<span class="co">#&gt; 1 21733 contra… Contradi… https:/… Detecting cont… Kaggle           kaggle           Getting… Prizes</span>
-<span class="co">#&gt; 2 21755 gan-ge… I’m Some… https:/… Use GANs to cr… Kaggle           kaggle           Getting… Prizes</span>
-<span class="co">#&gt; 3 21154 tpu-ge… Petals t… https:/… Getting Starte… Kaggle           kaggle           Getting… Knowl…</span>
-<span class="co">#&gt; 4  3004 digit-… Digit Re… https:/… Learn computer… Kaggle           kaggle           Getting… Knowl…</span>
-<span class="co">#&gt; 5  3136 titanic Titanic … https:/… Start here! Pr… Kaggle           kaggle           Getting… Knowl…</span>
-<span class="co">#&gt; # … with 15 more rows, and 14 more variables: deadline &lt;dttm&gt;, kernel_count &lt;int&gt;,</span>
-<span class="co">#&gt; #   team_count &lt;int&gt;, user_has_entered &lt;lgl&gt;, user_rank &lt;lgl&gt;, merger_deadline &lt;dttm&gt;,</span>
-<span class="co">#&gt; #   new_entrant_deadline &lt;dttm&gt;, enabled_date &lt;dttm&gt;, max_daily_submissions &lt;int&gt;,</span>
-<span class="co">#&gt; #   max_team_size &lt;int&gt;, evaluation_metric &lt;chr&gt;, awards_points &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   is_kernels_submissions_only &lt;lgl&gt;, submissions_disabled &lt;lgl&gt;</span>
-
-<span class="co">## it's paginated, so to see page two:</span>
-<span class="va">comps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span>page <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="va">comps2</span>
-<span class="co">#&gt; # A tibble: 20 x 23</span>
-<span class="co">#&gt;      id ref     title    url       description    organization_name organization_ref category reward</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;          &lt;chr&gt;             &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; </span>
-<span class="co">#&gt; 1 23304 jane-s… Jane St… https://… "Test your mo… Jane Street Group jane-street-gro… Featured $100,…</span>
-<span class="co">#&gt; 2 23652 seti-b… SETI Br… https://… "Find extrate… Berkeley SETI Re… berkeleyseti     Research $15,0…</span>
-<span class="co">#&gt; 3 25401 hungry… Hungry … https://… "Don't. Stop.… Kaggle            kaggle           Playgro… Prizes</span>
-<span class="co">#&gt; 4 26680 siim-c… SIIM-FI… https://… "Identify and… Society for Imag… siim             Featured $100,…</span>
-<span class="co">#&gt; 5 26933 google… Google … https://… "Improve high… Google            google           Research $10,0…</span>
-<span class="co">#&gt; # … with 15 more rows, and 14 more variables: deadline &lt;dttm&gt;, kernel_count &lt;int&gt;,</span>
-<span class="co">#&gt; #   team_count &lt;int&gt;, user_has_entered &lt;lgl&gt;, user_rank &lt;lgl&gt;, merger_deadline &lt;dttm&gt;,</span>
-<span class="co">#&gt; #   new_entrant_deadline &lt;dttm&gt;, enabled_date &lt;dttm&gt;, max_daily_submissions &lt;int&gt;,</span>
-<span class="co">#&gt; #   max_team_size &lt;int&gt;, evaluation_metric &lt;chr&gt;, awards_points &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   is_kernels_submissions_only &lt;lgl&gt;, submissions_disabled &lt;lgl&gt;</span>
-
-<span class="co">## search by keyword for competitions</span>
-<span class="va">imagecomps</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kgl_competitions_list.html">kgl_competitions_list</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"image"</span><span class="op">)</span>
-<span class="va">imagecomps</span>
-<span class="co">#&gt; # A tibble: 20 x 23</span>
-<span class="co">#&gt;      id ref      title    url      description     organization_na… organization_ref category reward</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; </span>
-<span class="co">#&gt; 1 29761 landmar… Google … https:/… Given an image… Google           google           Research Swag  </span>
-<span class="co">#&gt; 2 19991 alaska2… ALASKA2… https:/… Detect secret … Troyes Universi… UTT              Research $25,0…</span>
-<span class="co">#&gt; 3 10418 human-p… Human P… https:/… Classify subce… Human Protein A… human-protein-a… Featured $37,0…</span>
-<span class="co">#&gt; 4 14420 recursi… Recursi… https:/… CellSignal: Di… Recursion Pharm… recursionpharma  Research $13,0…</span>
-<span class="co">#&gt; 5  6927 carvana… Carvana… https:/… Automatically … Carvana          carvana          Featured $25,0…</span>
-<span class="co">#&gt; # … with 15 more rows, and 14 more variables: deadline &lt;dttm&gt;, kernel_count &lt;int&gt;,</span>
-<span class="co">#&gt; #   team_count &lt;int&gt;, user_has_entered &lt;lgl&gt;, user_rank &lt;lgl&gt;, merger_deadline &lt;dttm&gt;,</span>
-<span class="co">#&gt; #   new_entrant_deadline &lt;dttm&gt;, enabled_date &lt;dttm&gt;, max_daily_submissions &lt;int&gt;,</span>
-<span class="co">#&gt; #   max_team_size &lt;int&gt;, evaluation_metric &lt;chr&gt;, awards_points &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   is_kernels_submissions_only &lt;lgl&gt;, submissions_disabled &lt;lgl&gt;</span></code></pre></div>
-<p>You can look up the datalist for a given Kaggle competition using the API.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## data list for a given competition</span>
-<span class="va">c1_datalist</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kgl_competitions_data_list.html">kgl_competitions_data_list</a></span><span class="op">(</span><span class="va">comps1</span><span class="op">$</span><span class="va">ref</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="va">c1_datalist</span>
-<span class="co">#&gt; # A tibble: 3 × 7</span>
-<span class="co">#&gt;   id                           ref                   name  description total_bytes url   creation_date      </span>
-<span class="co">#&gt;   &lt;chr&gt;                        &lt;chr&gt;                 &lt;chr&gt; &lt;lgl&gt;             &lt;int&gt; &lt;chr&gt; &lt;dttm&gt;             </span>
-<span class="co">#&gt; 1 contradictory-my-dear-watson test.csv              test… NA              1180141 http… 2020-07-27 19:45:43</span>
-<span class="co">#&gt; 2 contradictory-my-dear-watson train.csv             trai… NA              2771659 http… 2020-07-27 19:45:43</span>
-<span class="co">#&gt; 3 contradictory-my-dear-watson sample_submission.csv samp… NA                67549 http… 2020-07-27 19:45:43</span></code></pre></div>
-<p>For a more in-depth walkthrough visit the <a href="https://koderkow.github.io/kaggler/articles/kaggle-api.html">Kaggle API</a> page.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; • These files will be downloaded:</span></span>
+<span><span class="co">#&gt;   - 'gender_submission'</span></span>
+<span><span class="co">#&gt;   - 'test'</span></span>
+<span><span class="co">#&gt;   - 'train'.</span></span>
+<span><span class="co">#&gt; • Downloading 'gender_submission.csv'...</span></span>
+<span><span class="co">#&gt; • Downloading 'test.csv'...</span></span>
+<span><span class="co">#&gt; • Downloading 'train.csv'...</span></span></code></pre></div>
+<p>For a more in-depth walkthrough visit the <a href="https://koderkow.github.io/kaggler/articles/kgl-flow.html">Kaggle Flow</a> page.</p>
 <div class="section level2">
 <h2 id="notes">Note(s)<a class="anchor" aria-label="anchor" href="#notes"></a>
 </h2>
 <ul>
-<li>The base of this package was cloned from the original at <a href="https://github.com/mkearney/kaggler" class="external-link">{kaggler}</a>. I have decided to take the developers work and continue their amazing development! Major props and recognition goes out to the original developer(s) of this package.<ul><li>I will be updating all documentation and examples for the README and functions for this package as time goes on</li></ul>
+<li>The base of this package was cloned from the original at <a href="https://github.com/mkearney/kaggler" class="external-link">{kaggler}</a>. I have decided to take the developers work and continue their amazing development! Major props and recognition goes out to the original developer(s) of this package.
+<ul>
+<li>I will be updating all documentation and examples for the README and functions for this package as time goes on</li>
+</ul>
 </li>
 <li>The the developers are in no way affiliated with Kaggle.com, and, as such, makes no assurances that there won’t be breaking changes to the API at any time</li>
 <li>Although the developers are not affiliated, it’s good practice to be informed, so here is the link to Kaggle’s terms of service: <a href="https://www.kaggle.com/terms" class="external-link uri">https://www.kaggle.com/terms</a>
@@ -289,7 +283,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/KoderKow/kaggler/actions" class="external-link"><img src="https://github.com/KoderKow/kaggler/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/KoderKow/kaggler/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/KoderKow/kaggler/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
@@ -304,7 +298,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 

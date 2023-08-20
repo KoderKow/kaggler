@@ -125,7 +125,7 @@
 
       
 
-      </header><script src="kgl-flow_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Kaggle Flow</h1>
@@ -141,28 +141,43 @@
 <div class="section level2">
 <h2 id="kaggle-flow">Kaggle Flow<a class="anchor" aria-label="anchor" href="#kaggle-flow"></a>
 </h2>
-<p>This is an <strong>experimental</strong> and <strong>opinionated</strong> reproducible workflow for working with Kaggle competitions. The Kaggle Flow will always check if the competition rules are accepted and the data files for the competition are readily available. If they are not, they will be downloaded.</p>
+<p>This is an <strong>experimental</strong> and
+<strong>opinionated</strong> reproducible workflow for working with
+Kaggle competitions. The Kaggle Flow will always check if the
+competition rules are accepted and the data files for the competition
+are readily available. If they are not, they will be downloaded.</p>
 <div class="section level3">
 <h3 id="id-input">ID input<a class="anchor" aria-label="anchor" href="#id-input"></a>
 </h3>
-<p>Find the competition you want to work on. Methods have been built out to accept multiple forms of <code>id</code>. The follow examples below will be using the <code>titanic</code> competition to show the example inputs.</p>
+<p>Find the competition you want to work on. Methods have been built out
+to accept multiple forms of <code>id</code>. The follow examples below
+will be using the <code>titanic</code> competition to show the example
+inputs.</p>
 <ol style="list-style-type: decimal">
 <li>The competition URL
 <ul>
 <li>
-<code>https://www.kaggle.com/c/titanic</code> and <code>https://www.kaggle.com/c/titanic/code</code> will recognize <code>titanic</code> as the ID</li>
-<li>Anything after <code>https://www.kaggle.com/c/</code> and before the next forward slash, if it exists</li>
+<code>https://www.kaggle.com/c/titanic</code> and
+<code>https://www.kaggle.com/c/titanic/code</code> will recognize
+<code>titanic</code> as the ID</li>
+<li>Anything after <code>https://www.kaggle.com/c/</code> and before the
+next forward slash, if it exists</li>
 </ul>
 </li>
 <li>Kaggle’s API command
 <ul>
-<li>Kaggles official API is built in python and they supply a command to download the data on the data tab of a competition. The download functions will take <code>kaggle competitions download -c titanic</code>and recognize the ID as <code>titanic</code>
+<li>Kaggles official API is built in python and they supply a command to
+download the data on the data tab of a competition. The download
+functions will take
+<code>kaggle competitions download -c titanic</code>and recognize the ID
+as <code>titanic</code>
 </li>
 </ul>
 </li>
 <li>Explicit ID
 <ul>
-<li>If the above two cases don’t match in the logic then everything else will be considered an ID</li>
+<li>If the above two cases don’t match in the logic then everything else
+will be considered an ID</li>
 <li>Example; entering <code>titanic</code> directly</li>
 </ul>
 </li>
@@ -171,88 +186,103 @@
 <div class="section level3">
 <h3 id="example-work-flow">Example Work Flow<a class="anchor" aria-label="anchor" href="#example-work-flow"></a>
 </h3>
-<p>The flow will always check if the user has accepted the rules to the competition. If the rules have not been accepted, a prompt will be shown notifying the user of the error and an input to take the user to the competitions rules.</p>
+<p>The flow will always check if the user has accepted the rules to the
+competition. If the rules have not been accepted, a prompt will be shown
+notifying the user of the error and an input to take the user to the
+competitions rules.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"tabular-playground-series-jun-2021"</span><span class="op">)</span>
-
-<span class="co">#&gt; x You must accept this competition's rules before you'll be able to download files.</span>
-<span class="co">#&gt; Would you like to visit 'https://www.kaggle.com/c/tabular-playground-series-jun-2021/rules' to  accept the rules?</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 1: Nope</span>
-<span class="co">#&gt; 2: Yup</span>
-<span class="co">#&gt; 3: No way</span></code></pre></div>
-<p>Now lets switch to a different project and a competition my account has accepted the rules for. Running <code><a href="../reference/kgl_flow.html">kgl_flow()</a></code> will download all the files I need and also store some metadata to keep track of the competition ID and information about the competitions data files.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"tabular-playground-series-jun-2021"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; x You must accept this competition's rules before you'll be able to download files.</span></span>
+<span><span class="co">#&gt; Would you like to visit 'https://www.kaggle.com/c/tabular-playground-series-jun-2021/rules' to  accept the rules?</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 1: Nope</span></span>
+<span><span class="co">#&gt; 2: Yup</span></span>
+<span><span class="co">#&gt; 3: No way</span></span></code></pre></div>
+<p>Now lets switch to a different project and a competition my account
+has accepted the rules for. Running <code><a href="../reference/kgl_flow.html">kgl_flow()</a></code> will
+download all the files I need and also store some metadata to keep track
+of the competition ID and information about the competitions data
+files.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span>
-
-<span class="co">#&gt; • These files will be downloaded:</span>
-<span class="co">#&gt;   - 'gender_submission'</span>
-<span class="co">#&gt;   - 'test'</span>
-<span class="co">#&gt;   - 'train'.</span>
-<span class="co">#&gt; • Downloading 'gender_submission.csv'...</span>
-<span class="co">#&gt; • Downloading 'test.csv'...</span>
-<span class="co">#&gt; • Downloading 'train.csv'...</span></code></pre></div>
-<p>The files have been saved into a new directory; <code>_kaggle_data</code>.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span><span class="st">"titanic"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; • These files will be downloaded:</span></span>
+<span><span class="co">#&gt;   - 'gender_submission'</span></span>
+<span><span class="co">#&gt;   - 'test'</span></span>
+<span><span class="co">#&gt;   - 'train'.</span></span>
+<span><span class="co">#&gt; • Downloading 'gender_submission.csv'...</span></span>
+<span><span class="co">#&gt; • Downloading 'test.csv'...</span></span>
+<span><span class="co">#&gt; • Downloading 'train.csv'...</span></span></code></pre></div>
+<p>The files have been saved into a new directory;
+<code>_kaggle_data</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="st">"_kaggle_data/"</span><span class="op">)</span>
-
-<span class="co">#&gt; _kaggle_data/gender_submission.csv</span>
-<span class="co">#&gt; _kaggle_data/meta</span>
-<span class="co">#&gt; _kaggle_data/test.csv</span>
-<span class="co">#&gt; _kaggle_data/train.csv</span></code></pre></div>
-<p>We can get some information about our competition data by looking at the metadata.</p>
+<code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span><span class="st">"_kaggle_data/"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; _kaggle_data/gender_submission.csv</span></span>
+<span><span class="co">#&gt; _kaggle_data/meta</span></span>
+<span><span class="co">#&gt; _kaggle_data/test.csv</span></span>
+<span><span class="co">#&gt; _kaggle_data/train.csv</span></span></code></pre></div>
+<p>We can get some information about our competition data by looking at
+the metadata.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_flow_meta.html">kgl_flow_meta</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co">#&gt; ℹ Competition ID: 'titanic'</span>
-<span class="co">#&gt; # A tibble: 3 x 10</span>
-<span class="co">#&gt;   id     ref      name    description                total_bytes url      creation_date       download_time       nrows ncols</span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                            &lt;int&gt; &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;              &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1 titan… gender_… gender… "An example of what a sub…        3258 https:… 2018-04-09 05:33:22 2021-08-26 16:19:50   418     2</span>
-<span class="co">#&gt; 2 titan… test.csv test.c… "test data to check the a…       28629 https:… 2018-04-09 05:33:22 2021-08-26 16:19:51   418    11</span>
-<span class="co">#&gt; 3 titan… train.c… train.… "contains data "                 61194 https:… 2018-04-09 05:33:22 2021-08-26 16:19:52   891    12</span></code></pre></div>
-<p>We can also look at the competition information that is returned by the Kaggle API.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_flow_meta.html">kgl_flow_meta</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; ℹ Competition ID: 'titanic'</span></span>
+<span><span class="co">#&gt; # A tibble: 3 x 10</span></span>
+<span><span class="co">#&gt;   id     ref      name    description                total_bytes url      creation_date       download_time       nrows ncols</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                            &lt;int&gt; &lt;chr&gt;   &lt;dttm&gt;              &lt;dttm&gt;              &lt;int&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 titan… gender_… gender… "An example of what a sub…        3258 https:… 2018-04-09 05:33:22 2021-08-26 16:19:50   418     2</span></span>
+<span><span class="co">#&gt; 2 titan… test.csv test.c… "test data to check the a…       28629 https:… 2018-04-09 05:33:22 2021-08-26 16:19:51   418    11</span></span>
+<span><span class="co">#&gt; 3 titan… train.c… train.… "contains data "                 61194 https:… 2018-04-09 05:33:22 2021-08-26 16:19:52   891    12</span></span></code></pre></div>
+<p>We can also look at the competition information that is returned by
+the Kaggle API.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_flow_competition_info.html">kgl_flow_competition_info</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co">#&gt; # A tibble: 1 × 23</span>
-<span class="co">#&gt;      id ref     title url   description organization_na… organization_ref category</span>
-<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;   </span>
-<span class="co">#&gt; 1  3136 titanic Tita… http… Start here… Kaggle           kaggle           Getting…</span>
-<span class="co">#&gt; # … with 15 more variables: reward &lt;chr&gt;, deadline &lt;dttm&gt;, kernel_count &lt;int&gt;,</span>
-<span class="co">#&gt; #   team_count &lt;int&gt;, user_has_entered &lt;lgl&gt;, user_rank &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   merger_deadline &lt;dttm&gt;, new_entrant_deadline &lt;dttm&gt;, enabled_date &lt;dttm&gt;,</span>
-<span class="co">#&gt; #   max_daily_submissions &lt;int&gt;, max_team_size &lt;lgl&gt;, evaluation_metric &lt;chr&gt;,</span>
-<span class="co">#&gt; #   awards_points &lt;lgl&gt;, is_kernels_submissions_only &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   submissions_disabled &lt;lgl&gt;</span></code></pre></div>
-<p>If the competitions data is all in csv format, then they can easily be loaded in.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_flow_competition_info.html">kgl_flow_competition_info</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 23</span></span>
+<span><span class="co">#&gt;      id ref     title url   description organization_na… organization_ref category</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt;   </span></span>
+<span><span class="co">#&gt; 1  3136 titanic Tita… http… Start here… Kaggle           kaggle           Getting…</span></span>
+<span><span class="co">#&gt; # … with 15 more variables: reward &lt;chr&gt;, deadline &lt;dttm&gt;, kernel_count &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   team_count &lt;int&gt;, user_has_entered &lt;lgl&gt;, user_rank &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   merger_deadline &lt;dttm&gt;, new_entrant_deadline &lt;dttm&gt;, enabled_date &lt;dttm&gt;,</span></span>
+<span><span class="co">#&gt; #   max_daily_submissions &lt;int&gt;, max_team_size &lt;lgl&gt;, evaluation_metric &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   awards_points &lt;lgl&gt;, is_kernels_submissions_only &lt;lgl&gt;,</span></span>
+<span><span class="co">#&gt; #   submissions_disabled &lt;lgl&gt;</span></span></code></pre></div>
+<p>If the competitions data is all in csv format, then they can easily
+be loaded in.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_flow_load.html">kgl_flow_load</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co">#&gt; ℹ Competition ID: 'titanic'</span>
-<span class="co">#&gt; ✓ The data has been loaded into the global environment!</span>
-<span class="co">#&gt;   - 'gender_submission'</span>
-<span class="co">#&gt;   - 'test'</span>
-<span class="co">#&gt;   - 'train'</span></code></pre></div>
-<p>In an unwanted situation where one of the files gets accidentily deleted, kgl_flow_load() will reference the metadata to make sure all files are available before loading them in.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_flow_load.html">kgl_flow_load</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; ℹ Competition ID: 'titanic'</span></span>
+<span><span class="co">#&gt; ✓ The data has been loaded into the global environment!</span></span>
+<span><span class="co">#&gt;   - 'gender_submission'</span></span>
+<span><span class="co">#&gt;   - 'test'</span></span>
+<span><span class="co">#&gt;   - 'train'</span></span></code></pre></div>
+<p>In an unwanted situation where one of the files gets accidentily
+deleted, kgl_flow_load() will reference the metadata to make sure all
+files are available before loading them in.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">file_delete</a></span><span class="op">(</span><span class="st">"_kaggle_data/train.csv"</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/kgl_flow_load.html">kgl_flow_load</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; x There seem to be files missing! Run 'kgl_flow()' to make sure all files are present.</span></code></pre></div>
-<p>As prompted, we can run <code><a href="../reference/kgl_flow.html">kgl_flow()</a></code> again to get the files back.</p>
+<code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">file_delete</a></span><span class="op">(</span><span class="st">"_kaggle_data/train.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/kgl_flow_load.html">kgl_flow_load</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; x There seem to be files missing! Run 'kgl_flow()' to make sure all files are present.</span></span></code></pre></div>
+<p>As prompted, we can run <code><a href="../reference/kgl_flow.html">kgl_flow()</a></code> again to get the
+files back.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co">#&gt; ℹ These files are detected in '_kaggle_data/' and will not be downloaded:</span>
-<span class="co">#&gt;   - 'gender_submission'</span>
-<span class="co">#&gt;   - 'test'</span>
-<span class="co">#&gt; ● These files will be downloaded:</span>
-<span class="co">#&gt;   - 'train'.</span>
-<span class="co">#&gt; ● Downloading 'train.csv'...</span></code></pre></div>
-<p>We did not need to supply the <code>id</code> this time because the flow will check if an ID has been recorded in the metadata.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_flow.html">kgl_flow</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; ℹ These files are detected in '_kaggle_data/' and will not be downloaded:</span></span>
+<span><span class="co">#&gt;   - 'gender_submission'</span></span>
+<span><span class="co">#&gt;   - 'test'</span></span>
+<span><span class="co">#&gt; ● These files will be downloaded:</span></span>
+<span><span class="co">#&gt;   - 'train'.</span></span>
+<span><span class="co">#&gt; ● Downloading 'train.csv'...</span></span></code></pre></div>
+<p>We did not need to supply the <code>id</code> this time because the
+flow will check if an ID has been recorded in the metadata.</p>
 </div>
 <div class="section level3">
 <h3 id="submit-to-competition">Submit to competition<a class="anchor" aria-label="anchor" href="#submit-to-competition"></a>
@@ -263,29 +293,31 @@
 <h3 id="leaderboard">Leaderboard<a class="anchor" aria-label="anchor" href="#leaderboard"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/kgl_flow_leaderboard.html">kgl_flow_leaderboard</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co">#&gt; • Downloading leaderboard data for 'titanic'</span>
-<span class="co">#&gt; ✓ Leaderboard Data Downloaded!                                        #&gt;                      </span>
-<span class="co">#&gt; # A tibble: 50,327 × 4</span>
-<span class="co">#&gt;    team_id team_name           submission_date     score</span>
-<span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt;               &lt;dttm&gt;              &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 2596702 Itaegyun            2021-07-12 08:15:47     1</span>
-<span class="co">#&gt;  2 6650429 arduin              2021-07-12 12:00:53     1</span>
-<span class="co">#&gt;  3 6931429 Nguyen Duc Tung (K… 2021-07-14 00:57:27     1</span>
-<span class="co">#&gt;  4 6931547 Bach Nguyen #3      2021-07-14 05:27:44     1</span>
-<span class="co">#&gt;  5 6931673 DDWanderer          2021-07-14 02:00:10     1</span>
-<span class="co">#&gt;  6 6931524 he130230            2021-07-14 02:11:04     1</span>
-<span class="co">#&gt;  7 6931497 (K12_HN) Pham Vu T… 2021-07-14 02:55:22     1</span>
-<span class="co">#&gt;  8 6933163 HE130793            2021-07-14 04:21:24     1</span>
-<span class="co">#&gt;  9 7006924 hebimonhp           2021-07-14 04:08:43     1</span>
-<span class="co">#&gt; 10 6931521 Duc North           2021-07-14 04:45:48     1</span>
-<span class="co">#&gt; # … with 50,317 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/kgl_flow_leaderboard.html">kgl_flow_leaderboard</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#&gt; • Downloading leaderboard data for 'titanic'</span></span>
+<span><span class="co">#&gt; ✓ Leaderboard Data Downloaded!                                        #&gt;                      </span></span>
+<span><span class="co">#&gt; # A tibble: 50,327 × 4</span></span>
+<span><span class="co">#&gt;    team_id team_name           submission_date     score</span></span>
+<span><span class="co">#&gt;      &lt;dbl&gt; &lt;chr&gt;               &lt;dttm&gt;              &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 2596702 Itaegyun            2021-07-12 08:15:47     1</span></span>
+<span><span class="co">#&gt;  2 6650429 arduin              2021-07-12 12:00:53     1</span></span>
+<span><span class="co">#&gt;  3 6931429 Nguyen Duc Tung (K… 2021-07-14 00:57:27     1</span></span>
+<span><span class="co">#&gt;  4 6931547 Bach Nguyen #3      2021-07-14 05:27:44     1</span></span>
+<span><span class="co">#&gt;  5 6931673 DDWanderer          2021-07-14 02:00:10     1</span></span>
+<span><span class="co">#&gt;  6 6931524 he130230            2021-07-14 02:11:04     1</span></span>
+<span><span class="co">#&gt;  7 6931497 (K12_HN) Pham Vu T… 2021-07-14 02:55:22     1</span></span>
+<span><span class="co">#&gt;  8 6933163 HE130793            2021-07-14 04:21:24     1</span></span>
+<span><span class="co">#&gt;  9 7006924 hebimonhp           2021-07-14 04:08:43     1</span></span>
+<span><span class="co">#&gt; 10 6931521 Duc North           2021-07-14 04:45:48     1</span></span>
+<span><span class="co">#&gt; # … with 50,317 more rows</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="special-thanks">Special thanks<a class="anchor" aria-label="anchor" href="#special-thanks"></a>
 </h3>
-<p>This has been heavily influenced by the <a href="https://github.com/ropensci/targets" class="external-link">{targets}</a> package. Any issues or ideas for improvements to this experimental flow is greatly appreciated!</p>
+<p>This has been heavily influenced by the <a href="https://github.com/ropensci/targets" class="external-link">{targets}</a> package. Any
+issues or ideas for improvements to this experimental flow is greatly
+appreciated!</p>
 </div>
 </div>
   </div>
@@ -307,7 +339,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 

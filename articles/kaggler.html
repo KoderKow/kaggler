@@ -125,7 +125,7 @@
 
       
 
-      </header><script src="kaggler_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>kaggler</h1>
@@ -139,22 +139,34 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://koderkow.github.io/kaggler">kaggler</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="api-key-setup">API key setup<a class="anchor" aria-label="anchor" href="#api-key-setup"></a>
 </h2>
 <p><span>1.</span> Go to <a href="kaggle.com">https://www.kaggle.com/</a> and sign in</p>
-<p><span>2.</span> Click <code>Account</code> or navigate to <code>https://www.kaggle.com/{username}/account</code></p>
-<p><span>3.</span> Scroll down to the <code>API</code> section and click <code>Create New API Token</code> (which should cause you to download a <code>kaggle.json</code> file with your username and API key)</p>
+<p><span>2.</span> Click <code>Account</code> or navigate to
+<code>https://www.kaggle.com/{username}/account</code></p>
+<p><span>3.</span> Scroll down to the <code>API</code> section and click
+<code>Create New API Token</code> (which should cause you to download a
+<code>kaggle.json</code> file with your username and API key)</p>
 <p><img src="../reference/figures/kag.png" width="75%" style="display: block; margin: auto;"></p>
-<p><span>4.</span> Save the <code>kaggle.json</code> file in a location you can easily locate the path for such as the <code>Downloads/</code> folder</p>
-<p><span>5.</span> Copy the <code>kaggle.json</code> file to <code>~/.kaggle/kaggle.json</code></p>
+<p><span>4.</span> Save the <code>kaggle.json</code> file in a location
+you can easily locate the path for such as the <code>Downloads/</code>
+folder</p>
+<p><span>5.</span> Copy the <code>kaggle.json</code> file to
+<code>~/.kaggle/kaggle.json</code></p>
 <ul>
-<li>There is a helper function, <code><a href="../reference/kgl_auth_file_setup.html">kgl_auth_file_setup()</a></code> that takes the path of the saved <code>kaggle.json</code> file and <em>copies</em> it to the required directory</li>
+<li>There is a helper function, <code><a href="../reference/kgl_auth_file_setup.html">kgl_auth_file_setup()</a></code> that
+takes the path of the saved <code>kaggle.json</code> file and
+<em>copies</em> it to the required directory</li>
 </ul>
-<p><span>6.</span> Thats it! When calling any of the <a href="https://koderkow.github.io/kaggler">kaggler</a> functions the authorization function will check for that file and create an environment variable, <code>KAGGLE_PAT</code>, in your <code>.Renviron</code> file</p>
+<p><span>6.</span> Thats it! When calling any of the
+<a href="https://koderkow.github.io/kaggler">kaggler</a> functions the authorization function will check
+for that file and create an environment variable,
+<code>KAGGLE_PAT</code>, in your <code>.Renviron</code> file</p>
 <ul>
-<li>You can view and edit the .Renviron with <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>
+<li>You can view and edit the .Renviron with
+<code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>
 </li>
 </ul>
 </div>
@@ -165,12 +177,14 @@
 <div class="section level3">
 <h3 id="interact-with-the-api">Interact with the API<a class="anchor" aria-label="anchor" href="#interact-with-the-api"></a>
 </h3>
-<p><a href="https://koderkow.github.io/kaggler/articles/kaggle-api.html">Kaggle Flow</a></p>
+<p><a href="https://koderkow.github.io/kaggler/articles/kaggle-api.html">Kaggle
+Flow</a></p>
 </div>
 <div class="section level3">
 <h3 id="kaggle-flow">Kaggle Flow<a class="anchor" aria-label="anchor" href="#kaggle-flow"></a>
 </h3>
-<p><a href="https://koderkow.github.io/kaggler/articles/kgl-flow.html">Kaggle Flow</a></p>
+<p><a href="https://koderkow.github.io/kaggler/articles/kgl-flow.html">Kaggle
+Flow</a></p>
 </div>
 </div>
   </div>
@@ -192,7 +206,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
   <p class="preferably">Using <a href="https://preferably.amirmasoudabdol.name/?source=footer" class="external-link">preferably</a> template.</p>
 </div>
 
